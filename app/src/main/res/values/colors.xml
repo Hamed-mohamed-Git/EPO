@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="purple_200">#f5da8f</color>
+    <color name="purple_500">#ebb51f</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#ebb51f</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="barColor">#ebb51f</color>
+    <color name="secondFragmentStatusBarColor">#e9ebec</color>
+    <color name="islamicFragment">#f8f7ef</color>
+    <color name="recycleViewCardColor">#ffff</color>
+    <color name="recycleViewCardPressedColor">#ebb51f</color>
+    <color name="signInColor">#eaeaea</color>
+    <color name="signInActivityColor">#293241</color>
+    <color name="termsAndConditions">#f7f7f7</color>
+</resources>

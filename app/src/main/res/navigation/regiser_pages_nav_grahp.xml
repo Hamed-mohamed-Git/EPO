@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/regiser_pages_nav_grahp"
+    app:startDestination="@id/registerFragment">
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.peodemo.logPages.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_signInActivity"
+            app:destination="@id/signInActivity"
+            app:enterAnim="@anim/slide_in_left_introduction_activity"
+            app:exitAnim="@anim/silde_out_right_introduction_activity"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_registerFragment_to_signUpActivity"
+            app:destination="@id/signUpActivity"
+            app:enterAnim="@anim/slide_in_left_introduction_activity"
+            app:exitAnim="@anim/silde_out_right_introduction_activity" />
+    </fragment>
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.example.peodemo.logPages.signInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
+    <activity
+        android:id="@+id/signUpActivity"
+        android:name="com.example.peodemo.logPages.signUpActivity"
+        android:label="activity_sign_up"
+        tools:layout="@layout/activity_sign_up" />
+</navigation>

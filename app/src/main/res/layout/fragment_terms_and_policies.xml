@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".logPages.TermsAndPoliciesFragment">
+
+
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotobold"
+        android:layout_marginStart="5sp"
+        android:text="Please read these terms, conditions and policies carefully before using Our Service"
+        android:textSize="19dp"
+        />
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotobold"
+        android:text="Definitions"
+        android:textColor="@color/barColor"
+        android:textSize="25dp"
+        android:layout_marginStart="15sp"
+         />
+
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="@font/robotoregular"
+        android:text="For the purposes of these Terms and Conditions:"
+        android:textSize="18dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotobold"
+        android:text="1. Application "
+        android:textColor="@color/barColor"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"/>
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40sp"
+        android:text="means the software program provided by the Company downloaded by You on any electronic device, named Epo"
+        />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="2. Application Store" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40sp"
+        android:text="means the digital distribution service operated and developed by Apple Inc. (Apple App Store) or Google Inc. (Google Play Store) in which the Application has been downloaded." />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="3. Affiliate " />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40sp"
+        android:text="means an entity that controls, is controlled by or is under common control with a party, where control means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority." />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="4. Country " />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="refers to: Egypt" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="5. Company " />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40sp"
+        android:text="(referred to as either the Company, We, Us or Our in this Agreement) refers to Epo." />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="6. Device" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="40sp"
+        android:text="means any device that can access the Service such as a computer, a cellphone or a digital tablet." />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="7. Service" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="refers to the Application" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="8. Third-party Social Media Service " />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40sp"
+        android:layout_marginStart="20dp"
+        android:text="means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service." />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotobold"
+        android:textColor="@color/barColor"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15sp"
+        android:text="Definitions" />
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="@font/robotoregular"
+        android:text="For the purposes of this Privacy Policy:"
+        android:textSize="18dp"
+        android:layout_marginStart="15dp" />
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="1. Account" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40sp"
+        android:layout_marginStart="20dp"
+        android:text="means a unique account created for You to access our Service or parts of our Service." />
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="2. Personal Data " />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40sp"
+        android:layout_marginStart="20dp"
+        android:text="is any information that relates to an identified or identifiable individual." />
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="3. Service Provider " />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40sp"
+        android:layout_marginStart="20dp"
+        android:text="means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used." />
+    <TextView
+        android:id="@+id/textView54"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/barColor"
+        android:fontFamily="@font/robotobold"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:text="4. Usage Data " />
+
+    <TextView
+        android:id="@+id/textView55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit)."/>
+</LinearLayout>

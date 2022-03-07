@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splash_fragment">
+
+    <fragment
+        android:id="@+id/first_welcome"
+        android:name="com.example.peodemo.welcomeFragments.First_welcome"
+        android:label="fragment_first_welcome"
+        tools:layout="@layout/fragment_first_welcome" >
+        <action
+            android:id="@+id/action_first_welcome_to_second_welcome"
+            app:destination="@id/second_welcome"
+            app:enterAnim="@anim/fragmenttransfer"
+            app:popEnterAnim="@anim/firstfarfmenttoreturn" />
+    </fragment>
+    <fragment
+        android:id="@+id/second_welcome"
+        android:name="com.example.peodemo.welcomeFragments.Second_welcome"
+        android:label="fragment_second_welcome"
+        tools:layout="@layout/fragment_second_welcome" >
+        <action
+            android:id="@+id/action_second_welcome_to_third_welcome"
+            app:destination="@id/third_welcome"
+            app:enterAnim="@anim/fragmenttransfer"
+            app:popEnterAnim="@anim/firstfarfmenttoreturn"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/third_welcome"
+        android:name="com.example.peodemo.welcomeFragments.Third_welcome"
+        android:label="fragment_third_welcome"
+        tools:layout="@layout/fragment_third_welcome" >
+        <action
+            android:id="@+id/action_third_welcome_to_get_started_Fragment"
+            app:destination="@id/get_started_Fragment"
+            app:enterAnim="@anim/fragmenttransfer"
+            app:popEnterAnim="@anim/firstfarfmenttoreturn"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/get_started_Fragment"
+        android:name="com.example.peodemo.welcomeFragments.get_started_Fragment"
+        android:label="fragment_get_started_"
+        tools:layout="@layout/fragment_get_started_" >
+        <action
+            android:id="@+id/action_get_started_Fragment_to_introductionActivity"
+            app:destination="@id/introductionActivity"
+            app:enterAnim="@anim/slide_in_left_introduction_activity"
+            app:exitAnim="@anim/silde_out_right_introduction_activity" />
+    </fragment>
+    <activity
+        android:id="@+id/introductionActivity"
+        android:name="com.example.peodemo.home.introduction.introductionActivity"
+        android:label="activity_introduction"
+        tools:layout="@layout/activity_introduction" >
+        <argument
+            android:name="clearBackstack"
+            app:argType="boolean"
+            android:defaultValue="true"
+            />
+    </activity>
+    <fragment
+        android:id="@+id/splash_fragment"
+        android:name="com.example.peodemo.welcomeFragments.splash_fragment"
+        android:label="splash_fragment" >
+        <action
+            android:id="@+id/action_splash_fragment_to_first_welcome"
+            app:destination="@id/first_welcome"
+            app:enterAnim="@anim/first_welcome_animate"
+            app:exitAnim="@anim/first_welcome_transfer"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_fragment_to_introductionActivity"
+            app:destination="@id/introductionActivity"
+            app:enterAnim="@anim/slide_in_left_introduction_activity"
+            app:exitAnim="@anim/silde_out_right_introduction_activity"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_fragment_to_introductionActivity2"
+            app:destination="@id/introductionActivity"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

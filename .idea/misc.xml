@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/action_bar_background.xml" value="0.2861111111111111" />
+        <entry key="app/src/main/res/drawable/button_sign_in_with_background.xml" value="0.3234375" />
+        <entry key="app/src/main/res/drawable/firstwelcomebuttonbackground.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/drawable/fragment_markes_bar_viewcard_background.xml" value="0.334375" />
+        <entry key="app/src/main/res/drawable/get_stared_button_icon_backgroung.xml" value="0.32769230769230767" />
+        <entry key="app/src/main/res/drawable/get_started_button_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/get_started_text_button_background.xml" value="0.32769230769230767" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/icon_background.xml" value="0.2388888888888889" />
+        <entry key="app/src/main/res/drawable/navigation_bar_background.xml" value="0.2861111111111111" />
+        <entry key="app/src/main/res/drawable/next_button_style.xml" value="0.3484375" />
+        <entry key="app/src/main/res/drawable/peoIcon_background.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/drawable/register_button_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/register_buttons_view_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/register_image_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/secondfragmentbuttonbackgroud.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/drawable/sign_in_button_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/sign_in_button_introduction_text_color.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/sign_in_button_text_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/sign_in_cursor_edit_text.xml" value="0.2111111111111111" />
+        <entry key="app/src/main/res/drawable/sign_in_register_button_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/sign_up_text_sign_in_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/signin_itroduction_button_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/terms_and_conditions_decline_button_text_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/termsandconditions.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/termsandconditions_button_accept_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/thirdwelcomefragmentbackground.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/font/font.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/font/fontnew.xml" value="0.35052083333333334" />
+        <entry key="app/src/main/res/layout/action_bar_background.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/activity_introduction.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/activity_main_dash_board2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_register_activitypage.xml" value="0.18206521739130435" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_sign_up_nested2.xml" value="0.2151268115942029" />
+        <entry key="app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.26313405797101447" />
+        <entry key="app/src/main/res/layout/content_sign_up_nested.xml" value="0.21458333333333332" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.23369565217391305" />
+        <entry key="app/src/main/res/layout/fragment_first_welcome.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_get_started_.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2898550724637681" />
+        <entry key="app/src/main/res/layout/fragment_information.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/fragment_markes_bar.xml" value="0.2898550724637681" />
+        <entry key="app/src/main/res/layout/fragment_our_courses.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.23369565217391305" />
+        <entry key="app/src/main/res/layout/fragment_second_welcome.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_splash_fragment.xml" value="0.2653985507246377" />
+        <entry key="app/src/main/res/layout/fragment_teach_on_e_p_o.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/fragment_terms_and_conditions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_terms_and_policies.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_third_welcome.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/register_image_background.xml" value="0.18795289855072464" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/icon.xml" value="0.2388888888888889" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/peoIcon_round.xml" value="0.190625" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
