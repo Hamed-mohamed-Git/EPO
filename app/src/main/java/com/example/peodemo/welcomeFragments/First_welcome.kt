@@ -44,6 +44,7 @@ class First_welcome : Fragment() {
 
 
         //those lines to get the view in xml file by them id
+        //add a repostory
         //to assigning the view this view is imageview called first welcome button
         val nextButton = view.findViewById<ImageView>(R.id.firstWelcomeButton)
         //assigning a text1 property to control the textview 1  in fragment xml file
