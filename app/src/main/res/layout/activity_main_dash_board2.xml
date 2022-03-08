@@ -112,79 +112,180 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <View
-        android:id="@+id/navigationTapPressed"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="250dp"
-        android:background="@drawable/navigation_bar_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="@+id/view12"
-        app:layout_constraintTop_toTopOf="@+id/view12" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="371dp"
         android:layout_height="47dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/view12"
         app:layout_constraintStart_toStartOf="@+id/view12"
         app:layout_constraintTop_toTopOf="@+id/view12">
 
-        <ImageView
-            android:id="@+id/dashBoardHome"
-            android:layout_width="25dp"
-            android:layout_height="27dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="35dp"
-            app:srcCompat="@drawable/homepressed" />
+        <FrameLayout
+            android:layout_marginStart="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/dashBoardCourse"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="25dp"
-            app:srcCompat="@drawable/course" />
 
-        <ImageView
-            android:id="@+id/dashBoardProgress"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="25dp"
-            app:srcCompat="@drawable/progress" />
+            <FrameLayout
+                android:id="@+id/homeFrameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/dashBoardProfile"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="40dp"
-            app:srcCompat="@drawable/profile" />
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/navigation_bar_pressed_item"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="57dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Home"
+                    android:textColor="@color/barColor" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/dashBoardHome"
+                android:layout_width="25dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/homepressed" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp">
+
+            <FrameLayout
+                android:id="@+id/courseFrameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/navigation_bar_pressed_item"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Courses"
+                    android:textColor="@color/barColor" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/dashBoardCourse"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/course" />
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp">
+
+            <FrameLayout
+                android:id="@+id/progressFrameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/navigation_bar_pressed_item"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Progress"
+                    android:textColor="@color/barColor" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/dashBoardProgress"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/progress" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp">
+
+            <FrameLayout
+                android:id="@+id/profileFrameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/navigation_bar_pressed_item"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="43dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Profile"
+                    android:textColor="@color/barColor" />
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/dashBoardProfile"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="7dp"
+                app:srcCompat="@drawable/profile" />
+
+
+        </FrameLayout>
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView58"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="230dp"
-        android:text="Home"
-        android:fontFamily="@font/robotobold"
-        android:textColor="@color/barColor"
-        app:layout_constraintBottom_toBottomOf="@+id/view12"
-        app:layout_constraintEnd_toEndOf="@+id/view12"
-        app:layout_constraintStart_toStartOf="@+id/navigationTapPressed"
-        app:layout_constraintTop_toTopOf="@+id/view12" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

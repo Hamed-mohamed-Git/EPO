@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/icon_background.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/drawable/navigation_bar_background.xml" value="0.2861111111111111" />
+        <entry key="app/src/main/res/drawable/navigation_bar_pressed_item.xml" value="0.3296296296296296" />
         <entry key="app/src/main/res/drawable/next_button_style.xml" value="0.3484375" />
         <entry key="app/src/main/res/drawable/peoIcon_background.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable/register_button_background.xml" value="0.3328125" />
@@ -44,6 +45,10 @@
         <entry key="app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/content_sign_up_nested.xml" value="0.21458333333333332" />
+        <entry key="app/src/main/res/layout/fragment_dash_board_course.xml" value="0.2558876811594203" />
+        <entry key="app/src/main/res/layout/fragment_dash_board_profile.xml" value="0.2558876811594203" />
+        <entry key="app/src/main/res/layout/fragment_dash_board_progress.xml" value="0.2558876811594203" />
+        <entry key="app/src/main/res/layout/fragment_dashboard_home.xml" value="0.2558876811594203" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.23369565217391305" />
         <entry key="app/src/main/res/layout/fragment_first_welcome.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_get_started_.xml" value="0.33" />

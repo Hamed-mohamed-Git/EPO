@@ -85,5 +85,17 @@
             app:destination="@id/introductionActivity"
             app:popUpTo="@id/splash_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_fragment_to_mainDashBoardActivity"
+            app:destination="@id/mainDashBoardActivity"
+            app:enterAnim="@anim/slide_in_left_introduction_activity"
+            app:exitAnim="@anim/silde_out_right_introduction_activity"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <activity
+        android:id="@+id/mainDashBoardActivity"
+        android:name="com.example.peodemo.DashBoard.mainDashBoardActivity"
+        android:label="activity_main_dash_board2"
+        tools:layout="@layout/activity_main_dash_board2" />
 </navigation>

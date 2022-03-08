@@ -1,6 +1,7 @@
 package com.example.peodemo.logPages
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -183,6 +184,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                 return@setOnClickListener
             }
             addNewAccount(email,password,name,lastName)
+            onBoardingFinished()
         }
 
 
@@ -196,6 +198,10 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
             val userInformation = User(email,password,name, lastName)
             if (task.isSuccessful){
                 currentUserDocRef.set(userInformation)
+                var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                onBoardingFinished()
                 Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
             }
             else{
@@ -278,7 +284,9 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     val user = mAuth.currentUser
                     val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"")
                     currentUserDocRef.set(userInformation)
+                    onBoardingFinished()
                     var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
                     Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
                 } else {
@@ -301,7 +309,9 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     val user = mAuth.currentUser
                     val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"")
                     currentUserDocRef.set(userInformation)
+                    onBoardingFinished()
                     var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
                     Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
                 } else {
@@ -340,10 +350,11 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                         currentUserDocRef.set(userInformation)
                         // navigate to HomePageActivity after successful login
                         var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         // send github user name from MainActivity to HomePageActivity
                         this.startActivity(intent)
                         Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
-
+                        onBoardingFinished()
                     })
                 .addOnFailureListener(
                     OnFailureListener {
@@ -351,6 +362,19 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                         Toast.makeText(this, "Error : $it", Toast.LENGTH_LONG).show()
                     })
         }
+
+    }
+    //create a method to return the splash fragment a boolean value if the user click on nextButton send to splash fragment true
+    //if true the app does not launch the welcome fragments
+    private fun onBoardingFinished() {
+        //assigning a sharedPref property to create a key and get a context of this fragment
+        val sharedPref = this.getSharedPreferences("onSignUpBoarding", Context.MODE_PRIVATE)
+        //assigning a editor property to create set a key and boolean value to use in splash fragment
+        val editor = sharedPref.edit()
+        //set those values
+        editor.putBoolean("signProcessFinished", true)
+        //apply it if the method called
+        editor.apply()
 
     }
 

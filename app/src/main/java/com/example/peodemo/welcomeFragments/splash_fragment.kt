@@ -34,10 +34,21 @@ class splash_fragment : Fragment() {
             {
                 //create a condition to ask onBoardingFinished if the user visited welcome fragments or not
                 //if matches move on introduction activity
-                if(onBoardingFinished())
+                if(onBoardingFinished() && !onSignUpFinished())
                 {
                     //create an action to move to another Activity called introduction Activity by save change
                     val action = splash_fragmentDirections.actionSplashFragmentToIntroductionActivity()
+                    //create a extras property to add flags if the user click on return system button close the app
+                    val extras = ActivityNavigator.Extras.Builder()
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .build()
+                    //add this action to navigate method to move to introduction Activity
+                    findNavController().navigate(action,extras)
+                }else if (onSignUpFinished()){
+                    //create an action to move to another Activity called introduction Activity by save change
+                    val action = splash_fragmentDirections.actionSplashFragmentToMainDashBoardActivity()
                     //create a extras property to add flags if the user click on return system button close the app
                     val extras = ActivityNavigator.Extras.Builder()
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -67,6 +78,13 @@ class splash_fragment : Fragment() {
         val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         //if the user does not click on that button yet return a default value and return it
         return sharedPref.getBoolean("Finished", false)
+    }
+    //create this method to get the value that returned from get started fragment to make the condition above there
+    private fun onSignUpFinished(): Boolean{
+        //create a shared pref to set a value that returned
+        val sharedPref = requireActivity().getSharedPreferences("onSignUpBoarding", Context.MODE_PRIVATE)
+        //if the user does not click on that button yet return a default value and return it
+        return sharedPref.getBoolean("signProcessFinished", false)
     }
 
 }
