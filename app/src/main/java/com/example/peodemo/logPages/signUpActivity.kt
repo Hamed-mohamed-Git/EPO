@@ -195,7 +195,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
     private fun addNewAccount(email: String, password: String, name: String, lastName: String) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            val userInformation = User(email,password,name, lastName)
+            val userInformation = User(email,password,name, lastName,"",false)
             if (task.isSuccessful){
                 currentUserDocRef.set(userInformation)
                 var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
@@ -282,7 +282,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
 
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"")
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
@@ -307,7 +307,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"")
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
@@ -346,7 +346,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                         // User is signed in.
                         // retrieve the current user
                         val user = mAuth.currentUser
-                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"")
+                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                         currentUserDocRef.set(userInformation)
                         // navigate to HomePageActivity after successful login
                         var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)

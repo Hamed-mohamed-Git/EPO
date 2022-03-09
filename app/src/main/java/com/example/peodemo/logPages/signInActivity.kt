@@ -157,7 +157,9 @@ class signInActivity : AppCompatActivity(), TextWatcher {
     private fun signIn(email: String, password: String) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
             if (task.isSuccessful){
+                onBoardingFinished()
                 var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 startActivity(intent)
             } else {
                 Toast.makeText(this@signInActivity,task.exception?.message,Toast.LENGTH_LONG).show()
@@ -199,8 +201,10 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
+                    onBoardingFinished()
                     val user = mAuth.currentUser
                     var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -217,7 +221,9 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
+                    onBoardingFinished()
                     var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -250,10 +256,10 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                     OnSuccessListener<AuthResult?> {
                         // User is signed in.
                         // retrieve the current user
-
+                        onBoardingFinished()
                         // navigate to HomePageActivity after successful login
                         var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
-
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         // send github user name from MainActivity to HomePageActivity
                         this.startActivity(intent)
                         Toast.makeText(this, "Login Successfully", Toast.LENGTH_LONG).show()
@@ -277,6 +283,19 @@ class signInActivity : AppCompatActivity(), TextWatcher {
     }
 
     override fun afterTextChanged(s: Editable?) {
+
+    }
+    //create a method to return the splash fragment a boolean value if the user click on nextButton send to splash fragment true
+    //if true the app does not launch the welcome fragments
+    private fun onBoardingFinished() {
+        //assigning a sharedPref property to create a key and get a context of this fragment
+        val sharedPref = this.getSharedPreferences("onSignUpBoarding", Context.MODE_PRIVATE)
+        //assigning a editor property to create set a key and boolean value to use in splash fragment
+        val editor = sharedPref.edit()
+        //set those values
+        editor.putBoolean("signProcessFinished", true)
+        //apply it if the method called
+        editor.apply()
 
     }
 

@@ -9,7 +9,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import com.example.peodemo.DashBoard.glide.GlideApp
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.introductionActivity
+import com.example.peodemo.logPages.model.User
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
@@ -53,6 +56,33 @@ class mainDashBoardActivity : AppCompatActivity() {
         window?.statusBarColor = this.resources.getColor(R.color.barColor)
         //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        getUserInformation { User ->
+
+            if (User.profileImageURI.isNotEmpty() && User.logWithState){
+                GlideApp.with(this@mainDashBoardActivity)
+                    .load(User.profileImageURI)
+                    .placeholder(R.drawable.user)
+                    .into(profileCircleImageView)
+            }
+            else if (User.profileImageURI.isNotEmpty() && !User.logWithState){
+                GlideApp.with(this@mainDashBoardActivity)
+                    .load(mStorage.getReference(User.profileImageURI))
+                    .placeholder(R.drawable.user)
+                    .into(profileCircleImageView)
+            }
+            if (User.name.isNotEmpty()){
+                dashBoardUserLastName.visibility = View.GONE
+                dashBoardUserName.text = User.name
+            }
+
+        }
+        signOutButton.setOnClickListener {
+            mAuth.signOut()
+            onBoardingSignOutFinished()
+            val intent = Intent(this,introductionActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
+        }
 
         dashBoardCourse.setOnClickListener {
             homeFrameLayout.visibility = View.GONE
@@ -133,17 +163,40 @@ class mainDashBoardActivity : AppCompatActivity() {
             if (it.isSuccessful){
                 val userDataByHashMap = mutableMapOf<String, Any>()
                 val user = mAuth.currentUser
+                userDataByHashMap["logWithState"] = false
+                userDataByHashMap["profileImageURI"] = ref.path
                 userDataByHashMap["email"] = user?.email.toString()
                 userDataByHashMap["lastName"] = " "
                 userDataByHashMap["name"] = user?.displayName.toString()
                 userDataByHashMap["password"] = " "
-                userDataByHashMap["ImageProfileURI"] = ref.path
                 currentUserDocRef.update(userDataByHashMap)
                 Toast.makeText(this@mainDashBoardActivity, "The image is uploaded successfully", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(this@mainDashBoardActivity, it.exception?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+
+    }
+
+    private fun getUserInformation(onComplete:(User) -> Unit){
+        currentUserDocRef.get().addOnSuccessListener {
+            onComplete(it.toObject(User::class.java)!!)
+        }
+
+
+    }
+
+    //create a method to return the splash fragment a boolean value if the user click on nextButton send to splash fragment true
+    //if true the app does not launch the welcome fragments
+    private fun onBoardingSignOutFinished() {
+        //assigning a sharedPref property to create a key and get a context of this fragment
+        val sharedPref = this.getSharedPreferences("onSignUpBoarding", Context.MODE_PRIVATE)
+        //assigning a editor property to create set a key and boolean value to use in splash fragment
+        val editor = sharedPref.edit()
+        //set those values
+        editor.putBoolean("signProcessFinished", false)
+        //apply it if the method called
+        editor.apply()
 
     }
 
