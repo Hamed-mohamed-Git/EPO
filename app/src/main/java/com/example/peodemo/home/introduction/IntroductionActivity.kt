@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.HomeFragment
 import com.example.peodemo.home.introduction.fragments.InformationFragment
-import com.example.peodemo.home.introduction.fragments.ourCoursesFragment
+import com.example.peodemo.home.introduction.fragments.ourCourses.ourCoursesFragment
 import com.example.peodemo.home.introduction.fragments.teachOnEPOFragment
-import com.example.peodemo.home.introduction.tapModel
-import com.example.peodemo.home.introduction.tapViewModel
 import com.example.peodemo.logPages.signInActivity
 import kotlinx.android.synthetic.main.activity_introduction.*
 import java.util.*

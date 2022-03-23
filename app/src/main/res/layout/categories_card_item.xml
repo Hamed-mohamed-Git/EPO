@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:layout_gravity="center"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:background="#F8F7F9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_marginEnd="20sp"
+            android:id="@+id/introductionCourseTabsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="45sp"
+            android:background="@drawable/background_for_layout_of_categories_card_pressed">
+
+            <FrameLayout
+                android:id="@+id/introductionImageCourseTabsLayout"
+                android:layout_width="28dp"
+                android:background="@drawable/background_for_layout_of_categories_card"
+                android:layout_height="28dp"
+                android:layout_marginTop="8sp"
+                android:layout_marginStart="5sp"
+                >
+                <ImageView
+                    android:id="@+id/introductionCourseImageView"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ios" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/introductionCourseTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="12sp"
+                android:text="IOS"
+
+                android:layout_marginEnd="11sp"
+                android:textSize="14sp"
+                android:fontFamily="@font/robotoregular"
+                android:textColor="@color/black"/>
+        </FrameLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

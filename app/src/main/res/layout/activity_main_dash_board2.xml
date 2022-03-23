@@ -4,12 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F6F6EF"
     tools:context=".DashBoard.mainDashBoardActivity">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="375dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:background="#F6F6EF"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view11">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/dashboardCoordinateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
     <View
         android:id="@+id/dashBoardActionBar"
         android:layout_width="381dp"
-        android:layout_height="109dp"
+        android:layout_height="80dp"
         android:background="@drawable/action_bar_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,31 +46,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/helloDashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:visibility="visible"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/robotobold"
-        android:text="Hello,"
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/view11"
-        app:layout_constraintHorizontal_bias="0.078"
+        android:fontFamily="@font/robotoregular"
+        android:text="Welcome back!"
+        android:textColor="#525252"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/dashBoardUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/robotobold"
         android:text="Name"
-        android:textColor="@color/white"
-        android:textSize="27sp"
+        android:visibility="visible"
+        android:textColor="#343434"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,26 +79,26 @@
         android:id="@+id/dashBoardUserLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/robotobold"
         android:text="Last"
-        android:textColor="@color/white"
-        android:textSize="27sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:visibility="visible"
+        android:textColor="#343434"
+        android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/dashBoardUserName"
-        app:layout_constraintTop_toTopOf="@+id/dashBoardActionBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileCircleImageView"
-        android:layout_width="69dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="52dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="13dp"
         android:src="@drawable/user"
-        app:layout_constraintEnd_toEndOf="@+id/dashBoardActionBar"
-        app:layout_constraintTop_toTopOf="@+id/dashBoardActionBar" />
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/view12"
@@ -112,7 +135,7 @@
         app:layout_constraintTop_toTopOf="@+id/view12">
 
         <FrameLayout
-            android:layout_marginStart="17sp"
+            android:layout_marginStart="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -124,7 +147,7 @@
                 android:visibility="visible">
 
                 <View
-                    android:layout_width="100dp"
+                    android:layout_width="124dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="2dp"
@@ -134,20 +157,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="57dp"
+                    android:layout_marginStart="54dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/robotobold"
-                    android:text="Home"
+                    android:text="DashBoard"
                     android:textColor="@color/barColor" />
             </FrameLayout>
 
             <ImageView
                 android:id="@+id/dashBoardHome"
-                android:layout_width="25dp"
-                android:layout_height="27dp"
+                android:layout_width="23dp"
+                android:layout_height="24dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="8dp"
-                app:srcCompat="@drawable/homepressed" />
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/dashboardpressed" />
 
         </FrameLayout>
 
@@ -272,15 +295,79 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/signOutButton"
+    <FrameLayout
+        android:id="@+id/frameLayoutSignUp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="20dp"
+        android:visibility="visible"
+        android:background="@drawable/logout_button_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/signOutButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/logout_button_image_background"
+            android:text="Button"
+            tools:layout_editor_absoluteX="290dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+    </FrameLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/dashboardItemDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/view12"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashBoardActionBar" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/framebackLayout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/logout_button_background"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/dashBoardBackButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/dashboardbackarraow"
+                android:text="Button"
+                tools:layout_editor_absoluteX="290dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/dashboardTabsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13sp"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:fontFamily="@font/robotobold"
+            android:textSize="20sp"
+            android:text="Courses Details " />
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,15 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.peodemo.DashBoard.fragmentPages.courses.dashBoardCourseFragment
+import com.example.peodemo.DashBoard.fragmentPages.dashBoardProfileFragment
+import com.example.peodemo.DashBoard.fragmentPages.dashBoardProgressFragment
+import com.example.peodemo.DashBoard.fragmentPages.dashboardHomeFragment
 import com.example.peodemo.DashBoard.glide.GlideApp
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.introductionActivity
 import com.example.peodemo.logPages.model.User
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,9 +26,9 @@ import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_main_dash_board2.*
 import java.io.ByteArrayOutputStream
 import java.util.*
-import kotlin.Result.Companion.success
 
 class mainDashBoardActivity : AppCompatActivity() {
+
 
     companion object{
         val RC_S_IMAGE = 2
@@ -47,14 +51,23 @@ class mainDashBoardActivity : AppCompatActivity() {
     get() = mStorage.reference.child(mAuth.currentUser?.uid.toString())
 
 
+    private  var mHomeFragment = dashboardHomeFragment()
+    private  var mCoursesFragment = dashBoardCourseFragment()
+    private  var mProgressFragment =  dashBoardProgressFragment()
+    private  var mProfileFragment = dashBoardProfileFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
+
         //assigning this property to context the activity on it
         val window = this.window
         //this line to change the state bar by using statusBarColor
         window?.statusBarColor = this.resources.getColor(R.color.barColor)
         //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+
+
 
         getUserInformation { User ->
 
@@ -84,45 +97,125 @@ class mainDashBoardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        setFragment(mHomeFragment)
         dashBoardCourse.setOnClickListener {
             homeFrameLayout.visibility = View.GONE
             progressFrameLayout.visibility = View.GONE
             profileFrameLayout.visibility = View.GONE
             courseFrameLayout.visibility = View.VISIBLE
-            dashBoardHome.setImageResource(R.drawable.home)
+
+            setFragment(mCoursesFragment)
+
+            dashBoardHome.setImageResource(R.drawable.dashboard)
             dashBoardProgress.setImageResource(R.drawable.progress)
             dashBoardProfile.setImageResource(R.drawable.profile)
             dashBoardCourse.setImageResource(R.drawable.coursepressed)
+
+            profileCircleImageView.visibility = View.GONE
+            helloDashboard.visibility = View.GONE
+            dashBoardUserName.visibility = View.GONE
+            dashBoardUserLastName.visibility = View.GONE
+            frameLayoutSignUp.visibility = View.GONE
+            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
+
+
+            dashboardItemDetails.visibility = View.VISIBLE
+            dashboardTabsText.text = "Courses Details"
+
+
+
         }
         dashBoardHome.setOnClickListener {
             courseFrameLayout.visibility = View.GONE
             progressFrameLayout.visibility = View.GONE
             profileFrameLayout.visibility = View.GONE
             homeFrameLayout.visibility = View.VISIBLE
-            dashBoardHome.setImageResource(R.drawable.homepressed)
+
+            setFragment(mHomeFragment)
+            dashBoardHome.setImageResource(R.drawable.dashboardpressed)
             dashBoardProgress.setImageResource(R.drawable.progress)
             dashBoardProfile.setImageResource(R.drawable.profile)
             dashBoardCourse.setImageResource(R.drawable.course)
+
+            profileCircleImageView.visibility = View.VISIBLE
+            frameLayoutSignUp.visibility = View.VISIBLE
+            helloDashboard.visibility = View.VISIBLE
+            dashBoardUserName.visibility = View.VISIBLE
+
+            dashBoardActionBar.animate().scaleY(0.9f).duration = 2000
+
+            dashboardItemDetails.visibility = View.GONE
+
         }
         dashBoardProgress.setOnClickListener {
             homeFrameLayout.visibility = View.GONE
             progressFrameLayout.visibility = View.VISIBLE
             profileFrameLayout.visibility = View.GONE
             courseFrameLayout.visibility = View.GONE
-            dashBoardHome.setImageResource(R.drawable.home)
+            setFragment(mProgressFragment)
+
+            dashBoardHome.setImageResource(R.drawable.dashboard)
             dashBoardProgress.setImageResource(R.drawable.progresspressed)
             dashBoardProfile.setImageResource(R.drawable.profile)
             dashBoardCourse.setImageResource(R.drawable.course)
+
+            profileCircleImageView.visibility = View.GONE
+            frameLayoutSignUp.visibility = View.GONE
+            helloDashboard.visibility = View.GONE
+            dashBoardUserName.visibility = View.GONE
+            dashBoardUserLastName.visibility = View.GONE
+
+            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
+
+
+            dashboardItemDetails.visibility = View.VISIBLE
+            dashboardTabsText.text = "Progress Details"
         }
         dashBoardProfile.setOnClickListener {
             homeFrameLayout.visibility = View.GONE
             progressFrameLayout.visibility = View.GONE
             profileFrameLayout.visibility = View.VISIBLE
             courseFrameLayout.visibility = View.GONE
-            dashBoardHome.setImageResource(R.drawable.home)
+
+            setFragment(mProfileFragment)
+
+            dashBoardHome.setImageResource(R.drawable.dashboard)
             dashBoardProgress.setImageResource(R.drawable.progress)
             dashBoardProfile.setImageResource(R.drawable.profilepressed)
             dashBoardCourse.setImageResource(R.drawable.course)
+
+            profileCircleImageView.visibility = View.GONE
+            helloDashboard.visibility = View.GONE
+            dashBoardUserName.visibility = View.GONE
+            frameLayoutSignUp.visibility = View.GONE
+            dashBoardUserLastName.visibility = View.GONE
+
+            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
+
+            dashboardItemDetails.visibility = View.VISIBLE
+            dashboardTabsText.text = "Profile Details"
+        }
+        framebackLayout.setOnClickListener {
+            setFragment(mHomeFragment)
+
+            dashBoardActionBar.animate().scaleY(0.9f).duration = 2000
+
+            courseFrameLayout.visibility = View.GONE
+            progressFrameLayout.visibility = View.GONE
+            profileFrameLayout.visibility = View.GONE
+            homeFrameLayout.visibility = View.VISIBLE
+
+
+            dashBoardHome.setImageResource(R.drawable.dashboardpressed)
+            dashBoardProgress.setImageResource(R.drawable.progress)
+            dashBoardProfile.setImageResource(R.drawable.profile)
+            dashBoardCourse.setImageResource(R.drawable.course)
+
+            profileCircleImageView.visibility = View.VISIBLE
+            frameLayoutSignUp.visibility = View.VISIBLE
+            helloDashboard.visibility = View.VISIBLE
+            dashBoardUserName.visibility = View.VISIBLE
+            dashboardItemDetails.visibility = View.GONE
         }
 
 
@@ -197,6 +290,18 @@ class mainDashBoardActivity : AppCompatActivity() {
         editor.putBoolean("signProcessFinished", false)
         //apply it if the method called
         editor.apply()
+
+    }
+
+    //declare a private SetFragment method to control in the fragments when the user press on the items in recycle view
+    private fun setFragment(fragment: Fragment) {
+        //declare an instance from beginTransaction class to call the method in it and store it in fr property
+        val fr = supportFragmentManager.beginTransaction()
+        //calling the replace method to trans the fragments
+        fr.setCustomAnimations(R.anim.side_in_left_dashboard_fragments_transaction,R.anim.side_out_right_to_dashboard_fragments_transaction)
+        fr.replace(R.id.dashboardCoordinateLayout,fragment)
+        //and commit it
+        fr.commit()
 
     }
 

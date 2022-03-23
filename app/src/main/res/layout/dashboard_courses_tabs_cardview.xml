@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F6F6EF"
+    android:layout_gravity="center"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp"
+  >
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:background="#F6F6EF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_marginStart="20sp"
+            android:id="@+id/dashboardCourseTabsLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/navigation_bar_pressed_item">
+
+            <ImageView
+                android:id="@+id/dashboardCourseImageView"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="9sp"
+                app:srcCompat="@drawable/all" />
+
+            <TextView
+                android:id="@+id/dashboardCourseTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="10sp"
+                android:text="All"
+                android:layout_marginEnd="12sp"
+                android:textSize="14sp"
+                android:fontFamily="@font/robotobold"
+                android:textColor="@color/barColor"/>
+        </FrameLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
