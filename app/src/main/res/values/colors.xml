@@ -24,4 +24,6 @@
     <color name="dashboardOngoingTapCourses">#697AB2</color>
     <color name="dashboardOngoingTapCoursesPressed">#ffff</color>
     <color name="dashboardNewTapCourses">#59C8EF</color>
+
+    <color name="introductionCourseDetailsStatusBarColor">#F8F8F8</color>
 </resources>

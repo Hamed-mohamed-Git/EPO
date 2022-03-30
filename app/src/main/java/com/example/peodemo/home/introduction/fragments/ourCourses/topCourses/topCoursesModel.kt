@@ -1,9 +1,8 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.topCourses
 
 data class topCoursesModel(
-    val name:String,
+    val courseName:String,
     val price:String,
-    val lesson:String,
-    val image:Int,
-    var pressed:Int
+    val lessonCount:String,
+    val image:Int
 )

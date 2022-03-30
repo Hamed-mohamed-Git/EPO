@@ -79,5 +79,7 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
     apply plugin:'kotlin-kapt'
 
+    implementation 'com.google.android.exoplayer:exoplayer:2.15.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.0'
 
 }

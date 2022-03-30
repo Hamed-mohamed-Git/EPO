@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/background_for_layout_of_categories_card.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/background_for_layout_of_categories_card_pressed.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/button_sign_in_with_background.xml" value="0.3234375" />
+        <entry key="app/src/main/res/drawable/course_details_in_ourcourses.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/find_course_card_dashboard_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/firstwelcomebuttonbackground.xml" value="0.33645833333333336" />
         <entry key="app/src/main/res/drawable/fragment_markes_bar_viewcard_background.xml" value="0.334375" />
@@ -20,11 +21,14 @@
         <entry key="app/src/main/res/drawable/logout_button_image_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/navigation_bar_background.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/navigation_bar_pressed_item.xml" value="0.3296296296296296" />
+        <entry key="app/src/main/res/drawable/nested_scroll_view_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/next_button_style.xml" value="0.3484375" />
         <entry key="app/src/main/res/drawable/peoIcon_background.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/drawable/price_background_item_card.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/register_button_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/register_buttons_view_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/register_image_background.xml" value="0.3328125" />
+        <entry key="app/src/main/res/drawable/roundes_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/secondfragmentbuttonbackgroud.xml" value="0.33645833333333336" />
         <entry key="app/src/main/res/drawable/sign_in_button_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/sign_in_button_introduction_text_color.xml" value="0.3328125" />
@@ -37,9 +41,11 @@
         <entry key="app/src/main/res/drawable/termsandconditions.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/termsandconditions_button_accept_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/thirdwelcomefragmentbackground.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/drawable/top_courses_item_card_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/font/font.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/font/fontnew.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/action_bar_background.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/activity_course_details.xml" value="0.26222826086956524" />
         <entry key="app/src/main/res/layout/activity_introduction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_main_dash_board2.xml" value="0.33" />
@@ -48,6 +54,7 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up_nested2.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_video_player.xml" value="0.25271739130434784" />
         <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.26313405797101447" />
         <entry key="app/src/main/res/layout/categories_card_item.xml" value="0.9" />
         <entry key="app/src/main/res/layout/content_sign_up_nested.xml" value="0.21458333333333332" />

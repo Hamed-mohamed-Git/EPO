@@ -4,7 +4,9 @@
     package="com.example.peodemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +15,12 @@
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PEODemo">
+        <activity
+            android:name=".home.introduction.fragments.ourCourses.CourseDetails.IntroductionVideo"
+            android:exported="false" />
+        <activity
+            android:name=".home.introduction.fragments.ourCourses.CourseDetails.courseDetails"
+            android:exported="false" />
         <activity
             android:name=".logPages.TermsAndConditionsActivity"
             android:exported="false" />
@@ -42,7 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -68,6 +75,5 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
     </application>
-
 
 </manifest>
