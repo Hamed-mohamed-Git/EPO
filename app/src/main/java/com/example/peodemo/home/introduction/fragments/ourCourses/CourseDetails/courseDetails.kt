@@ -5,12 +5,78 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.peodemo.R
+import com.example.peodemo.logPages.signUpActivity
 import kotlinx.android.synthetic.main.activity_course_details.*
+import kotlinx.android.synthetic.main.fragment_second_welcome.*
 
 class courseDetails : AppCompatActivity() {
+
+    private lateinit var DataFromOurCorsesFragment:courseDetailModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_details)
+
+        DataFromOurCorsesFragment = intent.getSerializableExtra("data") as courseDetailModel
+        courseDetailsTeacherName.text = DataFromOurCorsesFragment.teacher
+        courseDetailsCourseName.text = DataFromOurCorsesFragment.name
+        courseDetailsLessenCount.text = DataFromOurCorsesFragment.amongOfVideos
+        courseDetailsCourseImage.setImageResource(DataFromOurCorsesFragment.Image)
+        courseDetailsPrice.text = DataFromOurCorsesFragment.price
+        priceFrameLayout.background.setTint(DataFromOurCorsesFragment.mainColor)
+        peopleCourseDetailsFrameLayout.background.setTint(DataFromOurCorsesFragment.mainColor)
+        peopleCourseDetails.background.setTint(DataFromOurCorsesFragment.subColor)
+
+        starCourseDetailsFrameLayout.background.setTint(DataFromOurCorsesFragment.mainColor)
+        starCourseDetails.background.setTint(DataFromOurCorsesFragment.subColor)
+
+        likeCourseDetailsFrameLayout.background.setTint(DataFromOurCorsesFragment.mainColor)
+        likeCourseDetails.background.setTint(DataFromOurCorsesFragment.subColor)
+
+        coursePlayFrameLayout.background.setTint(DataFromOurCorsesFragment.mainColor)
+        CourseDetailsPlayButton.background.setTint(DataFromOurCorsesFragment.subColor)
+
+        VideoTime.text = DataFromOurCorsesFragment.videoTime
+        VideoTime.setTextColor(DataFromOurCorsesFragment.mainColor)
+        VideoTimeMinutes.setTextColor(DataFromOurCorsesFragment.mainColor)
+
+        courseIncluded.background.setTint(DataFromOurCorsesFragment.mainColor)
+        courseIncluded.setTextColor(DataFromOurCorsesFragment.subColor)
+
+        description.background.setTint(DataFromOurCorsesFragment.subColor)
+        description.setTextColor(DataFromOurCorsesFragment.mainColor)
+
+        if (DataFromOurCorsesFragment.firstSectionOfDescription == null){
+            FirstParagraph.visibility = View.GONE
+        }else{
+            FirstParagraph.text = DataFromOurCorsesFragment.firstSectionOfDescription
+        }
+
+        if (DataFromOurCorsesFragment.secondSectionOfDescription == null){
+            SecondParagraph.visibility = View.GONE
+        }else{
+            SecondParagraph.text = DataFromOurCorsesFragment.secondSectionOfDescription
+        }
+
+        if (DataFromOurCorsesFragment.thirdSectionOfDescription == null){
+            ThirdParagraph.visibility = View.GONE
+        }else{
+            ThirdParagraph.text = DataFromOurCorsesFragment.thirdSectionOfDescription
+        }
+
+        if (DataFromOurCorsesFragment.fourthSectionOfDescription == null){
+            FourthParagraph.visibility = View.GONE
+        }else{
+            FourthParagraph.text = DataFromOurCorsesFragment.fourthSectionOfDescription
+        }
+
+
+        checkoutButton.background.setTint(DataFromOurCorsesFragment.mainColor)
+        hello.setTextColor(DataFromOurCorsesFragment.mainColor)
+
+
+
+
         //assigning this property to context the activity on it
         val window = this.window
         //this line to change the state bar by using statusBarColor
@@ -29,6 +95,17 @@ class courseDetails : AppCompatActivity() {
         }
         IntroductionVideoButton.setOnClickListener {
             val intent = Intent(this,IntroductionVideo::class.java)
+            intent.putExtra("url",DataFromOurCorsesFragment.VideoURI)
+            startActivity(intent)
+        }
+
+        back.setOnClickListener {
+            finish()
+        }
+
+        checkoutButton.setOnClickListener {
+            val intent = Intent(this,signUpActivity::class.java)
+            intent.putExtra("courseName",DataFromOurCorsesFragment.name)
             startActivity(intent)
         }
 

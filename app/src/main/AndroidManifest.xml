@@ -17,7 +17,10 @@
         android:theme="@style/Theme.PEODemo">
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.IntroductionVideo"
-            android:exported="false" />
+            android:exported="true"
+            android:configChanges="orientation|keyboard|layoutDirection|screenSize"
+            android:launchMode="singleTask"
+            />
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.courseDetails"
             android:exported="false" />

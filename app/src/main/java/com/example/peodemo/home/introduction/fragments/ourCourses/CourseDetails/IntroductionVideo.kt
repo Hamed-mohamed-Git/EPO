@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -26,18 +27,30 @@ import com.google.android.exoplayer2.util.Util
 class IntroductionVideo : AppCompatActivity() {
     private lateinit var constraintLayoutRoot:ConstraintLayout
     private lateinit var exoPlayerView: PlayerView
-
+    private  var URLFromCourseDetails = ""
     private lateinit var simpleExoPlayer:SimpleExoPlayer
     private lateinit var mediaSource:MediaSource
-
+    private var statusShown = 1
     private lateinit var urlType : URLType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction_video)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window?.statusBarColor = this.resources.getColor(R.color.black)
+        URLFromCourseDetails = intent.getStringExtra("url") as String
         findView()
         intiPlayer()
+        exoPlayerView.setOnClickListener {
+            if (statusShown == 1){
+                hideSystemUI()
+                statusShown = 0
+            }else if (statusShown == 0){
+                showSystemUI()
+                statusShown = 1
+            }
+
+        }
     }
     private fun findView(){
         constraintLayoutRoot = findViewById(R.id.constraintLayoutRoot)
@@ -61,7 +74,7 @@ class IntroductionVideo : AppCompatActivity() {
         //urlType.url = "https://www.dropbox.com/home/EPO%20educating%20programming%20online/project%20explanation/QR%20section?preview=QR+Section.mp4"
 
         urlType = URLType.MP4
-        urlType.url = "https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/yt1s.com%20-%20Billie%20Eilish%20Khalid%20%20lovely_1080p.mp4?alt=media&token=cc361faa-8e46-437b-ac6f-57b8efc1dfd0"
+        urlType.url = URLFromCourseDetails
 
         simpleExoPlayer.seekTo(0)
         when(urlType){
@@ -99,11 +112,14 @@ class IntroductionVideo : AppCompatActivity() {
         constraintSet.applyTo(constraintLayoutRoot)
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE){
-            hideSystemUI()
+            statusShown = 1
+            showSystemUI()
+            exoPlayerView.layoutParams.width= ViewGroup.LayoutParams.MATCH_PARENT
+            exoPlayerView.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
         else {
+            statusShown = 1
             showSystemUI()
-
             val layoutParams = exoPlayerView.layoutParams as ConstraintLayout.LayoutParams
             layoutParams.dimensionRatio = "16:9"
         }
@@ -125,7 +141,7 @@ class IntroductionVideo : AppCompatActivity() {
     }
 
     private fun showSystemUI(){
-        actionBar?.show()
+        actionBar?.hide()
 
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -173,7 +189,7 @@ class IntroductionVideo : AppCompatActivity() {
 
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
-            Toast.makeText(this@IntroductionVideo, error.message.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@IntroductionVideo, "Check your internet connection and try again!", Toast.LENGTH_SHORT).show()
         }
     }
 }

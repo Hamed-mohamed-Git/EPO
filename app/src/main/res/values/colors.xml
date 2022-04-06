@@ -26,4 +26,36 @@
     <color name="dashboardNewTapCourses">#59C8EF</color>
 
     <color name="introductionCourseDetailsStatusBarColor">#F8F8F8</color>
+
+
+    <color name="theMainIOSFoundationCourse">#405DE6</color>
+    <color name="theSubIOSFoundationCourse">#FFFFFF</color>
+
+    <color name="theMainIOSDesignCourse">#95999F</color>
+    <color name="theSubIOSDesignCourse">#FFFFFF</color>
+
+    <color name="theMainIOSDatabaseCourse">#EF4F5C</color>
+    <color name="theSubIOSDatabaseCourse">#FFFFFF</color>
+
+
+    <color name="theMainAndroidFoundationCourse">#5685C3</color>
+    <color name="theSubAndroidFoundationCourse">#FFFFFF</color>
+
+    <color name="theMainAndroidDesignCourse">#31323B</color>
+    <color name="theSubAndroidDesignCourse">#FFFFFF</color>
+
+    <color name="theMainAndroidJetpackComposeCourse">#7E89FD</color>
+    <color name="theSubAndroidJetpackComposeCourse">#DEE3FC</color>
+
+    <color name="theMainAndroidPatternCourse">#4E65B0</color>
+    <color name="theSubAndroidPatternCourse">#FFFFFF</color>
+
+    <color name="theMainDataStructurePart1Course">#41A69A</color>
+    <color name="theSubDataStructurePart1Course">#FFFFFF</color>
+
+    <color name="theMainDataStructurePart2Course">#414588</color>
+    <color name="theSubDataStructurePart2Course">#DCE0FF</color>
+
+    <color name="theMainDataStructureAlgorithmsCourse">#414588</color>
+    <color name="theSubAndroidAlgorithmsCourse">#DCE0FF</color>
 </resources>
