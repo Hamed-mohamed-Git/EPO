@@ -3,6 +3,7 @@ package com.example.peodemo.logPages
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -16,8 +17,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.peodemo.DashBoard.mainDashBoardActivity
 import com.example.peodemo.R
+import com.example.peodemo.logPages.model.CourseDetails
+import com.example.peodemo.logPages.model.User
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -30,10 +34,15 @@ import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import java.security.MessageDigest
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class signInActivity : AppCompatActivity(), TextWatcher {
+    private var DataFromOurCourses = ""
     companion object{
         private const val RC_SIGN_IN = 120
     }
@@ -48,21 +57,21 @@ class signInActivity : AppCompatActivity(), TextWatcher {
 
     private var callBackManger:CallbackManager? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         textView14.setOnClickListener {
-            val intent = Intent(this,RegisterActivitypage::class.java)
+            val intent = Intent(this,signUpActivity::class.java)
             startActivity(intent)
         }
-
+        window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
+        DataFromOurCourses = intent.getStringExtra("CourseID") as String
 
 
         editTextTextEmailAddress.addTextChangedListener(this@signInActivity)
         editTextTextPassword.addTextChangedListener(this@signInActivity)
-
-
-
+        
 
         githubEdit = editTextTextEmailAddress
         loginBtn = signInWithGithub
@@ -153,13 +162,18 @@ class signInActivity : AppCompatActivity(), TextWatcher {
         window?.statusBarColor = this.resources.getColor(R.color.signInActivityColor)
         //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
-
     private fun signIn(email: String, password: String) {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {task ->
             if (task.isSuccessful){
                 onBoardingFinished()
                 var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                if (DataFromOurCourses != ""){
+                    intent.putExtra("anotherCourse",DataFromOurCourses)
+                }
+                else{
+                    intent.putExtra("anotherCourse","")
+                }
                 startActivity(intent)
             } else {
                 Toast.makeText(this@signInActivity,task.exception?.message,Toast.LENGTH_LONG).show()
@@ -205,6 +219,13 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                     val user = mAuth.currentUser
                     var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    if (DataFromOurCourses != ""){
+                        intent.putExtra("anotherCourse",DataFromOurCourses)
+                    }
+                    else{
+                        intent.putExtra("anotherCourse",DataFromOurCourses)
+
+                    }
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -224,6 +245,12 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                     onBoardingFinished()
                     var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    if (DataFromOurCourses != ""){
+                        intent.putExtra("anotherCourse",DataFromOurCourses)
+                    }
+                    else{
+                        intent.putExtra("anotherCourse","")
+                    }
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -261,6 +288,12 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                         var intent = Intent(this@signInActivity,mainDashBoardActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         // send github user name from MainActivity to HomePageActivity
+                        if (DataFromOurCourses != ""){
+                            intent.putExtra("anotherCourse",DataFromOurCourses)
+                        }
+                        else{
+                            intent.putExtra("anotherCourse","")
+                        }
                         this.startActivity(intent)
                         Toast.makeText(this, "Login Successfully", Toast.LENGTH_LONG).show()
 

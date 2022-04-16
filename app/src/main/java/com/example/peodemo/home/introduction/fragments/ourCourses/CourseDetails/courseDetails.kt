@@ -1,13 +1,13 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.peodemo.R
-import com.example.peodemo.logPages.signUpActivity
+import com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutActivity
 import kotlinx.android.synthetic.main.activity_course_details.*
-import kotlinx.android.synthetic.main.fragment_second_welcome.*
 
 class courseDetails : AppCompatActivity() {
 
@@ -88,6 +88,9 @@ class courseDetails : AppCompatActivity() {
             descriptionLayout.visibility = View.GONE
 
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.window.navigationBarColor = getColor(R.color.introductionCourseDetailsStatusBarColor)
+        }
         description.setOnClickListener {
             courseIncludedLayout.visibility = View.GONE
             descriptionLayout.visibility = View.VISIBLE
@@ -104,8 +107,9 @@ class courseDetails : AppCompatActivity() {
         }
 
         checkoutButton.setOnClickListener {
-            val intent = Intent(this,signUpActivity::class.java)
-            intent.putExtra("courseName",DataFromOurCorsesFragment.name)
+            val intent = Intent(this, CheckOutActivity::class.java)
+            intent.putExtra("ID",DataFromOurCorsesFragment.checkoutDetails)
+            intent.putExtra("MainColor",DataFromOurCorsesFragment.mainColor)
             startActivity(intent)
         }
 

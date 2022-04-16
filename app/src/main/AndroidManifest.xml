@@ -16,11 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PEODemo">
         <activity
+            android:name="com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutActivity"
+            android:exported="false" />
+        <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.IntroductionVideo"
-            android:exported="true"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize"
-            android:launchMode="singleTask"
-            />
+            android:exported="true"
+            android:launchMode="singleTask" />
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.courseDetails"
             android:exported="false" />

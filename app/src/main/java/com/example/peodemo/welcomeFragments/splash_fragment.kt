@@ -1,5 +1,6 @@
 package com.example.peodemo.welcomeFragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.peodemo.DashBoard.mainDashBoardActivity
 import com.example.peodemo.R
 
 
@@ -48,15 +50,14 @@ class splash_fragment : Fragment() {
                     findNavController().navigate(action,extras)
                 }else if (onSignUpFinished()){
                     //create an action to move to another Activity called introduction Activity by save change
-                    val action = splash_fragmentDirections.actionSplashFragmentToMainDashBoardActivity()
+                    val intent = Intent(this.activity,mainDashBoardActivity::class.java)
                     //create a extras property to add flags if the user click on return system button close the app
-                    val extras = ActivityNavigator.Extras.Builder()
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                        .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .build()
-                    //add this action to navigate method to move to introduction Activity
-                    findNavController().navigate(action,extras)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    intent.putExtra("anotherCourse","")
+                    startActivity(intent)
+                    activity?.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
                 }
                 //if does not move on welcome fragments
                 else

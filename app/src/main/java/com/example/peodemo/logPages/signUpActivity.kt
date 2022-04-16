@@ -3,6 +3,7 @@ package com.example.peodemo.logPages
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
@@ -35,6 +37,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class signUpActivity : AppCompatActivity(), TextWatcher {
+    private var DataFromOurCourses = ""
     companion object{
         private const val RC_SIGN_IN = 120
     }
@@ -55,11 +58,15 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
     private val currentUserDocRef: DocumentReference
         get() = fireStoreInstance.document("Users/${mAuth.currentUser?.uid.toString()}")
 
+    private val currentUserCourseDetailsDocRef: DocumentReference
+        get() = fireStoreInstance.document("Users/${mAuth.currentUser?.uid.toString()}/")
+
     private lateinit var loginBtn: ImageView
     private lateinit var githubEdit: EditText
     private val provider = OAuthProvider.newBuilder("github.com")
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -67,6 +74,10 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
         val window = this.window
         //this line to change the state bar by using statusBarColor
         window?.statusBarColor = this.resources.getColor(R.color.signInActivityColor)
+        window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
+
+
+        DataFromOurCourses = intent.getStringExtra("CourseID") as String
 
 
 
@@ -195,7 +206,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
     private fun addNewAccount(email: String, password: String, name: String, lastName: String) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            val userInformation = User(email,password,name, lastName,"",false)
+            val userInformation = User(email,password,name, lastName,"",false,DataFromOurCourses)
             if (task.isSuccessful){
                 currentUserDocRef.set(userInformation)
                 var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
@@ -282,7 +293,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
 
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
@@ -307,7 +318,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
@@ -346,7 +357,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                         // User is signed in.
                         // retrieve the current user
                         val user = mAuth.currentUser
-                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
+                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
                         currentUserDocRef.set(userInformation)
                         // navigate to HomePageActivity after successful login
                         var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)

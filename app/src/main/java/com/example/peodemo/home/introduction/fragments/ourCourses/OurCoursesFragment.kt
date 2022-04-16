@@ -4,14 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails.courseDetailModel
@@ -21,6 +20,7 @@ import com.example.peodemo.home.introduction.fragments.ourCourses.categories.gat
 
 import com.example.peodemo.home.introduction.fragments.ourCourses.topCourses.topCoursesModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.topCourses.topCoursesViewModel
+import com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutProcessingModel
 import kotlinx.android.synthetic.main.fragment_our_courses.*
 import java.util.ArrayList
 
@@ -55,7 +55,6 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_our_courses, container, false)
-
     }
 
     @SuppressLint("WrongConstant")
@@ -155,7 +154,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
 
             when(position){
                 0 -> {
-                    val courseDetailsList = courseDetailModel("Foundation"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("iosFC1",199.99f,300,10,4)
+                        ,"Foundation"
                         ,"Chris Ching"
                         ,"199.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FIOS%20development%2FiOS%20Foundations%20(SwiftUI).mp4?alt=media&token=ee3c2084-b743-4a75-a433-e78c996cf0ea",
@@ -175,7 +176,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
 
                 }
                 1 ->{
-                    val courseDetailsList = courseDetailModel("Design app"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("iosDC2",49.99f,150,6,3)
+                        ,"Design app"
                         ,"Chris Ching"
                         ,"49.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FIOS%20development%2FDesign%20Course.mp4?alt=media&token=7e7e4709-d6fc-4899-b41b-b06f309a0477",
@@ -195,7 +198,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
 
                 }
                 2 ->{
-                    val courseDetailsList = courseDetailModel("Database"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("iosDAC3",29.99f,30,11,3)
+                        ,"Database"
                         ,"Chris Ching"
                         ,"29.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FIOS%20development%2FiOS%20Databases%20(SwiftUI).mp4?alt=media&token=a3fb83b6-2656-4221-9036-efd501c3a06f",
@@ -220,7 +225,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
         }else if (CategoriesType == "Android"){
             when(position){
                 0 -> {
-                    val courseDetailsList = courseDetailModel("Foundation"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("andF0",299.99f,360,34,8)
+                        ,"Foundation"
                         ,"John Tripho"
                         ,"299.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FAndroid%20Development%2Ffoundation.mp4?alt=media&token=48dd253d-c49b-4214-819b-d93668541c15",
@@ -239,7 +246,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                     startActivity(intent)
                 }
                 1 -> {
-                    val courseDetailsList = courseDetailModel("Design Course"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("andD1",149.99f,150,27,2)
+                        ,"Design Course"
                         ,"Jesse Showalter "
                         ,"149.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FAndroid%20Development%2FDesgin.mp4?alt=media&token=23690085-c906-4e03-9152-18fd51d11a14",
@@ -258,7 +267,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                     startActivity(intent)
                 }
                 2 -> {
-                    val courseDetailsList = courseDetailModel("Jetpack Compose"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("andJP2",399.99f,400,21,7)
+                        ,"Jetpack Compose"
                         ,"Stevdza-san"
                         ,"399.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FAndroid%20Development%2FIntroduction%20-%20Jetpack%20Compose.mp4?alt=media&token=a2843613-ba12-4cf7-b0b5-c164845c503b",
@@ -278,7 +289,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
 
                 }
                 3 -> {
-                    val courseDetailsList = courseDetailModel("Pattern"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("andP3",99.99f,120,13,4)
+                        ,"Pattern"
                         ,"Mosh Hamedani"
                         ,"99.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FAndroid%20Development%2Fpattern%20Introduction.mp4?alt=media&token=e02cada6-19b8-456c-91c0-6a2e2b468236",
@@ -300,7 +313,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
         }else if (CategoriesType == "Data Structure"){
             when(position){
                 0 -> {
-                    val courseDetailsList = courseDetailModel("Part 1"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("dsP10",99.99f,30,18,5)
+                        ,"Part 1"
                         ,"Mosh Hamedani"
                         ,"99.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FData%20structure%20and%20algorithms%2Fpart%201.mp4?alt=media&token=fb0fb242-4a0d-437d-a9f6-5d5f8db890cc",
@@ -319,7 +334,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                     startActivity(intent)
                 }
                 1 -> {
-                    val courseDetailsList = courseDetailModel("Part 2"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("dsP21",199.99f,20,5,7)
+                        ,"Part 2"
                         ,"Mosh Hamedani"
                         ,"199.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FData%20structure%20and%20algorithms%2Fpart%202.mp4?alt=media&token=ba461aab-d45c-4892-8cf5-a54db492e6dc",
@@ -338,7 +355,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                     startActivity(intent)
                 }
                 2 -> {
-                    val courseDetailsList = courseDetailModel("Algorithms"
+                    val courseDetailsList = courseDetailModel(
+                        CheckOutProcessingModel("dsA2",149.99f,100,14,4)
+                        ,"Algorithms"
                         ,"Mosh Hamedani"
                         ,"149.99"
                         ,"https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FData%20structure%20and%20algorithms%2FAlgorithm.mp4?alt=media&token=caeeb9fd-e068-4909-975b-5ac56a66814a",

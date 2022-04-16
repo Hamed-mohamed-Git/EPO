@@ -1,8 +1,10 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails
 
+import com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutProcessingModel
 import java.io.Serializable
 
 class courseDetailModel(
+    val checkoutDetails: CheckOutProcessingModel,
     val name:String,
     val teacher:String,
     val price:String,

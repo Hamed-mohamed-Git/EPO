@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.example.peodemo.DashBoard.fragmentPages.courses.dashBoardCourseFragment
 import com.example.peodemo.DashBoard.fragmentPages.dashBoardProfileFragment
@@ -28,7 +29,7 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 class mainDashBoardActivity : AppCompatActivity() {
-
+    private var DataFromOurCourses = ""
 
     companion object{
         val RC_S_IMAGE = 2
@@ -60,17 +61,34 @@ class mainDashBoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
 
+
         //assigning this property to context the activity on it
         val window = this.window
         //this line to change the state bar by using statusBarColor
         window?.statusBarColor = this.resources.getColor(R.color.barColor)
         //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
+        DataFromOurCourses = intent.getStringExtra("anotherCourse") as String
+
 
 
 
         getUserInformation { User ->
-
+            val userDataByHashMap = mutableMapOf<String, Any>()
+            val user = mAuth.currentUser
+            if (DataFromOurCourses != ""){
+                userDataByHashMap["logWithState"] = false
+                userDataByHashMap["profileImageURI"] = User.profileImageURI
+                userDataByHashMap["email"] = user?.email.toString()
+                userDataByHashMap["lastName"] = " "
+                userDataByHashMap["name"] = user?.displayName.toString()
+                userDataByHashMap["password"] = " "
+                userDataByHashMap["CourseDetails"] = DataFromOurCourses
+                currentUserDocRef.update(userDataByHashMap)
+                setCourseInformationOnTheServer("Foundation",3,5)
+            }
+            //setCourseInformationOnTheServer("Foundation",3,5)
+            DataFromOurCourses = User.CourseDetails
             if (User.profileImageURI.isNotEmpty() && User.logWithState){
                 GlideApp.with(this@mainDashBoardActivity)
                     .load(User.profileImageURI)
@@ -83,7 +101,11 @@ class mainDashBoardActivity : AppCompatActivity() {
                     .placeholder(R.drawable.user)
                     .into(profileCircleImageView)
             }
-            if (User.name.isNotEmpty()){
+            if (User.lastName.isNotEmpty()){
+                dashBoardUserLastName.visibility = View.VISIBLE
+                dashBoardUserLastName.text = User.lastName
+                dashBoardUserName.text = User.name
+            }else{
                 dashBoardUserLastName.visibility = View.GONE
                 dashBoardUserName.text = User.name
             }
@@ -255,14 +277,17 @@ class mainDashBoardActivity : AppCompatActivity() {
         ref.putBytes(imageSelectedByte).addOnCompleteListener {
             if (it.isSuccessful){
                 val userDataByHashMap = mutableMapOf<String, Any>()
-                val user = mAuth.currentUser
-                userDataByHashMap["logWithState"] = false
-                userDataByHashMap["profileImageURI"] = ref.path
-                userDataByHashMap["email"] = user?.email.toString()
-                userDataByHashMap["lastName"] = " "
-                userDataByHashMap["name"] = user?.displayName.toString()
-                userDataByHashMap["password"] = " "
-                currentUserDocRef.update(userDataByHashMap)
+                getUserInformation {
+                    val user = mAuth.currentUser
+                    userDataByHashMap["logWithState"] = false
+                    userDataByHashMap["profileImageURI"] = ref.path
+                    userDataByHashMap["email"] = user?.email.toString()
+                    userDataByHashMap["lastName"] = it.lastName
+                    userDataByHashMap["name"] = user?.displayName.toString()
+                    userDataByHashMap["password"] = it.password
+                    userDataByHashMap["CourseDetails"] = it.CourseDetails
+                    currentUserDocRef.update(userDataByHashMap)
+                }
                 Toast.makeText(this@mainDashBoardActivity, "The image is uploaded successfully", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(this@mainDashBoardActivity, it.exception?.message.toString(), Toast.LENGTH_SHORT).show()
@@ -305,5 +330,17 @@ class mainDashBoardActivity : AppCompatActivity() {
 
     }
 
-
+    private fun setCourseInformationOnTheServer(CourseName:String,Modules:Int,lessons:Int){
+        for (modulesAmount  in 1..Modules){
+            for (LessonAmount in 1..lessons){
+                fireStoreInstance.collection("Users")
+                    .document(mAuth.currentUser!!.uid)
+                    .collection("My Courses")
+                    .document(CourseName)
+                    .collection("Module $modulesAmount")
+                    .document("lesson $LessonAmount")
+                    .set(mapOf("finished" to false))
+            }
+        }
+    }
 }

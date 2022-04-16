@@ -4,8 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peodemo.R
@@ -41,6 +48,8 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         //make a condition if the phone sdk above 15 or not
         //if matches
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.window.navigationBarColor = getColor(R.color.theSubIOSFoundationCourse)
+
             //assigning this property to context the activity on it
             val window = this.window
             //this line to change the state bar by using statusBarColor
@@ -65,6 +74,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         //make an action if the user tap on signIn button take they to SignIn Activity
         signInIntroductionButton.setOnClickListener {
             val intent = Intent(this,signInActivity::class.java)
+            intent.putExtra("CourseID","")
             startActivity(intent)
         }
 
@@ -82,6 +92,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
     }
 
     //calling a onItemClick that we crated in tapViewModel class to make actions if the user tap on any item
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onItemClick(position: Int) {
         //use a conditional loop to access each item by index
         when (position){
@@ -102,6 +113,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 adapter.notifyItemChanged(1)
                 adapter.notifyItemChanged(2)
                 adapter.notifyItemChanged(3)
+                this.window.navigationBarColor = getColor(R.color.theSubIOSFoundationCourse)
 
             }
             // if the user tap on the second item
@@ -121,7 +133,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 adapter.notifyItemChanged(0)
                 adapter.notifyItemChanged(2)
                 adapter.notifyItemChanged(3)
-
+                this.window.navigationBarColor = getColor(R.color.theSubIOSFoundationCourse)
             }
             // if the user tap on the third item
             2 ->{
@@ -140,6 +152,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 adapter.notifyItemChanged(0)
                 adapter.notifyItemChanged(1)
                 adapter.notifyItemChanged(3)
+                this.window.navigationBarColor = getColor(R.color.theSubIOSFoundationCourse)
             }
             // if the user tap on the last item
             3 ->{
@@ -158,8 +171,13 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 adapter.notifyItemChanged(0)
                 adapter.notifyItemChanged(1)
                 adapter.notifyItemChanged(2)
+                
+                this.window.navigationBarColor = getColor(R.color.transpernt)
+
+
             }
         }
     }
+  
 
 }
