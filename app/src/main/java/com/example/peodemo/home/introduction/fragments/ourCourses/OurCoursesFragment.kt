@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails.courseDetailModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails.courseDetails
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CourseLessonsModel
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseLessonDetailsModel
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseModulesModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.categories.categoriesViewModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.categories.gategoriesModel
 
@@ -42,6 +46,8 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
     private val topCoursesAdapter = topCoursesViewModel(topCoursesTabList,this)
 
     private lateinit var courseCategory:String
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -155,6 +161,18 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
             when(position){
                 0 -> {
                     val courseDetailsList = courseDetailModel(
+                        CoursesModel(
+                            "Foundation",
+                            "iosFC1",
+                            R.drawable.foundation,
+                            0f,
+                            activity!!.getColor(R.color.theMainIOSFoundationCourse),
+                            30
+                            ,0,
+                            false,
+                            6,
+                            null
+                        ),
                         CheckOutProcessingModel("iosFC1",199.99f,300,10,4)
                         ,"Foundation"
                         ,"Chris Ching"
@@ -177,6 +195,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 1 ->{
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("iosDC2",49.99f,150,6,3)
                         ,"Design app"
                         ,"Chris Ching"
@@ -199,6 +218,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 2 ->{
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("iosDAC3",29.99f,30,11,3)
                         ,"Database"
                         ,"Chris Ching"
@@ -226,6 +246,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
             when(position){
                 0 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("andF0",299.99f,360,34,8)
                         ,"Foundation"
                         ,"John Tripho"
@@ -247,6 +268,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 1 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("andD1",149.99f,150,27,2)
                         ,"Design Course"
                         ,"Jesse Showalter "
@@ -268,6 +290,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 2 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("andJP2",399.99f,400,21,7)
                         ,"Jetpack Compose"
                         ,"Stevdza-san"
@@ -290,6 +313,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 3 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("andP3",99.99f,120,13,4)
                         ,"Pattern"
                         ,"Mosh Hamedani"
@@ -314,6 +338,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
             when(position){
                 0 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("dsP10",99.99f,30,18,5)
                         ,"Part 1"
                         ,"Mosh Hamedani"
@@ -335,6 +360,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 1 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("dsP21",199.99f,20,5,7)
                         ,"Part 2"
                         ,"Mosh Hamedani"
@@ -356,6 +382,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                 }
                 2 -> {
                     val courseDetailsList = courseDetailModel(
+                        null,
                         CheckOutProcessingModel("dsA2",149.99f,100,14,4)
                         ,"Algorithms"
                         ,"Mosh Hamedani"
@@ -405,5 +432,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
         TopCoursesRecycleViewCourseIntroduction.layoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL,false)
         TopCoursesRecycleViewCourseIntroduction.adapter = topCoursesAdapter
     }
+
+
 
 }

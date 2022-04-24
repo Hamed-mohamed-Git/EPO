@@ -20,6 +20,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.peodemo.DashBoard.mainDashBoardActivity
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import com.example.peodemo.logPages.model.CourseDetails
 import com.example.peodemo.logPages.model.User
 import com.facebook.*
@@ -43,6 +44,7 @@ import kotlin.collections.ArrayList
 
 class signInActivity : AppCompatActivity(), TextWatcher {
     private var DataFromOurCourses = ""
+    private lateinit var courseDetails: CoursesModel
     companion object{
         private const val RC_SIGN_IN = 120
     }
@@ -67,6 +69,10 @@ class signInActivity : AppCompatActivity(), TextWatcher {
         }
         window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
         DataFromOurCourses = intent.getStringExtra("CourseID") as String
+        if (DataFromOurCourses != ""){
+            courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
+        }
+
 
 
         editTextTextEmailAddress.addTextChangedListener(this@signInActivity)
@@ -170,9 +176,11 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 if (DataFromOurCourses != ""){
                     intent.putExtra("anotherCourse",DataFromOurCourses)
+                    intent.putExtra("DataOfCourse",courseDetails)
                 }
                 else{
                     intent.putExtra("anotherCourse","")
+
                 }
                 startActivity(intent)
             } else {
@@ -221,9 +229,10 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     if (DataFromOurCourses != ""){
                         intent.putExtra("anotherCourse",DataFromOurCourses)
+                        intent.putExtra("DataOfCourse",courseDetails)
                     }
                     else{
-                        intent.putExtra("anotherCourse",DataFromOurCourses)
+                        intent.putExtra("anotherCourse","")
 
                     }
                     startActivity(intent)
@@ -247,6 +256,7 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     if (DataFromOurCourses != ""){
                         intent.putExtra("anotherCourse",DataFromOurCourses)
+                        intent.putExtra("DataOfCourse",courseDetails)
                     }
                     else{
                         intent.putExtra("anotherCourse","")
@@ -290,6 +300,7 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                         // send github user name from MainActivity to HomePageActivity
                         if (DataFromOurCourses != ""){
                             intent.putExtra("anotherCourse",DataFromOurCourses)
+                            intent.putExtra("DataOfCourse",courseDetails)
                         }
                         else{
                             intent.putExtra("anotherCourse","")

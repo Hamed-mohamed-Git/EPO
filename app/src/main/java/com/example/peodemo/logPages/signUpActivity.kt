@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.example.peodemo.DashBoard.mainDashBoardActivity
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import com.example.peodemo.logPages.model.User
 import com.facebook.*
 import com.facebook.login.LoginResult
@@ -38,6 +39,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class signUpActivity : AppCompatActivity(), TextWatcher {
     private var DataFromOurCourses = ""
+    private lateinit var courseDetails: CoursesModel
     companion object{
         private const val RC_SIGN_IN = 120
     }
@@ -78,6 +80,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
 
         DataFromOurCourses = intent.getStringExtra("CourseID") as String
+        courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
 
 
 
@@ -206,11 +209,18 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
     private fun addNewAccount(email: String, password: String, name: String, lastName: String) {
         mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
-            val userInformation = User(email,password,name, lastName,"",false,DataFromOurCourses)
+            val userInformation = User(email,password,name, lastName,"",false)
             if (task.isSuccessful){
                 currentUserDocRef.set(userInformation)
                 var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                if (DataFromOurCourses != ""){
+                    intent.putExtra("anotherCourse",DataFromOurCourses)
+                    intent.putExtra("DataOfCourse",courseDetails)
+                }
+                else{
+                    intent.putExtra("anotherCourse","")
+                }
                 startActivity(intent)
                 onBoardingFinished()
                 Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
@@ -293,11 +303,18 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
 
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity, mainDashBoardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    if (DataFromOurCourses != ""){
+                        intent.putExtra("anotherCourse",DataFromOurCourses)
+                        intent.putExtra("DataOfCourse",courseDetails)
+                    }
+                    else{
+                        intent.putExtra("anotherCourse","")
+                    }
                     startActivity(intent)
                     Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
                 } else {
@@ -318,11 +335,18 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("mainDashBoardActivity", "signInWithCredential:success")
                     val user = mAuth.currentUser
-                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
+                    val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                     currentUserDocRef.set(userInformation)
                     onBoardingFinished()
                     var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    if (DataFromOurCourses != ""){
+                        intent.putExtra("anotherCourse",DataFromOurCourses)
+                        intent.putExtra("DataOfCourse",courseDetails)
+                    }
+                    else{
+                        intent.putExtra("anotherCourse","")
+                    }
                     startActivity(intent)
                     Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
                 } else {
@@ -357,12 +381,19 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                         // User is signed in.
                         // retrieve the current user
                         val user = mAuth.currentUser
-                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true,DataFromOurCourses)
+                        val userInformation = User(user?.email.toString(),"",user?.displayName.toString(),"",user?.photoUrl.toString(),true)
                         currentUserDocRef.set(userInformation)
                         // navigate to HomePageActivity after successful login
                         var intent = Intent(this@signUpActivity,mainDashBoardActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         // send github user name from MainActivity to HomePageActivity
+                        if (DataFromOurCourses != ""){
+                            intent.putExtra("anotherCourse",DataFromOurCourses)
+                            intent.putExtra("DataOfCourse",courseDetails)
+                        }
+                        else{
+                            intent.putExtra("anotherCourse","")
+                        }
                         this.startActivity(intent)
                         Toast.makeText(this, "signUP Successfully", Toast.LENGTH_LONG).show()
                         onBoardingFinished()

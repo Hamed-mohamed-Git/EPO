@@ -1,9 +1,11 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.CourseDetails
 
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutProcessingModel
 import java.io.Serializable
 
 class courseDetailModel(
+    val CourseDetails: CoursesModel?,
     val checkoutDetails: CheckOutProcessingModel,
     val name:String,
     val teacher:String,

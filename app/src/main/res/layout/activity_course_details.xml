@@ -621,7 +621,6 @@
                 android:layout_marginBottom="45sp"
                 android:backgroundTint="#47408B"
                 android:background="@drawable/check_out_background"
-
                 >
 
                 <ImageView

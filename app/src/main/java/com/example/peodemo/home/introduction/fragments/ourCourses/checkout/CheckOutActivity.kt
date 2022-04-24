@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import com.example.peodemo.logPages.RegisterActivitypage
 import kotlinx.android.synthetic.main.activity_check_out.*
 
 class CheckOutActivity : AppCompatActivity() {
 
     private lateinit var DataFromCourseDetailsFragment: CheckOutProcessingModel
+    private lateinit var courseDetails: CoursesModel
     private var mainColorFromCourseDetails = 0
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -37,6 +39,7 @@ class CheckOutActivity : AppCompatActivity() {
         }
 
         DataFromCourseDetailsFragment = intent.getSerializableExtra("ID") as CheckOutProcessingModel
+        courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
         mainColorFromCourseDetails = intent.extras!!.getInt("MainColor")
         price.text = ((DataFromCourseDetailsFragment.price + 1).toInt()).toString()
         module.text = DataFromCourseDetailsFragment.modules.toString()
@@ -75,6 +78,7 @@ class CheckOutActivity : AppCompatActivity() {
         frameStartMyFreeTrailLayout.setOnClickListener {
                 val intent = Intent(this,RegisterActivitypage::class.java)
                 intent.putExtra("CourseID",DataFromCourseDetailsFragment.courseID)
+                intent.putExtra("DataOfCourse",courseDetails)
                 startActivity(intent)
         }
 

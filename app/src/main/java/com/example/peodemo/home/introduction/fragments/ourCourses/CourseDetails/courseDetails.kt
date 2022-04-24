@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutActivity
 import kotlinx.android.synthetic.main.activity_course_details.*
 
 class courseDetails : AppCompatActivity() {
 
     private lateinit var DataFromOurCorsesFragment:courseDetailModel
+    private lateinit var courseDetails:CoursesModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,6 +112,7 @@ class courseDetails : AppCompatActivity() {
             val intent = Intent(this, CheckOutActivity::class.java)
             intent.putExtra("ID",DataFromOurCorsesFragment.checkoutDetails)
             intent.putExtra("MainColor",DataFromOurCorsesFragment.mainColor)
+            intent.putExtra("DataOfCourse",DataFromOurCorsesFragment.CourseDetails)
             startActivity(intent)
         }
 

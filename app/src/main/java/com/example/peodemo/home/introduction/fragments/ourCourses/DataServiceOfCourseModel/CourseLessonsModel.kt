@@ -10,8 +10,8 @@ data class CourseLessonsModel(
     val number:Int,
     var percentage:Float,
     var finished:Boolean,
-    val lessonDetails:ArrayList<courseLessonDetailsModel>,
-    val lessonQUIZDetails:ArrayList<courseLessonQuizDetailsModel>,
-    val lessonChallengeDetails:ArrayList<courseLessonChellengeDetailsModel>,
-    var description:ArrayList<String>
+    val lessonDetails:courseLessonDetailsModel,
+    val lessonQUIZDetails:courseLessonQuizDetailsModel,
+    val lessonChallengeDetails:courseLessonChellengeDetailsModel,
+    var description:ArrayList<String>?
 ): Serializable

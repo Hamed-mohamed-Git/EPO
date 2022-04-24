@@ -3,15 +3,16 @@ package com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOf
 import java.io.Serializable
 
 data class CoursesModel(
-    val name:String,
+    val name:String?,
     val id:String?,
-    val image:Int,
-    var percentage:Float,
-    val Color:Int,
-    var Days:Int,
-    var SubscriptionDays:String,
-    var Finished:Boolean,
-    val ModulesCount:Int,
-    val ModulesDetails:ArrayList<courseModulesModel>,
-    var description:ArrayList<String>
-): Serializable
+    val image:Int?,
+    var percentage:Float?,
+    val Color:Int?,
+    var Days:Int?,
+    var SubscriptionDays:Int?,
+    var Finished:Boolean?,
+    val ModulesCount:Int?,
+    var ModulesDetails:ArrayList<courseModulesModel>?
+): Serializable{
+    constructor():this(null,null,null,null,null,null,null,null,null,null)
+}

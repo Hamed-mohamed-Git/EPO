@@ -5,10 +5,10 @@ import java.io.Serializable
 class courseModulesModel(
     val id:String,
     val name:String,
-    val image:String,
+    val image:Int?,
     val lessonsCount:Int,
-    val lessonDetails:ArrayList<CourseLessonsModel>,
+    val lessonDetails:ArrayList<CourseLessonsModel>?,
     var finishedLessons:Int,
     var Finished:Boolean,
-    var description:ArrayList<String>
+    var description:ArrayList<String>?
 ): Serializable

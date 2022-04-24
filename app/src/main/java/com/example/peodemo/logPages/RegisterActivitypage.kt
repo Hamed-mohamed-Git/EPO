@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import kotlinx.android.synthetic.main.activity_register_activitypage.*
 
 class RegisterActivitypage : AppCompatActivity() {
     private var DataFromOurCourses = ""
+    private lateinit var courseDetails: CoursesModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +26,18 @@ class RegisterActivitypage : AppCompatActivity() {
             window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
         }
         DataFromOurCourses = intent.getStringExtra("CourseID") as String
-
+        courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
         register.setOnClickListener {
             val intent = Intent(this,signUpActivity::class.java)
             intent.putExtra("CourseID",DataFromOurCourses)
+            intent.putExtra("DataOfCourse",courseDetails)
             startActivity(intent)
         }
 
         signIn.setOnClickListener {
             val intent = Intent(this,signInActivity::class.java)
             intent.putExtra("CourseID",DataFromOurCourses)
+            intent.putExtra("DataOfCourse",courseDetails)
             startActivity(intent)
         }
     }
