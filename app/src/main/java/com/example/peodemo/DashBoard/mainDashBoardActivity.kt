@@ -1,19 +1,27 @@
 package com.example.peodemo.DashBoard
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.peodemo.DashBoard.fragmentPages.courses.dashBoardCourseFragment
-import com.example.peodemo.DashBoard.fragmentPages.dashBoardProfileFragment
-import com.example.peodemo.DashBoard.fragmentPages.dashBoardProgressFragment
-import com.example.peodemo.DashBoard.fragmentPages.dashboardHomeFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteAlertDialog
+import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteModel
+import com.example.peodemo.DashBoard.categoriesTabs.tabsModel
+import com.example.peodemo.DashBoard.categoriesTabs.tabsViewModel
+import com.example.peodemo.DashBoard.courseGropie.courseItems
+import com.example.peodemo.DashBoard.courseGropie.courseModelMainDashBoard
 import com.example.peodemo.DashBoard.glide.GlideApp
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.*
@@ -22,16 +30,27 @@ import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfC
 import com.example.peodemo.home.introduction.introductionActivity
 import com.example.peodemo.logPages.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.kotlinandroidextensions.Item
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_main_dash_board2.*
+import kotlinx.android.synthetic.main.quotes_alert_dialog.*
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
-class mainDashBoardActivity : AppCompatActivity() {
+class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListener {
+
+
+    private lateinit var courseItemSection: Section
+
     private var DataFromOurCourses = ""
     private lateinit var courseDetails: CoursesModel
     companion object{
@@ -46,38 +65,76 @@ class mainDashBoardActivity : AppCompatActivity() {
     private val currentUserDocRef: DocumentReference
         get() = fireStoreInstance.document("Users/${mAuth.currentUser?.uid.toString()}")
 
+
+
+    private val QuoteDocRef: CollectionReference
+        get() = fireStoreInstance.collection("quotes")
+
+    private var personHasQuotes = ArrayList<String>()
+    private var qouteIndex = 0
+    private var quotesInformation = mutableListOf<quoteModel>()
+    private var MyCoursesitems = mutableListOf<Item>()
+
     private val mStorage:FirebaseStorage by lazy {
         FirebaseStorage.getInstance()
     }
 
     private var modules = ArrayList<courseModulesModel>()
     private var Lessons = ArrayList<CourseLessonsModel>()
-    private var LessonDetails = ArrayList<courseLessonDetailsModel>()
     private var LessonDetailsDescription = ArrayList<String>()
-    private var lessonDetailsChallenge = ArrayList<courseLessonChellengeDetailsModel>()
-    private var lessonQuizDetails = ArrayList<courseLessonQuizDetailsModel>()
 
 
 
     private val currentUserStorageRef:StorageReference
     get() = mStorage.reference.child(mAuth.currentUser?.uid.toString())
 
+    //assigning a tapList array property to store the recycle view in it
+    private val  tapList = java.util.ArrayList<tabsModel>()
+    private var Position = 0
+    //assigning a adapter property to store the tapView instance in ti
+    private val adapter = tabsViewModel(tapList,this)
+    private lateinit var timer:CountDownTimer
 
-    private  var mHomeFragment = dashboardHomeFragment()
-    private  var mCoursesFragment = dashBoardCourseFragment()
-    private  var mProgressFragment =  dashBoardProgressFragment()
-    private  var mProfileFragment = dashBoardProfileFragment()
 
+    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
 
+       timer =  object : CountDownTimer(60000, 1000) {
 
+            // Callback function, fired on regular interval
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            // Callback function, fired
+            // when the time is up
+            override fun onFinish() {
+                getQuotesFromServer()
+                timer.start()
+                Position++
+                if (Position >= tapList.size){
+                    Position = 0
+                }
+                selectTabOnCategories(Position)
+            }
+
+        }.start()
+
+
+        getQuotesFromServer()
+        tapList.add(tabsModel("Quotes",1))
+        tapList.add(tabsModel("Design",0))
+        tapList.add(tabsModel("backEnd",0))
+        tapList.add(tabsModel("Swift UI",0))
+        dashboardTabsRecycleView.layoutManager = LinearLayoutManager(this, LinearLayout.HORIZONTAL,false)
+        dashboardTabsRecycleView.adapter = adapter
         //assigning this property to context the activity on it
         val window = this.window
         //this line to change the state bar by using statusBarColor
-        window?.statusBarColor = this.resources.getColor(R.color.barColor)
-        //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window?.statusBarColor = this.resources.getColor(R.color.white)
+        window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         DataFromOurCourses = intent.getStringExtra("anotherCourse") as String
 
@@ -88,9 +145,9 @@ class mainDashBoardActivity : AppCompatActivity() {
                 userDataByHashMap["logWithState"] = User.logWithState
                 userDataByHashMap["profileImageURI"] = User.profileImageURI
                 userDataByHashMap["email"] = user?.email.toString()
-                userDataByHashMap["lastName"] = " "
-                userDataByHashMap["name"] = user?.displayName.toString()
-                userDataByHashMap["password"] = " "
+                userDataByHashMap["lastName"] = User.lastName
+                userDataByHashMap["name"] = User.name
+                userDataByHashMap["password"] = User.password
                 currentUserDocRef.update(userDataByHashMap)
                 courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
                 setCourseInformationOnTheServer("Foundation",3,5)
@@ -109,145 +166,45 @@ class mainDashBoardActivity : AppCompatActivity() {
                     .into(profileCircleImageView)
             }
             if (User.lastName.isNotEmpty()){
-                dashBoardUserLastName.visibility = View.VISIBLE
-                dashBoardUserLastName.text = User.lastName
                 dashBoardUserName.text = User.name
             }else{
-                dashBoardUserLastName.visibility = View.GONE
                 dashBoardUserName.text = User.name
             }
 
         }
-        signOutButton.setOnClickListener {
+        logout_button.setOnClickListener {
             mAuth.signOut()
-            onBoardingSignOutFinished()
             val intent = Intent(this,introductionActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
+            onBoardingSignOutFinished()
+        }
+        profileButton.setOnClickListener {
+
         }
 
-        setFragment(mHomeFragment)
-        dashBoardCourse.setOnClickListener {
-            homeFrameLayout.visibility = View.GONE
-            progressFrameLayout.visibility = View.GONE
-            profileFrameLayout.visibility = View.GONE
-            courseFrameLayout.visibility = View.VISIBLE
+        right.setOnClickListener {
+            if(Position >= tapList.size - 1){
 
-            setFragment(mCoursesFragment)
-
-            dashBoardHome.setImageResource(R.drawable.dashboard)
-            dashBoardProgress.setImageResource(R.drawable.progress)
-            dashBoardProfile.setImageResource(R.drawable.profile)
-            dashBoardCourse.setImageResource(R.drawable.coursepressed)
-
-            profileCircleImageView.visibility = View.GONE
-            helloDashboard.visibility = View.GONE
-            dashBoardUserName.visibility = View.GONE
-            dashBoardUserLastName.visibility = View.GONE
-            frameLayoutSignUp.visibility = View.GONE
-            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
-
-
-            dashboardItemDetails.visibility = View.VISIBLE
-            dashboardTabsText.text = "Courses Details"
-
-
-
+            }else{
+                Position++
+            }
+            selectTabOnCategories(Position)
         }
-        dashBoardHome.setOnClickListener {
-            courseFrameLayout.visibility = View.GONE
-            progressFrameLayout.visibility = View.GONE
-            profileFrameLayout.visibility = View.GONE
-            homeFrameLayout.visibility = View.VISIBLE
+        left.setOnClickListener {
+            if(Position <= 0){
+            }else {
+                Position--
+            }
+            selectTabOnCategories(Position)
 
-            setFragment(mHomeFragment)
-            dashBoardHome.setImageResource(R.drawable.dashboardpressed)
-            dashBoardProgress.setImageResource(R.drawable.progress)
-            dashBoardProfile.setImageResource(R.drawable.profile)
-            dashBoardCourse.setImageResource(R.drawable.course)
-
-            profileCircleImageView.visibility = View.VISIBLE
-            frameLayoutSignUp.visibility = View.VISIBLE
-            helloDashboard.visibility = View.VISIBLE
-            dashBoardUserName.visibility = View.VISIBLE
-
-            dashBoardActionBar.animate().scaleY(0.9f).duration = 2000
-
-            dashboardItemDetails.visibility = View.GONE
-
-        }
-        dashBoardProgress.setOnClickListener {
-            homeFrameLayout.visibility = View.GONE
-            progressFrameLayout.visibility = View.VISIBLE
-            profileFrameLayout.visibility = View.GONE
-            courseFrameLayout.visibility = View.GONE
-            setFragment(mProgressFragment)
-
-            dashBoardHome.setImageResource(R.drawable.dashboard)
-            dashBoardProgress.setImageResource(R.drawable.progresspressed)
-            dashBoardProfile.setImageResource(R.drawable.profile)
-            dashBoardCourse.setImageResource(R.drawable.course)
-
-            profileCircleImageView.visibility = View.GONE
-            frameLayoutSignUp.visibility = View.GONE
-            helloDashboard.visibility = View.GONE
-            dashBoardUserName.visibility = View.GONE
-            dashBoardUserLastName.visibility = View.GONE
-
-            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
-
-
-            dashboardItemDetails.visibility = View.VISIBLE
-            dashboardTabsText.text = "Progress Details"
-        }
-        dashBoardProfile.setOnClickListener {
-            homeFrameLayout.visibility = View.GONE
-            progressFrameLayout.visibility = View.GONE
-            profileFrameLayout.visibility = View.VISIBLE
-            courseFrameLayout.visibility = View.GONE
-
-            setFragment(mProfileFragment)
-
-            dashBoardHome.setImageResource(R.drawable.dashboard)
-            dashBoardProgress.setImageResource(R.drawable.progress)
-            dashBoardProfile.setImageResource(R.drawable.profilepressed)
-            dashBoardCourse.setImageResource(R.drawable.course)
-
-            profileCircleImageView.visibility = View.GONE
-            helloDashboard.visibility = View.GONE
-            dashBoardUserName.visibility = View.GONE
-            frameLayoutSignUp.visibility = View.GONE
-            dashBoardUserLastName.visibility = View.GONE
-
-            dashBoardActionBar.animate().scaleY(-0.4f).duration = 1500
-
-            dashboardItemDetails.visibility = View.VISIBLE
-            dashboardTabsText.text = "Profile Details"
-        }
-        framebackLayout.setOnClickListener {
-            setFragment(mHomeFragment)
-
-            dashBoardActionBar.animate().scaleY(0.9f).duration = 2000
-
-            courseFrameLayout.visibility = View.GONE
-            progressFrameLayout.visibility = View.GONE
-            profileFrameLayout.visibility = View.GONE
-            homeFrameLayout.visibility = View.VISIBLE
-
-
-            dashBoardHome.setImageResource(R.drawable.dashboardpressed)
-            dashBoardProgress.setImageResource(R.drawable.progress)
-            dashBoardProfile.setImageResource(R.drawable.profile)
-            dashBoardCourse.setImageResource(R.drawable.course)
-
-            profileCircleImageView.visibility = View.VISIBLE
-            frameLayoutSignUp.visibility = View.VISIBLE
-            helloDashboard.visibility = View.VISIBLE
-            dashBoardUserName.visibility = View.VISIBLE
-            dashboardItemDetails.visibility = View.GONE
         }
 
 
+
+        cardLayout.setOnClickListener {
+            setQuoteDialog()
+        }
 
 
         profileCircleImageView.setOnClickListener {
@@ -259,10 +216,35 @@ class mainDashBoardActivity : AppCompatActivity() {
 
             startActivityForResult(Intent.createChooser(getImageFromGallery,"select the best image you have"), RC_S_IMAGE)
         }
+        getCourseInformation(:: initRecycleView)
 
 
 
 
+    }
+
+    private fun getCourseInformation(onListen : (List<Item>) -> Unit):ListenerRegistration {
+        return currentUserDocRef.collection("My Courses").addSnapshotListener { value, error ->
+            if (error != null){
+                return@addSnapshotListener
+            }
+            MyCoursesitems.clear()
+            value!!.documents.forEach {
+                MyCoursesitems.add(courseItems(it.toObject(CoursesModel::class.java)!!,this))
+            }
+            onListen(MyCoursesitems)
+        }
+    }
+
+    @SuppressLint("WrongConstant")
+    private fun initRecycleView(item: List<Item>){
+        mainDashboardCourseRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@mainDashBoardActivity, LinearLayout.HORIZONTAL,false)
+            adapter = GroupAdapter<ViewHolder>().apply {
+                courseItemSection =  Section(item)
+                add(courseItemSection)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -290,7 +272,7 @@ class mainDashBoardActivity : AppCompatActivity() {
                     userDataByHashMap["profileImageURI"] = ref.path
                     userDataByHashMap["email"] = user?.email.toString()
                     userDataByHashMap["lastName"] = it.lastName
-                    userDataByHashMap["name"] = user?.displayName.toString()
+                    userDataByHashMap["name"] = it.name
                     userDataByHashMap["password"] = it.password
                     userDataByHashMap["CourseDetails"] = ""
                     currentUserDocRef.update(userDataByHashMap)
@@ -308,6 +290,7 @@ class mainDashBoardActivity : AppCompatActivity() {
             onComplete(it.toObject(User::class.java)!!)
         }
     }
+
     //create a method to return the splash fragment a boolean value if the user click on nextButton send to splash fragment true
     //if true the app does not launch the welcome fragments
     private fun onBoardingSignOutFinished() {
@@ -322,17 +305,6 @@ class mainDashBoardActivity : AppCompatActivity() {
 
     }
 
-    //declare a private SetFragment method to control in the fragments when the user press on the items in recycle view
-    private fun setFragment(fragment: Fragment) {
-        //declare an instance from beginTransaction class to call the method in it and store it in fr property
-        val fr = supportFragmentManager.beginTransaction()
-        //calling the replace method to trans the fragments
-        fr.setCustomAnimations(R.anim.side_in_left_dashboard_fragments_transaction,R.anim.side_out_right_to_dashboard_fragments_transaction)
-        fr.replace(R.id.dashboardCoordinateLayout,fragment)
-        //and commit it
-        fr.commit()
-
-    }
 
     private fun setCourseInformationOnTheServer(courseName: String,Modules:Int,lessons: Int){
         setDataIntoCourseModel("iosFC1",1)
@@ -355,25 +327,139 @@ class mainDashBoardActivity : AppCompatActivity() {
                     .collection("My Courses")
                     .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
                     .collection("lesson Details").document("lesson info")
-                    .set(lessonDetails)
+                    .set(lessonDetails!!)
                 fireStoreInstance.collection("Users")
                     .document(mAuth.currentUser!!.uid)
                     .collection("My Courses")
                     .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
-                    .collection("lesson Details").document("challenge info").set(lesson.lessonChallengeDetails)
+                    .collection("lesson Details").document("challenge info").set(lesson.lessonChallengeDetails!!)
                 fireStoreInstance.collection("Users")
                     .document(mAuth.currentUser!!.uid)
                     .collection("My Courses")
                     .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
-                    .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails)
+                    .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails!!)
 
             }
         }
     }
 
 
+    override fun onItemClick(position: Int) {
+        selectTabOnCategories(position)
+    }
+
+    private fun getQuotesFromServer(){
+        personHasQuotes.clear()
+        quotesInformation.clear()
+        QuoteDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                return@addSnapshotListener
+            }
+            var index = 0
+            value!!.documents.forEach {
+                quotesInformation.add(it.toObject(quoteModel::class.java)!!)
+                personHasQuotes.add(quotesInformation[index].name)
+                index++
+            }
+            qouteIndex = (0 until personHasQuotes.size).random()
+            cardHint.text = personHasQuotes[qouteIndex]
+        }
+
+    }
+
+    fun setQuoteDialog(){
+        quoteAlertDialog(quotesInformation[qouteIndex]).show(supportFragmentManager,"mydialog")
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        timer.cancel()
+    }
 
 
+    override fun onResume() {
+        super.onResume()
+        timer.start()
+    }
+    private fun selectTabOnCategories(position: Int){
+        Position = position
+        when (position){
+            // if the user tap on the first item
+            0 ->{
+                getQuotesFromServer()
+                //cardHint.text = personHasQuotes[qouteIndex]
+                //call this item and put it in tap property
+                var taps = tapList[position]
+                taps.pressed = 1
+                //And set 0 to other items
+                tapList[1].pressed = 0
+                tapList[2].pressed = 0
+                tapList[3].pressed = 0
+                adapter.notifyItemChanged(position)
+                adapter.notifyItemChanged(1)
+                adapter.notifyItemChanged(2)
+                adapter.notifyItemChanged(3)
+                dashboardTabsRecycleView.smoothScrollToPosition(position)
+
+
+            }
+            // if the user tap on the second item
+            1 ->{
+                //call this item and put it in tap property
+                var taps = tapList[position]
+                //and set a last var in this item to 1, if the user tap on this item
+                taps.pressed = 1
+                //And set 0 to other items
+                tapList[0].pressed = 0
+                tapList[2].pressed = 0
+                tapList[3].pressed = 0
+                adapter.notifyItemChanged(position)
+                adapter.notifyItemChanged(0)
+                adapter.notifyItemChanged(2)
+                adapter.notifyItemChanged(3)
+                dashboardTabsRecycleView.smoothScrollToPosition(position)
+
+            }
+            // if the user tap on the third item
+            2 ->{
+                //call this item and put it in tap property
+                var taps = tapList[position]
+                //and set a last var in this item to 1, if the user tap on this item
+                taps.pressed = 1
+                //And set 0 to other items
+                tapList[0].pressed = 0
+                tapList[1].pressed = 0
+                tapList[3].pressed = 0
+                //And change the item in the tap array
+                adapter.notifyItemChanged(position)
+                adapter.notifyItemChanged(0)
+                adapter.notifyItemChanged(1)
+                adapter.notifyItemChanged(3)
+                dashboardTabsRecycleView.smoothScrollToPosition(position)
+
+            }
+            // if the user tap on the third item
+            3 ->{
+                //call this item and put it in tap property
+                var taps = tapList[position]
+                //and set a last var in this item to 1, if the user tap on this item
+                taps.pressed = 1
+                //And set 0 to other items
+                tapList[0].pressed = 0
+                tapList[1].pressed = 0
+                tapList[2].pressed = 0
+                //And change the item in the tap array
+                adapter.notifyItemChanged(position)
+                adapter.notifyItemChanged(0)
+                adapter.notifyItemChanged(1)
+                adapter.notifyItemChanged(2)
+                dashboardTabsRecycleView.smoothScrollToPosition(position)
+
+            }
+
+        }
+    }
 
 
 
@@ -793,7 +879,7 @@ class mainDashBoardActivity : AppCompatActivity() {
                     setLessonsOFModules("iosFC1M1L13","Lesson 13: Wrap Up Challenge",13,0f,false,courseDetails,lessonQuiz,ChallengeDetails,null)
                 }
             }
-            setModulesOFCourse("iosFC1M1","Module 1",null,13,Lessons,0,false,null)
+            setModulesOFCourse("iosFC1M1","War Card Game",null,13,Lessons,0,false,null)
         }
     }
 
@@ -835,4 +921,5 @@ class mainDashBoardActivity : AppCompatActivity() {
                 description
             ))
     }
+
 }

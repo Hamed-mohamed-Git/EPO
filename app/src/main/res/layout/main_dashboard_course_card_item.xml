@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5D460"
+    android:layout_gravity="center"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
+    <FrameLayout
+        android:id="@+id/mainDashboardCourseFrameLayout"
+        android:layout_width="170dp"
+        android:layout_height="225dp"
+       android:layout_margin="27sp"
+        android:background="@drawable/main_dashboard_course_card_item_framelayout_background"
+        android:outlineSpotShadowColor="#969797"
+        android:elevation="8sp"
+        >
+        <ImageView
+            android:id="@+id/mainDashboardCourseImage"
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15sp"
+            android:src="@drawable/foundation"/>
+        <TextView
+            android:id="@+id/mainDashboardCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Foundation"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="40sp"
+            android:layout_marginStart="23sp"
+            android:textSize="23sp"
+            android:fontFamily="@font/robotobold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/mainDashboardCourseModelsFinished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="23sp"
+            android:layout_marginBottom="18sp"
+            android:fontFamily="@font/robotoregular"
+            android:text="0/6 Modules"
+            android:textColor="#A8A8A8"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>

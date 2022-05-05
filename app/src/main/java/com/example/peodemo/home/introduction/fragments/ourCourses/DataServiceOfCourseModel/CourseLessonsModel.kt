@@ -5,13 +5,15 @@ import java.io.Serializable
 
 
 data class CourseLessonsModel(
-    val id:String,
-    val name:String,
-    val number:Int,
-    var percentage:Float,
-    var finished:Boolean,
-    val lessonDetails:courseLessonDetailsModel,
-    val lessonQUIZDetails:courseLessonQuizDetailsModel,
-    val lessonChallengeDetails:courseLessonChellengeDetailsModel,
+    val id:String?,
+    val name:String?,
+    val number:Int?,
+    var percentage:Float?,
+    var finished:Boolean?,
+    val lessonDetails:courseLessonDetailsModel?,
+    val lessonQUIZDetails:courseLessonQuizDetailsModel?,
+    val lessonChallengeDetails:courseLessonChellengeDetailsModel?,
     var description:ArrayList<String>?
-): Serializable
+): Serializable{
+    constructor():this(null,null,null,null,null,null,null,null,null)
+}
