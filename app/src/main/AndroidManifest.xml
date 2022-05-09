@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PEODemo">
         <activity
-            android:name="com.example.peodemo.home.introduction.fragments.ourCourses.checkout.CheckOutActivity"
+            android:name=".DashBoard.courseGropie.ModulesPage.courseModulesPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.introduction.fragments.ourCourses.checkout.CheckOutActivity"
             android:exported="false" />
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.IntroductionVideo"

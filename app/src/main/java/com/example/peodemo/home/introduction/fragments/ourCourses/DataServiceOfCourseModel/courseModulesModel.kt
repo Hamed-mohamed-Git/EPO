@@ -7,10 +7,12 @@ class courseModulesModel(
     val name:String?,
     val image:Int?,
     val lessonsCount:Int?,
+    val videosCount:Int?,
+    val tasksCount:Int?,
     val lessonDetails:ArrayList<CourseLessonsModel>?,
     var finishedLessons:Int?,
     var Finished:Boolean?,
     var description:ArrayList<String>?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null)
+    constructor():this(null,null,null,null,null,null,null,null,null,null)
 }

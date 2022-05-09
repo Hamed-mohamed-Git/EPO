@@ -20,6 +20,7 @@ import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteAlertDialog
 import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteModel
 import com.example.peodemo.DashBoard.categoriesTabs.tabsModel
 import com.example.peodemo.DashBoard.categoriesTabs.tabsViewModel
+import com.example.peodemo.DashBoard.courseGropie.ModulesPage.courseModulesPageActivity
 import com.example.peodemo.DashBoard.courseGropie.courseItems
 import com.example.peodemo.DashBoard.courseGropie.courseModelMainDashBoard
 import com.example.peodemo.DashBoard.glide.GlideApp
@@ -37,11 +38,15 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_main_dash_board2.*
 import kotlinx.android.synthetic.main.quotes_alert_dialog.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
@@ -86,7 +91,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
 
     private val currentUserStorageRef:StorageReference
-    get() = mStorage.reference.child(mAuth.currentUser?.uid.toString())
+        get() = mStorage.reference.child(mAuth.currentUser?.uid.toString())
 
     //assigning a tapList array property to store the recycle view in it
     private val  tapList = java.util.ArrayList<tabsModel>()
@@ -94,6 +99,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
     //assigning a adapter property to store the tapView instance in ti
     private val adapter = tabsViewModel(tapList,this)
     private lateinit var timer:CountDownTimer
+    private var courseProcessChecked = false
 
 
     @SuppressLint("WrongConstant")
@@ -101,7 +107,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
 
-       timer =  object : CountDownTimer(60000, 1000) {
+        timer =  object : CountDownTimer(60000, 1000) {
 
             // Callback function, fired on regular interval
             override fun onTick(millisUntilFinished: Long) {
@@ -123,7 +129,6 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         }.start()
 
 
-        getQuotesFromServer()
         tapList.add(tabsModel("Quotes",1))
         tapList.add(tabsModel("Design",0))
         tapList.add(tabsModel("backEnd",0))
@@ -139,19 +144,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         DataFromOurCourses = intent.getStringExtra("anotherCourse") as String
 
         getUserInformation { User ->
-            if (DataFromOurCourses != ""){
-                val user = mAuth.currentUser
-                val userDataByHashMap = mutableMapOf<String, Any>()
-                userDataByHashMap["logWithState"] = User.logWithState
-                userDataByHashMap["profileImageURI"] = User.profileImageURI
-                userDataByHashMap["email"] = user?.email.toString()
-                userDataByHashMap["lastName"] = User.lastName
-                userDataByHashMap["name"] = User.name
-                userDataByHashMap["password"] = User.password
-                currentUserDocRef.update(userDataByHashMap)
-                courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
-                setCourseInformationOnTheServer("Foundation",3,5)
-            }
+
             //setCourseInformationOnTheServer("Foundation",3,5)
             //DataFromOurCourses = User.CourseDetails
             if (User.profileImageURI.isNotEmpty() && User.logWithState){
@@ -216,7 +209,29 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
             startActivityForResult(Intent.createChooser(getImageFromGallery,"select the best image you have"), RC_S_IMAGE)
         }
-        getCourseInformation(:: initRecycleView)
+        GlobalScope.launch {
+            getQuotesFromServer()
+            if (DataFromOurCourses != ""){
+                courseProcessChecked = true
+                getUserInformation { User ->
+                    val user = mAuth.currentUser
+                    val userDataByHashMap = mutableMapOf<String, Any>()
+                    userDataByHashMap["logWithState"] = User.logWithState
+                    userDataByHashMap["profileImageURI"] = User.profileImageURI
+                    userDataByHashMap["email"] = user?.email.toString()
+                    userDataByHashMap["lastName"] = User.lastName
+                    userDataByHashMap["name"] = User.name
+                    userDataByHashMap["password"] = User.password
+                    userDataByHashMap["courseCheckedOut"] = courseProcessChecked
+                    currentUserDocRef.update(userDataByHashMap)
+                }
+                courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
+                setCourseInformationOnTheServer(courseDetails.name!!)
+                delay(25000L)
+            }
+
+            getCourseInformation(:: initRecycleView)
+        }
 
 
 
@@ -243,6 +258,22 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             adapter = GroupAdapter<ViewHolder>().apply {
                 courseItemSection =  Section(item)
                 add(courseItemSection)
+                setOnItemClickListener(onItemClick)
+            }
+        }
+    }
+    val onItemClick = OnItemClickListener {Item,View ->
+        if (Item is courseItems){
+            if (Item.courseInfo.id == null){
+
+            }else{
+                val intent = Intent(this,courseModulesPageActivity::class.java)
+                intent.putExtra("courseInfo",Item.courseInfo.name)
+                intent.putExtra("courseModule",Item.courseInfo.modulesCount)
+                intent.putExtra("courseLessons",Item.courseInfo.lessonsCount)
+                intent.putExtra("courseVideos",Item.courseInfo.videosCount)
+                startActivity(intent)
+                this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
             }
         }
     }
@@ -275,6 +306,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     userDataByHashMap["name"] = it.name
                     userDataByHashMap["password"] = it.password
                     userDataByHashMap["CourseDetails"] = ""
+                    userDataByHashMap["courseCheckedOut"] = it.courseCheckedOut
                     currentUserDocRef.update(userDataByHashMap)
                 }
                 Toast.makeText(this@mainDashBoardActivity, "The image is uploaded successfully", Toast.LENGTH_SHORT).show()
@@ -306,39 +338,49 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
     }
 
 
-    private fun setCourseInformationOnTheServer(courseName: String,Modules:Int,lessons: Int){
-        setDataIntoCourseModel("iosFC1",1)
-        courseDetails.ModulesDetails = modules
-        fireStoreInstance.collection("Users")
-            .document(mAuth.currentUser!!.uid)
-            .collection("My Courses")
-            .document(courseName).set(courseDetails)
-        for (item in 0..modules.size - 1){
-            var Module = modules[item]
-            for (listOfLessons in 0..Lessons.size - 1){
-                var lesson = Lessons[listOfLessons]
-                var lessonDetails = lesson.lessonDetails
+    private fun setCourseInformationOnTheServer(courseName: String){
+        val newCourse = CoursesModel("New",null,R.drawable.newcoursegif,null,null,null,null,null,0,null,null,null)
+        if (courseProcessChecked){
+            setDataIntoCourseModel("iosFC1")
+            courseDetails.ModulesDetails = modules
+            fireStoreInstance.collection("Users")
+                .document(mAuth.currentUser!!.uid)
+                .collection("My Courses")
+                .document(courseName).set(courseDetails)
+            fireStoreInstance.collection("Users")
+                .document(mAuth.currentUser!!.uid)
+                .collection("My Courses")
+                .document(newCourse.name!!).set(newCourse)
+            for (item in 0..modules.size - 1){
+                val module = modules[item]
                 fireStoreInstance.collection("Users")
                     .document(mAuth.currentUser!!.uid)
                     .collection("My Courses")
-                    .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}").set(lesson)
-                fireStoreInstance.collection("Users")
-                    .document(mAuth.currentUser!!.uid)
-                    .collection("My Courses")
-                    .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
-                    .collection("lesson Details").document("lesson info")
-                    .set(lessonDetails!!)
-                fireStoreInstance.collection("Users")
-                    .document(mAuth.currentUser!!.uid)
-                    .collection("My Courses")
-                    .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
-                    .collection("lesson Details").document("challenge info").set(lesson.lessonChallengeDetails!!)
-                fireStoreInstance.collection("Users")
-                    .document(mAuth.currentUser!!.uid)
-                    .collection("My Courses")
-                    .document(courseName).collection("Module ${item + 1}").document("lesson ${listOfLessons + 1}")
-                    .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails!!)
-
+                    .document(courseName).collection("Modules").document(module.name!!).set(module)
+                /*for (listOfLessons in 0..Lessons.size - 1){
+                    val lesson = Lessons[listOfLessons]
+                    val lessonDetails = lesson.lessonDetails
+                    fireStoreInstance.collection("Users")
+                        .document(mAuth.currentUser!!.uid)
+                        .collection("My Courses")
+                        .document(courseName).collection("Modules").document(module.name!!).collection("Lesson").document("lesson ${listOfLessons + 1}").set(lesson)
+                    fireStoreInstance.collection("Users")
+                        .document(mAuth.currentUser!!.uid)
+                        .collection("My Courses")
+                        .document(courseName).collection(module.name).document("lesson ${listOfLessons + 1}")
+                        .collection("lesson Details").document("lesson info")
+                        .set(lessonDetails!!)
+                    fireStoreInstance.collection("Users")
+                        .document(mAuth.currentUser!!.uid)
+                        .collection("My Courses")
+                        .document(courseName).collection(module.name).document("lesson ${listOfLessons + 1}")
+                        .collection("lesson Details").document("challenge info").set(lesson.lessonChallengeDetails!!)
+                    fireStoreInstance.collection("Users")
+                        .document(mAuth.currentUser!!.uid)
+                        .collection("My Courses")
+                        .document(courseName).collection(module.name).document("lesson ${listOfLessons + 1}")
+                        .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails!!)
+                }*/
             }
         }
     }
@@ -463,7 +505,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
 
 
-    private fun setDataIntoCourseModel(CourseName:String,LessonNumber:Int){
+    private fun setDataIntoCourseModel(CourseName:String){
 
         if (CourseName == "iosFC1"){
             for (index in 1..13){
@@ -879,17 +921,28 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     setLessonsOFModules("iosFC1M1L13","Lesson 13: Wrap Up Challenge",13,0f,false,courseDetails,lessonQuiz,ChallengeDetails,null)
                 }
             }
-            setModulesOFCourse("iosFC1M1","War Card Game",null,13,Lessons,0,false,null)
+            setModulesOFCourse("iosFC1M1","Module 1: War Card Game",null,13,15,10,Lessons,0,false,null)
+            setModulesOFCourse("iosFC1M2","Module 2: Recipe List App",null,12,17,9,ArrayList<CourseLessonsModel>(),0,false,null)
+            setModulesOFCourse("iosFC1M3","Module 3: GitHub",null,7,10,6,ArrayList<CourseLessonsModel>(),0,false,null)
+            setModulesOFCourse("iosFC1M4","Module 4: Recipe App",null,20,25,18,ArrayList<CourseLessonsModel>(),0,false,null)
+            setModulesOFCourse("iosFC1M5","Module 5: Learning App",null,28,28,25,ArrayList<CourseLessonsModel>(),0,false,null)
+            setModulesOFCourse("iosFC1M6","Module 6: City Sights App",null,20,23,16,ArrayList<CourseLessonsModel>(),0,false,null)
         }
     }
 
-    private fun setModulesOFCourse(id:String,name:String,Image:Int?,lessons: Int,lessonDetails:ArrayList<CourseLessonsModel>,HowManyLessonsFinished:Int,finished:Boolean,description:ArrayList<String>?){
+    private fun setModulesOFCourse(
+        id:String,name:String,Image:Int?,lessons: Int,videos:Int?,task:Int?,lessonDetails:ArrayList<CourseLessonsModel>,
+        HowManyLessonsFinished:Int,finished:Boolean,
+        description:ArrayList<String>?)
+    {
         modules.add(
             courseModulesModel(
                 id,
                 name,
                 Image,
                 lessons,
+                videos,
+                task,
                 lessonDetails,
                 HowManyLessonsFinished,
                 finished,

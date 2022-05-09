@@ -12,7 +12,9 @@ data class CoursesModel(
     var SubscriptionDays:Int?,
     var Finished:Boolean?,
     val modulesCount:Int,
+    val lessonsCount:Int?,
+    val videosCount:Int?,
     var ModulesDetails:ArrayList<courseModulesModel>?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null,0,null)
+    constructor():this(null,null,null,null,null,null,null,null,0,null,null,null)
 }

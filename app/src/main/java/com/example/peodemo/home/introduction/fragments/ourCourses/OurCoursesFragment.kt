@@ -171,6 +171,8 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                             ,0,
                             false,
                             6,
+                            71,
+                            107,
                             null
                         ),
                         CheckOutProcessingModel("iosFC1",199.99f,300,10,4)

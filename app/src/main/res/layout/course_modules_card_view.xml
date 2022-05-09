@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F5D460"
+    android:layout_gravity="center"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:cardMaxElevation="0dp">
+    <FrameLayout
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:background="@drawable/main_dashboard_course_card_item_framelayout_background"
+        >
+        <FrameLayout
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:padding="5sp"
+            android:background="@drawable/course_modules_seeall_button_background">
+            <TextView
+                android:id="@+id/module_Number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="#343434"
+                android:textSize="25sp"
+                android:fontFamily="@font/robotobold"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="85sp"
+            android:layout_marginTop="13sp">
+            <TextView
+                android:id="@+id/module_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Module 1: War Card Game"
+                android:textColor="#343434"
+                android:fontFamily="@font/robotobold"
+                android:textSize="17sp"/>
+            <ProgressBar
+                android:id="@+id/module_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10sp"
+                android:layout_height="7dp"
+                android:visibility="gone"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:progressDrawable="@drawable/couse_modules_card_view_progressbar_background"
+                android:max="100"
+                />
+
+            <LinearLayout
+                android:id="@+id/module_info"
+                android:layout_marginTop="8sp"
+                android:layout_marginStart="1sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4sp"
+                        android:backgroundTint="#AEAC9C"
+                        android:background="@drawable/booklesson"/>
+                    <TextView
+                        android:id="@+id/module_hours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="26 Lesson"
+                        android:layout_marginTop="1sp"
+                        android:textColor="#AEAC9C"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/robotoregular"
+                        android:textSize="10sp"
+                        android:layout_marginStart="5sp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12sp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4sp"
+                        android:backgroundTint="#AEAC9C"
+                        android:background="@drawable/video"/>
+                    <TextView
+                        android:id="@+id/module_Videos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="56 Videos"
+                        android:layout_marginTop="1sp"
+                        android:textColor="#AEAC9C"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/robotoregular"
+                        android:textSize="10sp"
+                        android:layout_marginStart="5sp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginStart="12sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="4sp"
+                        android:backgroundTint="#AEAC9C"
+                        android:background="@drawable/folder"/>
+                    <TextView
+                        android:id="@+id/module_Files"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="40 Task"
+                        android:layout_marginTop="1sp"
+                        android:textColor="#AEAC9C"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/robotoregular"
+                        android:textSize="10sp"
+                        android:layout_marginStart="5sp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>

@@ -245,12 +245,13 @@
             android:layout_marginTop="190sp"
             android:background="@drawable/profile_button_background">
 
-            <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="39dp"
+                android:layout_height="39dp"
                 android:layout_gravity="center"
-                android:background="@drawable/person"
-                android:backgroundTint="@color/black" />
+                android:background="@drawable/profilegif"
+                />
         </FrameLayout>
 
     </FrameLayout>

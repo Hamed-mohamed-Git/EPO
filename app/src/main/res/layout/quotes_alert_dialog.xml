@@ -4,46 +4,52 @@
     android:layout_width="415dp"
     android:background="@drawable/fifthquoteimage"
     android:layout_height="735dp">
-
     <View
         android:id="@+id/overlay_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="#96222f3e"
         android:foregroundTintMode="src_atop"/>
-    <LinearLayout
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="250sp"
-            android:layout_height="wrap_content"
-            android:text="The Quote of Today:"
-            android:textColor="@color/white"
-            android:fontFamily="@font/godaregular"
-            android:layout_marginTop="150dp"
-            android:layout_marginStart="35sp"
-            android:textSize="45dp"/>
-        <TextView
-            android:id="@+id/quote"
-            android:layout_width="260sp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:fontFamily="@font/robotoregular"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="35sp"
-            android:textSize="23dp"/>
-        <TextView
-            android:id="@+id/personWhoQuoted"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="70dp"
+        >
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/white"
-            android:fontFamily="@font/mediem"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="37sp"
-            android:textSize="25dp"/>
-    </LinearLayout>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="250sp"
+                android:layout_height="wrap_content"
+                android:text="The Quote of Today:"
+                android:textColor="@color/white"
+                android:fontFamily="@font/godaregular"
+                android:layout_marginStart="35sp"
+                android:textSize="45dp"/>
+            <TextView
+                android:id="@+id/quote"
+                android:layout_width="260sp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/robotoregular"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="35sp"
+                android:textSize="23dp"/>
+            <TextView
+                android:id="@+id/personWhoQuoted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:fontFamily="@font/mediem"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="37sp"
+                android:textSize="25dp"/>
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/Close"
