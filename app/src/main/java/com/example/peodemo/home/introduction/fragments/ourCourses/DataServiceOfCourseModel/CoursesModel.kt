@@ -14,7 +14,8 @@ data class CoursesModel(
     val modulesCount:Int,
     val lessonsCount:Int?,
     val videosCount:Int?,
+    val introducitonURL:String?,
     var ModulesDetails:ArrayList<courseModulesModel>?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null,0,null,null,null)
+    constructor():this(null,null,null,null,null,null,null,null,0,null,null,null,null)
 }

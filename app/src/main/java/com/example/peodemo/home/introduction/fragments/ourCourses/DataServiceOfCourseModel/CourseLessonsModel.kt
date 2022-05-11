@@ -8,12 +8,19 @@ data class CourseLessonsModel(
     val id:String?,
     val name:String?,
     val number:Int?,
-    var percentage:Float?,
+    val videosCount:Int?,
+    val quizCount:Int?,
+    val assignmentCount:Int?,
+    var finishedCount:Int?,
     var finished:Boolean?,
+    var Process:Boolean?,
+    var enabled:Boolean?,
     val lessonDetails:courseLessonDetailsModel?,
     val lessonQUIZDetails:courseLessonQuizDetailsModel?,
     val lessonChallengeDetails:courseLessonChellengeDetailsModel?,
     var description:ArrayList<String>?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null,null)
+    constructor():this(null,null,null,null,null,
+        null,null,null,null,null,
+        null,null,null,null)
 }

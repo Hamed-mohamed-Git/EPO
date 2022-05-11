@@ -5,6 +5,7 @@ import java.io.Serializable
 class courseModulesModel(
     val id:String?,
     val name:String?,
+    val title:String?,
     val image:Int?,
     val lessonsCount:Int?,
     val videosCount:Int?,
@@ -12,7 +13,9 @@ class courseModulesModel(
     val lessonDetails:ArrayList<CourseLessonsModel>?,
     var finishedLessons:Int?,
     var Finished:Boolean?,
+    var Process:Boolean?,
+    var enabled:Boolean?,
     var description:ArrayList<String>?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null,null,null)
+    constructor():this(null,null,null,null,null,null,null,null,null,null,null,null,null)
 }

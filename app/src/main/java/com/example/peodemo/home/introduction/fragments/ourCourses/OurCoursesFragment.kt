@@ -173,6 +173,7 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
                             6,
                             71,
                             107,
+                            "https://firebasestorage.googleapis.com/v0/b/messrenger.appspot.com/o/Courses%20Videos%2FTHE%20introduction%20of%20courses%2FIOS%20development%2FiOS%20Foundations%20(SwiftUI).mp4?alt=media&token=ee3c2084-b743-4a75-a433-e78c996cf0ea",
                             null
                         ),
                         CheckOutProcessingModel("iosFC1",199.99f,300,10,4)

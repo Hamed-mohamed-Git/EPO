@@ -14,11 +14,15 @@
         <entry key="app/src/main/res/drawable/catogries_dashboard_button_background.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/check_out_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/course_details_in_ourcourses.xml" value="0.3390625" />
+        <entry key="app/src/main/res/drawable/course_lesson_backbutton_background.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/course_lesson_header_background.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/course_lesson_seeall_background.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/course_modules_back_button_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/course_modules_header_view_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/course_modules_scroll_thumb_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/course_modules_seeall_button_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/course_modules_video_background.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/couse_course_card_view_progressbar_background.xml" value="0.362962962962963" />
         <entry key="app/src/main/res/drawable/couse_modules_card_view_progressbar_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/dashboard_header_background_linearlayout.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/find_course_card_dashboard_background.xml" value="0.3390625" />
@@ -74,6 +78,7 @@
         <entry key="app/src/main/res/layout/activity_check_out.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_course_details.xml" value="0.26222826086956524" />
         <entry key="app/src/main/res/layout/activity_course_modules_page.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_course_page_main_dashboard.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_introduction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_introduction_video.xml" value="0.23278985507246377" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
@@ -89,7 +94,8 @@
         <entry key="app/src/main/res/layout/category_tabs_item_card.xml" value="0.20525956284153005" />
         <entry key="app/src/main/res/layout/content_sign_up_nested.xml" value="0.21458333333333332" />
         <entry key="app/src/main/res/layout/course_item.xml" value="0.20525956284153005" />
-        <entry key="app/src/main/res/layout/course_modules_card_view.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/course_lessons_card_view.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/course_modules_card_view.xml" value="0.5" />
         <entry key="app/src/main/res/layout/course_modules_seeall_button_background.xml" value="0.1646174863387978" />
         <entry key="app/src/main/res/layout/course_modules_video_background.xml" value="0.1646174863387978" />
         <entry key="app/src/main/res/layout/dashboard_courses_tabs_cardview.xml" value="0.5" />
@@ -102,7 +108,7 @@
         <entry key="app/src/main/res/layout/fragment_get_started_.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2898550724637681" />
         <entry key="app/src/main/res/layout/fragment_information.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/fragment_markes_bar.xml" value="0.2898550724637681" />
+        <entry key="app/src/main/res/layout/fragment_markes_bar.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_our_courses.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.23369565217391305" />
