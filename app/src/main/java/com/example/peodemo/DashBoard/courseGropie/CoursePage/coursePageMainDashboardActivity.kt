@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_course_page_main_dashboard.*
 import kotlinx.android.synthetic.main.course_modules_card_view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class coursePageMainDashboardActivity : AppCompatActivity() {
@@ -38,7 +39,8 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
     private lateinit var courseInfoFromDashBoard: String
     private lateinit var moduleInfoFromModuleScreen: String
     private lateinit var moduleInfoFromModuleScreenPlusOne: String
-
+    private lateinit var lessonInfoFromLessonScreen: String
+    private lateinit var lessonInfoFromLessonScreenPlusOne: String
 
     private val mAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
@@ -50,7 +52,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
         get() = fireStoreInstance.collection("Users/${mAuth.currentUser?.uid.toString()}/My Courses")
 
     private var coursesItems = mutableListOf<Item>()
-    private var coursesName = ArrayList<String>()
+    private var coursesLessonsName = ArrayList<String>()
     private lateinit var courseItemSection: Section
 
     @SuppressLint("SetTextI18n")
@@ -68,15 +70,24 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
         moduleInfoFromModuleScreen = intent.getStringExtra("courseModuleName") as String
         moduleInfoFromModuleScreenPlusOne = intent.getStringExtra("courseModuleNamePlusOne") as String
 
+        lessonPageSeeAll.setOnClickListener {
+            lessonRecycleView.smoothScrollToPosition(coursesItems.size)
+        }
+
         GlobalScope.launch(Dispatchers.IO){
             getDataFromServer()
         }
-        getCourseInformation(::initRecycleView)
+
         back_button.setOnClickListener {
             finish()
         }
-        getLessonsName()
 
+        GlobalScope.launch(Dispatchers.IO) {
+            getLessonsName()
+            delay(500L)
+            changeLessonsInfo()
+            getCourseInformation(::initRecycleView)
+        }
 
 
 
@@ -113,8 +124,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                 val intent = Intent(this,lessonDetailsPageActivity::class.java)
                 intent.putExtra("courseName",courseInfoFromDashBoard)
                 intent.putExtra("courseModuleName",moduleInfoFromModuleScreen)
-                intent.putExtra("courseLessonName",coursesName[Item.index - 1])
-                intent.putExtra("courseLessonNamePlusOne",coursesName[Item.index])
+                intent.putExtra("courseLessonName",coursesLessonsName[Item.index - 1])
                 startActivity(intent)
                 this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
             }
@@ -127,7 +137,24 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                 return@addSnapshotListener
             }
             value!!.documents.forEach {
-                coursesName.add(it.id)
+                coursesLessonsName.add(it.id)
+            }
+        }
+    }
+
+    private fun changeLessonsInfo(){
+        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").get().addOnSuccessListener{
+            if (it.isEmpty){
+                return@addOnSuccessListener
+            }
+            var index = 0
+            for (items in it.documents){
+                var anotherIndex = index + 1
+                if (anotherIndex <= coursesLessonsName.size - 1){
+                    checkEnabledInCourse(coursesLessonsName[index],coursesLessonsName[anotherIndex],anotherIndex)
+                    //Toast.makeText(this,"${moduleName[index]} :: ${moduleName[anotherIndex]}",Toast.LENGTH_LONG).show()
+                }
+                index++
             }
         }
     }
@@ -146,8 +173,9 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("SetTextI18n")
     private fun getDataFromServer(){
-        getUserCourseInformation {
+        getUserModuleInformation {
             val moduleDataByHashMap = mutableMapOf<String, Any?>()
             moduleDataByHashMap["description"] = it.description
             moduleDataByHashMap["finished"] = it.Finished
@@ -169,7 +197,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
 
             currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).update(moduleDataByHashMap)
             if (it.Finished!!){
-                getUserCourseInformationPlusOne {
+                getUserCourseModulePlusOne {
                     val moduleDataByHashMap = mutableMapOf<String, Any?>()
                     moduleDataByHashMap["description"] = it.description
                     moduleDataByHashMap["enabled"] = true
@@ -187,7 +215,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreenPlusOne).update(moduleDataByHashMap)
                 }
             }else{
-                getUserCourseInformationPlusOne {
+                getUserCourseModulePlusOne {
                     val moduleDataByHashMap = mutableMapOf<String, Any?>()
                     moduleDataByHashMap["description"] = it.description
                     moduleDataByHashMap["enabled"] = false
@@ -208,15 +236,61 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserCourseInformation(onComplete:(courseModulesModel) -> Unit){
+    private fun getUserModuleInformation(onComplete:(courseModulesModel) -> Unit){
         currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).get().addOnSuccessListener {
             onComplete(it.toObject(courseModulesModel::class.java)!!)
         }
     }
 
-    private fun getUserCourseInformationPlusOne(onComplete:(courseModulesModel) -> Unit){
+    private fun getUserCourseModulePlusOne(onComplete:(courseModulesModel) -> Unit){
         currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreenPlusOne).get().addOnSuccessListener {
             onComplete(it.toObject(courseModulesModel::class.java)!!)
         }
     }
+
+    private fun checkEnabledInCourse(LessonInfoFromModuleScreenFun:String,LessonInfoFromModuleScreenPlusOneFun:String,indexPlusOne:Int){
+        lessonInfoFromLessonScreen = LessonInfoFromModuleScreenFun
+        lessonInfoFromLessonScreenPlusOne = LessonInfoFromModuleScreenPlusOneFun
+        getUserLessonInformation {
+            if (it.finished!! && it.Process!!){
+                lessonInfoFromLessonScreenPlusOne = coursesLessonsName[indexPlusOne]
+                getUserLessonInformationPlusOne {
+                    val moduleDataByHashMap = mutableMapOf<String, Any?>()
+                    moduleDataByHashMap["assignmentCount"] = it.assignmentCount
+                    moduleDataByHashMap["description"] = it.description
+                    moduleDataByHashMap["enabled"] = true
+                    moduleDataByHashMap["finished"] = it.finished
+                    moduleDataByHashMap["finishedCount"] = it.finishedCount
+                    moduleDataByHashMap["id"] = it.id
+                    moduleDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                    moduleDataByHashMap["lessonDetails"] = it.lessonDetails
+                    moduleDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                    moduleDataByHashMap["name"] = it.name
+                    moduleDataByHashMap["number"] = it.number
+                    moduleDataByHashMap["process"] = it.Process
+                    moduleDataByHashMap["quizCount"] = it.quizCount
+                    moduleDataByHashMap["videosCount"] = it.videosCount
+                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(LessonInfoFromModuleScreenPlusOneFun).update(moduleDataByHashMap)
+                }
+            }
+        }
+    }
+
+    private fun getUserLessonInformation(onComplete:(CourseLessonsModel) -> Unit){
+        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreen).get().addOnSuccessListener {
+            onComplete(it.toObject(CourseLessonsModel::class.java)!!)
+        }
+    }
+
+    private fun getUserLessonInformationPlusOne(onComplete:(CourseLessonsModel) -> Unit){
+        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreenPlusOne).get().addOnSuccessListener {
+            onComplete(it.toObject(CourseLessonsModel::class.java)!!)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        changeLessonsInfo()
+    }
+
 }

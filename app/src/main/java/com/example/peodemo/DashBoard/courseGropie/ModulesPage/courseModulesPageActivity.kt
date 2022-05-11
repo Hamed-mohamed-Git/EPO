@@ -396,7 +396,7 @@ class courseModulesPageActivity : AppCompatActivity() {
     private fun checkEnabledInCourse(moduleInfoFromModuleScreenFun:String,moduleInfoFromModuleScreenPlusOneFun:String,indexPlusOne:Int){
         moduleInfoFromModuleScreen = moduleInfoFromModuleScreenFun
         moduleInfoFromModuleScreenPlusOne = moduleInfoFromModuleScreenPlusOneFun
-        getUserCourseInformation {
+        getUserModuleInformation {
             val moduleDataByHashMap = mutableMapOf<String, Any?>()
             moduleDataByHashMap["description"] = it.description
             moduleDataByHashMap["finished"] = it.Finished
@@ -414,7 +414,7 @@ class courseModulesPageActivity : AppCompatActivity() {
 
             if (it.Finished!! && it.Process!!){
                 moduleInfoFromModuleScreenPlusOne = moduleName[indexPlusOne]
-                getUserCourseInformationPlusOne {
+                getUserModuleInformationPlusOne {
                     val moduleDataByHashMap = mutableMapOf<String, Any?>()
                     moduleDataByHashMap["description"] = it.description
                     moduleDataByHashMap["enabled"] = true
@@ -433,7 +433,7 @@ class courseModulesPageActivity : AppCompatActivity() {
                 }
             }else if (!it.Finished!! && !it.Process!!){
                 moduleInfoFromModuleScreenPlusOne = moduleName[indexPlusOne]
-                getUserCourseInformationPlusOne {
+                getUserModuleInformationPlusOne{
                     val moduleDataByHashMap = mutableMapOf<String, Any?>()
                     moduleDataByHashMap["description"] = it.description
                     moduleDataByHashMap["enabled"] = false
@@ -454,13 +454,13 @@ class courseModulesPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserCourseInformation(onComplete:(courseModulesModel) -> Unit){
+    private fun getUserModuleInformation(onComplete:(courseModulesModel) -> Unit){
         currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).get().addOnSuccessListener {
             onComplete(it.toObject(courseModulesModel::class.java)!!)
         }
     }
 
-    private fun getUserCourseInformationPlusOne(onComplete:(courseModulesModel) -> Unit){
+    private fun getUserModuleInformationPlusOne(onComplete:(courseModulesModel) -> Unit){
         currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreenPlusOne).get().addOnSuccessListener {
             onComplete(it.toObject(courseModulesModel::class.java)!!)
         }

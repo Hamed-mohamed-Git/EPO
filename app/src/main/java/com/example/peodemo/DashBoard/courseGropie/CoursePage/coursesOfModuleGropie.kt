@@ -20,12 +20,17 @@ class coursesOfModuleGropie(var lessonInfo: CourseLessonsModel, val context: Con
         viewHolder.lessonAssignmentsCount.text = "${lessonInfo.assignmentCount} Assignments"
         if (lessonInfo.enabled!!){
             viewHolder.lessonLock.visibility = View.GONE
+        }else{
+            viewHolder.lessonLock.visibility = View.VISIBLE
         }
         if (lessonInfo.Process!!){
             viewHolder.CourseInformationLayout.visibility = View.GONE
             viewHolder.lessonPageProgressBar.visibility = View.VISIBLE
             viewHolder.lessonPageProgressBar.max = 3
             viewHolder.lessonPageProgressBar.setProgress(lessonInfo.finishedCount!!)
+        }else{
+            viewHolder.CourseInformationLayout.visibility = View.VISIBLE
+            viewHolder.lessonPageProgressBar.visibility = View.GONE
         }
     }
 

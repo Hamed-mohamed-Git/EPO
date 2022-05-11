@@ -20,7 +20,6 @@ class lessonDetailsPageActivity : AppCompatActivity() {
     private lateinit var courseInfoFromDashBoard: String
     private lateinit var moduleInfoFromModuleScreen: String
     private lateinit var lessonInfoFromLessonScreen: String
-    private lateinit var lessonInfoFromLessonScreenPlusOne: String
 
     private val mAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
@@ -38,23 +37,12 @@ class lessonDetailsPageActivity : AppCompatActivity() {
         courseInfoFromDashBoard = intent.getStringExtra("courseName") as String
         moduleInfoFromModuleScreen = intent.getStringExtra("courseModuleName") as String
         lessonInfoFromLessonScreen = intent.getStringExtra("courseLessonName") as String
-        lessonInfoFromLessonScreenPlusOne = intent.getStringExtra("courseLessonNamePlusOne") as String
         //Toast.makeText(this,lessonInfoFromLessonScreen,Toast.LENGTH_LONG).show()
         //Toast.makeText(this,lessonInfoFromLessonScreenPlusOne,Toast.LENGTH_LONG).show()
         getDataFromServer()
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
     private fun getDataFromServer(){
         getUserLessonInformation {
@@ -74,44 +62,6 @@ class lessonDetailsPageActivity : AppCompatActivity() {
             moduleDataByHashMap["quizCount"] = it.quizCount
             moduleDataByHashMap["videosCount"] = it.videosCount
             currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreen).update(moduleDataByHashMap)
-            if (it.finished!! && it.Process!!){
-                getUserLessonInformationPlusOne {
-                    moduleDataByHashMap["assignmentCount"] = it.assignmentCount
-                    moduleDataByHashMap["description"] = it.description
-                    moduleDataByHashMap["enabled"] = true
-                    moduleDataByHashMap["finished"] = it.finished
-                    moduleDataByHashMap["finishedCount"] = it.finishedCount
-                    moduleDataByHashMap["id"] = it.id
-                    moduleDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                    moduleDataByHashMap["lessonDetails"] = it.lessonDetails
-                    moduleDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                    moduleDataByHashMap["name"] = it.name
-                    moduleDataByHashMap["number"] = it.number
-                    moduleDataByHashMap["process"] = it.Process
-                    moduleDataByHashMap["quizCount"] = it.quizCount
-                    moduleDataByHashMap["videosCount"] = it.videosCount
-                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreenPlusOne).update(moduleDataByHashMap)
-                }
-            }else{
-                getUserLessonInformationPlusOne {
-                    val moduleDataByHashMap = mutableMapOf<String, Any?>()
-                    moduleDataByHashMap["assignmentCount"] = it.assignmentCount
-                    moduleDataByHashMap["description"] = it.description
-                    moduleDataByHashMap["enabled"] = it.enabled
-                    moduleDataByHashMap["finished"] = it.finished
-                    moduleDataByHashMap["finishedCount"] = it.finishedCount
-                    moduleDataByHashMap["id"] = it.id
-                    moduleDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                    moduleDataByHashMap["lessonDetails"] = it.lessonDetails
-                    moduleDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                    moduleDataByHashMap["name"] = it.name
-                    moduleDataByHashMap["number"] = it.number
-                    moduleDataByHashMap["process"] = it.Process
-                    moduleDataByHashMap["quizCount"] = it.quizCount
-                    moduleDataByHashMap["videosCount"] = it.videosCount
-                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreenPlusOne).update(moduleDataByHashMap)
-                }
-            }
         }
     }
 
@@ -121,9 +71,5 @@ class lessonDetailsPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserLessonInformationPlusOne(onComplete:(CourseLessonsModel) -> Unit){
-        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreenPlusOne).get().addOnSuccessListener {
-            onComplete(it.toObject(CourseLessonsModel::class.java)!!)
-        }
-    }
+
 }
