@@ -27,5 +27,9 @@
     <style name="Theme.PEODemo.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.PEODemo.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
 
 </resources>

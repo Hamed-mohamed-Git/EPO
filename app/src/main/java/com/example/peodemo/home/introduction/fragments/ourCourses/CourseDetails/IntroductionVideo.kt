@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -32,25 +33,36 @@ class IntroductionVideo : AppCompatActivity() {
     private lateinit var mediaSource:MediaSource
     private var statusShown = 1
     private lateinit var urlType : URLType
+    private lateinit var timer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction_video)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window?.statusBarColor = this.resources.getColor(R.color.black)
+        window?.navigationBarColor = this.resources.getColor(R.color.black)
         URLFromCourseDetails = intent.getStringExtra("url") as String
         findView()
         intiPlayer()
-        exoPlayerView.setOnClickListener {
-            if (statusShown == 1){
+        timer =  object : CountDownTimer(6000, 1000) {
+
+            // Callback function, fired on regular interval
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+
+            // Callback function, fired
+            // when the time is up
+            override fun onFinish() {
                 hideSystemUI()
-                statusShown = 0
-            }else if (statusShown == 0){
-                showSystemUI()
-                statusShown = 1
+                if (statusShown == 1){
+                    exoPlayerView.hideController()
+                }
+                start()
             }
 
         }
+        timer.start()
     }
     private fun findView(){
         constraintLayoutRoot = findViewById(R.id.constraintLayoutRoot)

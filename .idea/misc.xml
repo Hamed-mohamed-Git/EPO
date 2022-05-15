@@ -34,6 +34,9 @@
         <entry key="app/src/main/res/drawable/goback_button_check_out_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/icon_background.xml" value="0.2388888888888889" />
+        <entry key="app/src/main/res/drawable/lesson_details_backbutton_background.xml" value="0.3490740740740741" />
+        <entry key="app/src/main/res/drawable/lesson_details_buttons_background.xml" value="0.3490740740740741" />
+        <entry key="app/src/main/res/drawable/lesson_details_page_header_background.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/logout_button_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/logout_button_image_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/main_dashboard_course_card_item_framelayout_background.xml" value="0.27915057915057917" />
@@ -51,6 +54,7 @@
         <entry key="app/src/main/res/drawable/roundes_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/search_edit_text_background.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/secondfragmentbuttonbackgroud.xml" value="0.33645833333333336" />
+        <entry key="app/src/main/res/drawable/shape_rounded_rectangle.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/sign_in_button_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/sign_in_button_introduction_text_color.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/sign_in_button_text_background.xml" value="0.3328125" />
@@ -68,6 +72,7 @@
         <entry key="app/src/main/res/font/fontnew.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout-hdpi/fragment_get_started_.xml" value="0.25" />
         <entry key="app/src/main/res/layout-land/activity_course_modules_page.xml" value="0.2" />
+        <entry key="app/src/main/res/layout-land/activity_course_page_main_dashboard.xml" value="0.2515625" />
         <entry key="app/src/main/res/layout-ldpi/fragment_get_started_.xml" value="0.9" />
         <entry key="app/src/main/res/layout-mdpi/fragment_get_started_.xml" value="0.20867486338797814" />
         <entry key="app/src/main/res/layout-v23/activity_check_out.xml" value="0.2536231884057971" />
@@ -81,6 +86,7 @@
         <entry key="app/src/main/res/layout/activity_course_page_main_dashboard.xml" value="0.2246376811594203" />
         <entry key="app/src/main/res/layout/activity_introduction.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_introduction_video.xml" value="0.23278985507246377" />
+        <entry key="app/src/main/res/layout/activity_lesson_details_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_main_dash_board2.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_register_activitypage.xml" value="0.18206521739130435" />

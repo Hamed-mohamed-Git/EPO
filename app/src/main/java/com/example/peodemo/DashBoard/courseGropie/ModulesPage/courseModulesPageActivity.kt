@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -35,6 +36,10 @@ import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DataSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,8 +59,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+const val AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"
+const val TAG = "courseModulesPageActivity"
+
 
 class courseModulesPageActivity : AppCompatActivity() {
+
+    private var mIsLoading = false
+    private var mRewardedAd: RewardedAd? = null
 
     private lateinit var courseInfoFromDashBoard: String
     private var courseURLInfoFromDashBoard = ""
@@ -65,6 +76,7 @@ class courseModulesPageActivity : AppCompatActivity() {
 
     private lateinit var moduleInfoFromModuleScreen: String
     private lateinit var moduleInfoFromModuleScreenPlusOne: String
+
 
     private val mAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
@@ -122,7 +134,7 @@ class courseModulesPageActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             getModulesName()
-            delay(1000L)
+            delay(300L)
             changeModulesInfo()
             getModulesInformation(::initRecycleView)
         }
@@ -168,11 +180,11 @@ class courseModulesPageActivity : AppCompatActivity() {
             window.statusBarColor = this.resources.getColor(R.color.white)
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
-
-
-
+        //MobileAds.initialize(this) {}
+        //loadRewardedAd()
 
     }
+
 
     private fun getModulesName(){
         currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).collection("Modules").addSnapshotListener { value, error ->
@@ -230,14 +242,89 @@ class courseModulesPageActivity : AppCompatActivity() {
     val onItemClick = OnItemClickListener {Item,View ->
         if (Item is modulesOfCourseGropie){
             if (Item.moduleInfo.enabled!!){
-                val intent = Intent(this,coursePageMainDashboardActivity::class.java)
-                intent.putExtra("courseName",courseInfoFromDashBoard)
-                intent.putExtra("courseModuleName",Item.moduleInfo.name)
-                intent.putExtra("courseModuleNamePlusOne",moduleName[Item.index])
-                startActivity(intent)
-                this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
+                //showRewardedVideo(Item.moduleInfo.name!!,moduleName[Item.index])
+                moveToLessonActivity(Item.moduleInfo.name!!,moduleName[Item.index])
+
             }
         }
+    }
+
+
+
+    private fun loadRewardedAd() {
+        if (mRewardedAd == null) {
+            mIsLoading = true
+            var adRequest = AdRequest.Builder().build()
+
+            RewardedAd.load(
+                this, AD_UNIT_ID, adRequest,
+                object : RewardedAdLoadCallback() {
+
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+
+                        mIsLoading = false
+                        mRewardedAd = null
+                    }
+
+                    override fun onAdLoaded(rewardedAd: RewardedAd) {
+
+                        mRewardedAd = rewardedAd
+                        mIsLoading = false
+                    }
+                }
+            )
+        }
+    }
+
+
+
+    private fun showRewardedVideo(ModuleName:String,ModuleNamePlusOne:String) {
+        if (mRewardedAd != null) {
+            mRewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
+
+                override fun onAdDismissedFullScreenContent() {
+
+                    // Don't forget to set the ad reference to null so you
+                    // don't show the ad a second time.
+                    mRewardedAd = null
+                    loadRewardedAd()
+                    moveToLessonActivity(ModuleName,ModuleNamePlusOne)
+                }
+
+                override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+
+                    // Don't forget to set the ad reference to null so you
+                    // don't show the ad a second time.
+                    mRewardedAd = null
+                }
+
+                override fun onAdShowedFullScreenContent() {
+                    // Called when ad is dismissed.
+
+                }
+
+            }
+
+            mRewardedAd?.show(
+                this,
+                OnUserEarnedRewardListener() {
+                    fun onUserEarnedReward(rewardItem: RewardItem) {
+                        var rewardAmount = rewardItem.amount
+                        Log.d("TAG", "User earned the reward.")
+                    }
+                }
+            )
+
+        }
+    }
+
+    private fun moveToLessonActivity(ModuleName:String,ModuleNamePlusOne:String){
+        val intent = Intent(this,coursePageMainDashboardActivity::class.java)
+        intent.putExtra("courseName",courseInfoFromDashBoard)
+        intent.putExtra("courseModuleName",ModuleName)
+        intent.putExtra("courseModuleNamePlusOne",ModuleNamePlusOne)
+        startActivity(intent)
+        this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
     }
 
 
