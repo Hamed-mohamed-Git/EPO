@@ -134,7 +134,7 @@ class courseModulesPageActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             getModulesName()
-            delay(300L)
+            delay(200L)
             changeModulesInfo()
             getModulesInformation(::initRecycleView)
         }

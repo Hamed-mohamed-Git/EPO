@@ -1,10 +1,12 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseLessonQuizDetials
 
+import java.io.Serializable
+
 data class QuestionsModel (
     val question:String?,
-    val Answers:ArrayList<String>?,
-    val CorrectAnswer:String?,
+    val answers:ArrayList<String>?,
+    val correctAnswer:String?,
     val correctIndex:Int?
-    ){
+    ): Serializable {
     constructor():this(null,null,null,null)
 }

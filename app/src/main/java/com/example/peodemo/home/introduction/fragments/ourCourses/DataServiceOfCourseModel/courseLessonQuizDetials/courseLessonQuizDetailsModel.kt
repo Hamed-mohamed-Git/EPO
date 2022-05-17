@@ -4,7 +4,7 @@ import java.io.Serializable
 
 data class courseLessonQuizDetailsModel(
     var name:String?,
-    var Questions:ArrayList<QuestionsModel>?,
+    var questions:ArrayList<QuestionsModel>?,
     var finished:Boolean?
 ): Serializable{
     constructor():this(null,null,null)

@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PEODemo">
         <activity
+            android:name=".DashBoard.courseGropie.lessonDetailsPage.quizPage.questionsPageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DashBoard.courseGropie.lessonDetailsPage.quizPage.quizPageActivity"
+            android:exported="false" />
+        <activity
             android:name=".DashBoard.courseGropie.ModulesPage.ModuleADActivity"
             android:exported="false" />
         <activity

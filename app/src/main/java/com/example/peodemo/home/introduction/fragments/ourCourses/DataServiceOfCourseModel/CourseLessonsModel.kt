@@ -14,6 +14,10 @@ data class CourseLessonsModel(
     val assignmentCount:Int?,
     var finishedCount:Int?,
     var finishCount:Int?,
+    var videoFinishedCount:Int?,
+    var quizFinishedCount:Int?,
+    var challengeFinishedCount:Int?,
+    var resourceFinishedCount:Int?,
     var finished:Boolean?,
     var Process:Boolean?,
     var enabled:Boolean?,
@@ -22,7 +26,7 @@ data class CourseLessonsModel(
     val lessonChallengeDetails:courseLessonChellengeDetailsModel?,
     var description:String?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,
+    constructor():this(null,null,null,null,null,null,null,null,null,null,null,
         null,null,null,null,null,
         null,null,null,null)
 }

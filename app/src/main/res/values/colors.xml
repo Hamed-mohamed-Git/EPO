@@ -61,4 +61,6 @@
     <color name="theSubAndroidAlgorithmsCourse">#DCE0FF</color>
 
     <color name="transpernt">#00000000</color>
+
+    <color name="questionPageStatusBarColor">#6066CF</color>
 </resources>

@@ -113,7 +113,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.IO) {
             getLessonsName()
-            delay(500L)
+            delay(200L)
             changeLessonsInfo()
             getCourseInformation(::initRecycleView)
         }
@@ -320,6 +320,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                 getUserLessonInformationPlusOne {
                     val lessonDataByHashMap = mutableMapOf<String, Any?>()
                     lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                    lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
                     lessonDataByHashMap["description"] = it.description
                     lessonDataByHashMap["enabled"] = true
                     lessonDataByHashMap["finishCount"] = it.finishCount
@@ -334,6 +335,9 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     lessonDataByHashMap["number"] = it.number
                     lessonDataByHashMap["process"] = it.Process
                     lessonDataByHashMap["quizCount"] = it.quizCount
+                    lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                    lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
+                    lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
                     lessonDataByHashMap["videosCount"] = it.videosCount
                     currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(LessonInfoFromModuleScreenPlusOneFun).update(lessonDataByHashMap)
                 }
