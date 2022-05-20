@@ -154,6 +154,8 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
 
 
 
+
+
     }
 
     private fun getCourseInformation(onListen : (List<Item>) -> Unit): ListenerRegistration {
@@ -315,7 +317,31 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
         lessonInfoFromLessonScreen = LessonInfoFromModuleScreenFun
         lessonInfoFromLessonScreenPlusOne = LessonInfoFromModuleScreenPlusOneFun
         getUserLessonInformation {
-            if (it.finished!! && it.Process!!){
+            if (it.finishedCount!! == it.finishCount!!){
+                val lessonDataByHashMap = mutableMapOf<String, Any?>()
+                lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
+                lessonDataByHashMap["description"] = it.description
+                lessonDataByHashMap["enabled"] = it.enabled
+                lessonDataByHashMap["finishCount"] = it.finishCount
+                lessonDataByHashMap["finished"] = true
+                lessonDataByHashMap["finishedCount"] = it.finishedCount
+                lessonDataByHashMap["id"] = it.id
+                lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                lessonDataByHashMap["lessonDetails"] = it.lessonDetails
+                lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
+                lessonDataByHashMap["minutes"] = it.minutes
+                lessonDataByHashMap["name"] = it.name
+                lessonDataByHashMap["number"] = it.number
+                lessonDataByHashMap["process"] = it.Process
+                lessonDataByHashMap["quizCount"] = it.quizCount
+                lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
+                lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
+                lessonDataByHashMap["videosCount"] = it.videosCount
+                //Toast.makeText(this,LessonInfoFromModuleScreenFun,Toast.LENGTH_LONG).show()
+                currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(LessonInfoFromModuleScreenFun).update(lessonDataByHashMap)
                 lessonInfoFromLessonScreenPlusOne = coursesLessonsName[indexPlusOne]
                 getUserLessonInformationPlusOne {
                     val lessonDataByHashMap = mutableMapOf<String, Any?>()
@@ -330,6 +356,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
                     lessonDataByHashMap["lessonDetails"] = it.lessonDetails
                     lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                    lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
                     lessonDataByHashMap["minutes"] = it.minutes
                     lessonDataByHashMap["name"] = it.name
                     lessonDataByHashMap["number"] = it.number

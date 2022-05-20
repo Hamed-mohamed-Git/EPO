@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/action_bar_background.xml" value="0.2861111111111111" />
+        <entry key="app/src/main/res/drawable/add_image_button_background.xml" value="0.37384615384615383" />
         <entry key="app/src/main/res/drawable/alert_dialog_close_background.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/answer_layout_background.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/background_for_layout_of_categories_card.xml" value="0.3390625" />
@@ -13,6 +14,8 @@
         <entry key="app/src/main/res/drawable/categories_card_background.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/catogries_dashboard_background_view.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/catogries_dashboard_button_background.xml" value="0.2763888888888889" />
+        <entry key="app/src/main/res/drawable/challenge_download_background.xml" value="0.37384615384615383" />
+        <entry key="app/src/main/res/drawable/challenge_progress_background.xml" value="0.37384615384615383" />
         <entry key="app/src/main/res/drawable/check_out_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/close_questions_button_background.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/confirm_button_background.xml" value="0.3707692307692308" />
@@ -43,15 +46,24 @@
         <entry key="app/src/main/res/drawable/lesson_details_buttons_background.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/lesson_details_page_header_background.xml" value="0.3490740740740741" />
         <entry key="app/src/main/res/drawable/logout_button_background.xml" value="0.3921875" />
+        <entry key="app/src/main/res/drawable/logout_button_background_layout.xml" value="0.36923076923076925" />
         <entry key="app/src/main/res/drawable/logout_button_image_background.xml" value="0.3921875" />
         <entry key="app/src/main/res/drawable/main_dashboard_course_card_item_framelayout_background.xml" value="0.27915057915057917" />
+        <entry key="app/src/main/res/drawable/naviagtion_center_layout.xml" value="0.36923076923076925" />
+        <entry key="app/src/main/res/drawable/navigaiton_items_background.xml" value="0.36923076923076925" />
+        <entry key="app/src/main/res/drawable/navigartion_first_layout.xml" value="0.36923076923076925" />
+        <entry key="app/src/main/res/drawable/navigartion_last_layout.xml" value="0.36923076923076925" />
         <entry key="app/src/main/res/drawable/navigation_bar_background.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/navigation_bar_pressed_item.xml" value="0.3296296296296296" />
+        <entry key="app/src/main/res/drawable/navigation_layout_background_background.xml" value="0.36923076923076925" />
         <entry key="app/src/main/res/drawable/nested_scroll_view_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/next_button_style.xml" value="0.3484375" />
         <entry key="app/src/main/res/drawable/peoIcon_background.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/drawable/price_background_item_card.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/profile_button_background.xml" value="0.2763888888888889" />
+        <entry key="app/src/main/res/drawable/profile_dailog_login_details_layout_background.xml" value="0.36923076923076925" />
+        <entry key="app/src/main/res/drawable/profile_dialog_background.xml" value="0.36923076923076925" />
+        <entry key="app/src/main/res/drawable/profile_logout_layout_background.xml" value="0.37384615384615383" />
         <entry key="app/src/main/res/drawable/question_aler_dialog_close_background_button.xml" value="0.3648148148148148" />
         <entry key="app/src/main/res/drawable/question_coordinate_background.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/questions_page_progress_bar_background.xml" value="0.3707692307692308" />
@@ -87,14 +99,70 @@
         <entry key="app/src/main/res/layout-hdpi/fragment_get_started_.xml" value="0.25" />
         <entry key="app/src/main/res/layout-land/activity_course_modules_page.xml" value="0.2" />
         <entry key="app/src/main/res/layout-land/activity_course_page_main_dashboard.xml" value="0.2515625" />
+        <entry key="app/src/main/res/layout-large/fragment_splash_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout-ldpi/fragment_get_started_.xml" value="0.9" />
+        <entry key="app/src/main/res/layout-ldpi/fragment_splash_fragment.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/activity_challenge_page.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/activity_introduction.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/activity_main_dash_board2.xml" value="0.15368852459016394" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/fragment_first_welcome.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/fragment_second_welcome.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-ldrtl-sw320dp/fragment_third_welcome.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout-ldrtl-sw360dp/activity_introduction.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-ldrtl-sw400dp/activity_introduction.xml" value="0.15368852459016394" />
+        <entry key="app/src/main/res/layout-ldrtl-sw480dp/fragment_second_welcome.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-ldrtl-sw480dp/fragment_third_welcome.xml" value="0.28701456310679613" />
+        <entry key="app/src/main/res/layout-ldrtl-sw600dp/activity_main_dash_board2.xml" value="0.13854679802955666" />
+        <entry key="app/src/main/res/layout-ldrtl-sw600dp/fragment_third_welcome.xml" value="0.37900641025641024" />
+        <entry key="app/src/main/res/layout-ldrtl-w420dp/fragment_first_welcome.xml" value="0.2337962962962963" />
+        <entry key="app/src/main/res/layout-ldrtl/fragment_first_welcome.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout-mdpi/fragment_get_started_.xml" value="0.20867486338797814" />
+        <entry key="app/src/main/res/layout-normal/fragment_splash_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-small/fragment_splash_fragment.xml" value="1.25" />
+        <entry key="app/src/main/res/layout-sw320dp/activity_challenge_page.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-sw320dp/activity_introduction.xml" value="0.75" />
+        <entry key="app/src/main/res/layout-sw320dp/activity_main_dash_board2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw320dp/fragment_first_welcome.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout-sw320dp/fragment_get_started_.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw320dp/fragment_second_welcome.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout-sw320dp/fragment_splash_fragment.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout-sw320dp/fragment_third_welcome.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout-sw360dp/activity_introduction.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-sw360dp/fragment_get_started_.xml" value="0.15368852459016394" />
+        <entry key="app/src/main/res/layout-sw400dp/activity_introduction.xml" value="0.15368852459016394" />
+        <entry key="app/src/main/res/layout-sw400dp/fragment_first_welcome.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout-sw400dp/fragment_get_started_.xml" value="0.15368852459016394" />
+        <entry key="app/src/main/res/layout-sw420dp/fragment_first_welcome.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout-sw420dp/fragment_get_started_.xml" value="0.20380434782608695" />
+        <entry key="app/src/main/res/layout-sw480dp/activity_challenge_page.xml" value="0.28701456310679613" />
+        <entry key="app/src/main/res/layout-sw480dp/fragment_first_welcome.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-sw480dp/fragment_get_started_.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-sw480dp/fragment_second_welcome.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-sw480dp/fragment_splash_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw480dp/fragment_third_welcome.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-sw600dp-land/activity_course_modules_page.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_challenge_page.xml" value="0.28701456310679613" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_course_modules_page.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_main_dash_board2.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-sw600dp/course_modules_card_view.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_first_welcome.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_get_started_.xml" value="0.5" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_second_welcome.xml" value="0.28701456310679613" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_splash_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout-sw600dp/fragment_third_welcome.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-sw600dp/quotes_alert_dialog.xml" value="0.20220588235294118" />
+        <entry key="app/src/main/res/layout-sw720dp/activity_challenge_page.xml" value="0.1516025641025641" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_get_started_.xml" value="0.25" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_second_welcome.xml" value="0.1516025641025641" />
+        <entry key="app/src/main/res/layout-sw720dp/fragment_splash_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout-v23/activity_check_out.xml" value="0.2536231884057971" />
         <entry key="app/src/main/res/layout-v28/activity_questions_page.xml" value="0.24230072463768115" />
         <entry key="app/src/main/res/layout-xhdpi/fragment_get_started_.xml" value="0.20867486338797814" />
+        <entry key="app/src/main/res/layout-xlarge/fragment_splash_fragment.xml" value="0.17247267759562843" />
         <entry key="app/src/main/res/layout-xxhdpi/fragment_get_started_.xml" value="0.2" />
         <entry key="app/src/main/res/layout-xxxhdpi/fragment_get_started_.xml" value="0.2767210144927536" />
         <entry key="app/src/main/res/layout/action_bar_background.xml" value="0.19655797101449277" />
+        <entry key="app/src/main/res/layout/activity_challenge_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_check_out.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_course_details.xml" value="0.26222826086956524" />
         <entry key="app/src/main/res/layout/activity_course_modules_page.xml" value="0.33" />
@@ -104,6 +172,8 @@
         <entry key="app/src/main/res/layout/activity_lesson_details_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3182291666666667" />
         <entry key="app/src/main/res/layout/activity_main_dash_board2.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_module_adactivity.xml" value="0.20220588235294118" />
+        <entry key="app/src/main/res/layout/activity_profile_page.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_questions_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_quiz_page.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_register_activitypage.xml" value="0.18206521739130435" />
@@ -145,6 +215,7 @@
         <entry key="app/src/main/res/layout/fragment_terms_and_policies.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_third_question.xml" value="0.24230072463768115" />
         <entry key="app/src/main/res/layout/fragment_third_welcome.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/login_details_alert_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/main_dashboard_course_card_item.xml" value="0.2148224043715847" />
         <entry key="app/src/main/res/layout/quiz_alert_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/quotes_alert_dialog.xml" value="0.20525956284153005" />

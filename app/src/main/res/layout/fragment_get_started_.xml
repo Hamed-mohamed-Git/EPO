@@ -54,7 +54,7 @@
         android:src="@drawable/qurran"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.653" />
@@ -63,7 +63,7 @@
         android:id="@+id/Ayat"
         android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="300dp"
+
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/alfontcomhafsfont"
         android:text="فَأَمَّا الزَّبَدُ فَيَذْهَبُ جُفَاءً ۖ وَأَمَّا مَا يَنفَعُ النَّاسَ فَيَمْكُثُ فِي الْأَرْضِ ۚ كَذَٰلِكَ يَضْرِبُ اللَّهُ الْأَمْثَالَ"
@@ -72,6 +72,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/imageView16"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14"
         app:layout_constraintVertical_bias="0.522" />
 
@@ -79,13 +80,14 @@
         android:id="@+id/translation"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="300dp"
+
         android:layout_marginBottom="15dp"
         android:text="For the scum disappears like froth cast out; while that which is for the good of mankind remains on the earth. Thus doth Allah set forth parables."
         android:textColor="#a6862c"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.373" />
 
@@ -93,7 +95,6 @@
         android:id="@+id/Raad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="364dp"
         android:fontFamily="@font/alfontcomhafsfont"
         android:text="سورة الرعد"
         android:textColor="#8e6334"
@@ -101,6 +102,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.116" />
 
@@ -108,7 +110,7 @@
         android:id="@+id/getStartedButton"
         android:layout_width="210dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="380dp"
+
         android:layout_marginBottom="10dp"
         android:background="@drawable/get_started_button_background"
         android:drawableEnd="@drawable/getstartedarrow"
@@ -122,6 +124,7 @@
         app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.961" />
 

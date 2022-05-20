@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".welcomeFragments.Third_welcome">
+
+    <ImageView
+        android:id="@+id/thirdWelcomeImage"
+        android:layout_width="569dp"
+        android:layout_height="675dp"
+        android:layout_marginBottom="464dp"
+        android:src="@drawable/fourthimage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/thirdWelcomeTextView1"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/geomanistbold"
+        android:text="The great art of learning is to understand but little at a time."
+        android:textColor="#de5a53"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
+
+    <TextView
+        android:id="@+id/thirdWelcomeTextView2"
+        android:layout_width="440dp"
+        android:layout_height="wrap_content"
+        android:text="we’ll see you how you can deploy full-blown projects production-ready in a typical time . Let’s look into what kind of projects we’ll build and what technologies we’ll use."
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.688" />
+
+    <ImageView
+        android:id="@+id/minuteThirdFragment"
+        android:layout_width="100dp"
+        android:layout_height="27dp"
+
+        android:src="@drawable/minutethirdfragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.799" />
+
+    <ImageView
+        android:id="@+id/thirdWelcomeButton"
+        android:layout_width="100dp"
+        android:layout_height="100sp"
+        android:src="@drawable/thirdwelcomefragmentbackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minuteThirdFragment"
+        app:layout_constraintVertical_bias="0.609"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,28 +60,10 @@ open class get_started_Fragment : Fragment() {
         //those lines to get the view in xml file by them id
         //assigning the view this view is imageview called first welcome button
         val nextButton = view.findViewById<Button>(R.id.getStartedButton)
-        //assigning  text1 property to control the Raad  in fragment xml file
-        val text1 = view.findViewById<TextView>(R.id.Raad)
-        //assigning  text2 property to control the Ayat  in fragment xml file
-        val text2 = view.findViewById<TextView>(R.id.Ayat)
-        //assigning text3 property to control the translation  in fragment xml file
-        val text3 = view.findViewById<TextView>(R.id.translation)
         //assigning audioCasing property to control the image(a audioCasing image) in fragment xml file
         val audioCasing = view.findViewById<ImageView>(R.id.audioCase)
         //this line change the quranImage view position about 450 degree at 6 seconds
         val quranImage = view.findViewById<ImageView>(R.id.imageView16)
-
-
-        //here use the animation methods to make our fragment looks good
-        //this line change the next button position about 610 degree at 6 seconds
-        nextButton.animate().translationX(610f).duration = 6300
-        //this line change the text1 view position about 465 degree at 6 seconds
-        text1.animate().translationX(465f).duration = 6300
-        //this line change the text2 view position about 560 degree at 6 seconds
-        text2.animate().translationX(560f).duration = 6300
-        //this line change the text3 view position about 560 degree at 6 seconds
-        text3.animate().translationX(560f).duration = 6300
-
 
 
         //create an action by click on quran image

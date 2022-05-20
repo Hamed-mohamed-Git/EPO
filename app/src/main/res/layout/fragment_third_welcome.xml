@@ -20,13 +20,14 @@
         android:id="@+id/thirdWelcomeTextView1"
         android:layout_width="330dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="300dp"
+
         android:fontFamily="@font/geomanistbold"
         android:text="The great art of learning is to understand but little at a time."
         android:textColor="#de5a53"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.526" />
 
@@ -34,11 +35,12 @@
         android:id="@+id/thirdWelcomeTextView2"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="300dp"
+
         android:text="we’ll see you how you can deploy full-blown projects production-ready in a typical time . Let’s look into what kind of projects we’ll build and what technologies we’ll use."
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656" />
 
@@ -46,10 +48,11 @@
         android:id="@+id/minuteThirdFragment"
         android:layout_width="83dp"
         android:layout_height="27dp"
-        android:layout_marginEnd="368dp"
+
         android:src="@drawable/minutethirdfragment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.799" />
 
@@ -59,9 +62,11 @@
         android:layout_height="80dp"
         android:src="@drawable/thirdwelcomefragmentbackground"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minuteThirdFragment"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-30dp"
+        app:layout_constraintVertical_bias="0.737"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

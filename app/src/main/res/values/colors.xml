@@ -63,4 +63,6 @@
     <color name="transpernt">#00000000</color>
 
     <color name="questionPageStatusBarColor">#6066CF</color>
+    <color name="challengePageStatusBar">#141414</color>
+    <color name="profilePageStatusBar">#F7F8FB</color>
 </resources>

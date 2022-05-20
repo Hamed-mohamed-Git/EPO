@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Mainlayout"
+    android:layout_width="match_parent"
+    android:background="@drawable/fifthquoteimage"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/overlay_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="#96222f3e"
+        android:foregroundTintMode="src_atop"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="70dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20sp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="The Quote of Today:"
+                android:textColor="@color/white"
+                android:fontFamily="@font/godaregular"
+                android:layout_marginStart="35sp"
+                android:textSize="60dp"/>
+            <TextView
+                android:id="@+id/quote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/robotoregular"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="35sp"
+                android:textSize="35sp"/>
+            <TextView
+                android:id="@+id/personWhoQuoted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:fontFamily="@font/mediem"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="37sp"
+                android:textSize="35sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/Close"
+        android:layout_gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next"
+        android:textColor="@drawable/alert_dialog_close_background"
+        android:fontFamily="@font/geomanistbold"
+        android:layout_marginStart="450sp"
+        android:layout_marginBottom="10sp"
+
+        android:textSize="55dp"/>
+
+</FrameLayout>

@@ -19,6 +19,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:padding="5sp"
+            android:layout_gravity="center_vertical"
             android:background="@drawable/course_lesson_seeall_background">
 
             <TextView
@@ -50,8 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="85sp"
-            android:layout_marginTop="13sp">
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="85sp">
             <TextView
                 android:id="@+id/lessonName"
                 android:layout_width="wrap_content"

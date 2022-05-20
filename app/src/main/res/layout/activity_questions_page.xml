@@ -299,6 +299,45 @@
                             android:paddingBottom="8sp"
                             android:text="For editing code when a Swift file is selected in the Navigator."/>
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/fifthAnswer"
+                        android:layout_marginTop="15sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:background="@drawable/answer_layout_background"
+
+                        >
+                        <ImageView
+                            android:id="@+id/fifthImageCorrect"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10sp"
+                            android:layout_gravity="center_vertical"
+                            android:visibility="gone"
+                            android:src="@drawable/correctanswerimage"
+                            app:tint="@color/white" />
+                        <ImageView
+                            android:id="@+id/fifthImageWrong"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10sp"
+                            android:visibility="gone"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/wronganswerimage"
+                            app:tint="@color/white" />
+                        <TextView
+                            android:id="@+id/fifthAnswerText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="15sp"
+                            android:layout_marginEnd="10sp"
+                            android:fontFamily="@font/futur"
+                            android:paddingTop="8sp"
+                            android:paddingBottom="8sp"
+                            android:text="For editing code when a Swift file is selected in the Navigator."/>
+                    </LinearLayout>
 
 
 

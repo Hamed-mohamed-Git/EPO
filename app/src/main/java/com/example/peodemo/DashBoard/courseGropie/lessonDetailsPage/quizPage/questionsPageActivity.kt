@@ -131,6 +131,24 @@ class questionsPageActivity : AppCompatActivity() {
             firstAnswer.setBackgroundResource(R.drawable.answer_layout_background)
             firstAnswerText.setTextColor(this.getColor(R.color.UncheckedSwitchTextColor))
         }
+        fifthAnswer.setOnClickListener {
+            correctIndex = 5
+
+            fifthAnswer.setBackgroundResource(R.drawable.select_answer_layout_background)
+            fifthAnswerText.setTextColor(this.getColor(R.color.white))
+
+            fouthAnswer.setBackgroundResource(R.drawable.answer_layout_background)
+            fourthAnswerText.setTextColor(this.getColor(R.color.UncheckedSwitchTextColor))
+
+            secondAnswer.setBackgroundResource(R.drawable.answer_layout_background)
+            secondAnswerText.setTextColor(this.getColor(R.color.UncheckedSwitchTextColor))
+
+            thirdAnswer.setBackgroundResource(R.drawable.answer_layout_background)
+            thirdAnswerText.setTextColor(this.getColor(R.color.UncheckedSwitchTextColor))
+
+            firstAnswer.setBackgroundResource(R.drawable.answer_layout_background)
+            firstAnswerText.setTextColor(this.getColor(R.color.UncheckedSwitchTextColor))
+        }
         setQuizDataIntoView(currentIndex)
         quizCloseButton.setOnClickListener {
             finish()
@@ -232,26 +250,53 @@ class questionsPageActivity : AppCompatActivity() {
 
                 thirdAnswer.visibility = View.GONE
                 fouthAnswer.visibility = View.GONE
+                fifthAnswer.visibility = View.GONE
             }else if (answers.count() < 4){
-                val firstAnswer = answers[0]
-                val secondAnswer = answers[1]
-                val thirdAnswer = answers[2]
+                val firstAnswerA = answers[0]
+                val secondAnswerA = answers[1]
+                val thirdAnswerA = answers[2]
 
-                firstAnswerText.text = firstAnswer
-                secondAnswerText.text = secondAnswer
-                thirdAnswerText.text = thirdAnswer
+                firstAnswerText.text = firstAnswerA
+                secondAnswerText.text = secondAnswerA
+                thirdAnswerText.text = thirdAnswerA
 
+
+                thirdAnswer.visibility = View.VISIBLE
                 fouthAnswer.visibility = View.GONE
+                fifthAnswer.visibility = View.GONE
             }else if (answers.count() == 4){
-                val firstAnswer = answers[0]
-                val secondAnswer = answers[1]
-                val thirdAnswer = answers[2]
-                val fourthAnswer = answers[3]
+                val firstAnswerA = answers[0]
+                val secondAnswerA = answers[1]
+                val thirdAnswerA = answers[2]
+                val fourthAnswerA = answers[3]
 
-                firstAnswerText.text = firstAnswer
-                secondAnswerText.text = secondAnswer
-                thirdAnswerText.text = thirdAnswer
-                fourthAnswerText.text = fourthAnswer
+                firstAnswerText.text = firstAnswerA
+                secondAnswerText.text = secondAnswerA
+                thirdAnswerText.text = thirdAnswerA
+                fourthAnswerText.text = fourthAnswerA
+
+
+                thirdAnswer.visibility = View.VISIBLE
+                fouthAnswer.visibility = View.VISIBLE
+                fifthAnswer.visibility = View.GONE
+
+            }else if (answers.count() == 5){
+                val firstAnswerA = answers[0]
+                val secondAnswerA = answers[1]
+                val thirdAnswerA = answers[2]
+                val fourthAnswerA = answers[3]
+                val fifthAnswerA = answers[4]
+
+                firstAnswerText.text = firstAnswerA
+                secondAnswerText.text = secondAnswerA
+                thirdAnswerText.text = thirdAnswerA
+                fourthAnswerText.text = fourthAnswerA
+                fifthAnswerText.text = fifthAnswerA
+
+
+                thirdAnswer.visibility = View.VISIBLE
+                fouthAnswer.visibility = View.VISIBLE
+                fifthAnswer.visibility = View.VISIBLE
 
             }
         }
@@ -268,8 +313,8 @@ class questionsPageActivity : AppCompatActivity() {
                 }
                 correctLayout.setBackgroundResource(R.drawable.correct_answer_layout_background)
                 if(CorrectIndex == 1){
-                    secondAnswer.setBackgroundResource(R.drawable.correct_answer_layout_background)
-                    secondAnswerText.setTextColor(this.getColor(R.color.white))
+                    firstAnswer.setBackgroundResource(R.drawable.correct_answer_layout_background)
+                    firstAnswerText.setTextColor(this.getColor(R.color.white))
 
                 }else if(CorrectIndex == 2){
                     secondAnswer.setBackgroundResource(R.drawable.correct_answer_layout_background)
@@ -283,6 +328,10 @@ class questionsPageActivity : AppCompatActivity() {
                 }else if(CorrectIndex == 4){
                     fouthAnswer.setBackgroundResource(R.drawable.correct_answer_layout_background)
                     fourthAnswerText.setTextColor(this.getColor(R.color.white))
+                }
+                else if(CorrectIndex == 5){
+                    fifthAnswer.setBackgroundResource(R.drawable.correct_answer_layout_background)
+                    fifthAnswerText.setTextColor(this.getColor(R.color.white))
                 }
             }else{
                 if (wrongQuestionCount <= 3 ){
@@ -303,6 +352,10 @@ class questionsPageActivity : AppCompatActivity() {
                 }else if(CorrectIndex == 4){
                     fouthAnswer.setBackgroundResource(R.drawable.wrong_answer_frame_layout_background)
                     fourthAnswerText.setTextColor(this.getColor(R.color.white))
+                }
+                else if(CorrectIndex == 5){
+                    fifthAnswer.setBackgroundResource(R.drawable.wrong_answer_frame_layout_background)
+                    fifthAnswerText.setTextColor(this.getColor(R.color.white))
                 }
             }
             correctIndex = 0

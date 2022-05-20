@@ -16,17 +16,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PEODemo">
         <activity
-            android:name=".DashBoard.courseGropie.lessonDetailsPage.quizPage.questionsPageActivity"
+            android:name=".DashBoard.profile.profilePageActivity"
             android:exported="false" />
         <activity
+            android:name=".DashBoard.courseGropie.lessonDetailsPage.challengePage.challengePageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".DashBoard.courseGropie.lessonDetailsPage.quizPage.questionsPageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".DashBoard.courseGropie.lessonDetailsPage.quizPage.quizPageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".DashBoard.courseGropie.ModulesPage.ModuleADActivity"
             android:exported="false" />
         <activity
             android:name=".DashBoard.courseGropie.lessonDetailsPage.lessonDetailsPageActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".DashBoard.courseGropie.CoursePage.coursePageMainDashboardActivity"
             android:exported="false" />
@@ -35,7 +49,9 @@
             android:exported="false" />
         <activity
             android:name=".home.introduction.fragments.ourCourses.checkout.CheckOutActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.IntroductionVideo"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize"
@@ -43,30 +59,46 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".home.introduction.fragments.ourCourses.CourseDetails.courseDetails"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".logPages.TermsAndConditionsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".logPages.RegisterActivitypage"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".logPages.signUpActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".DashBoard.mainDashBoardActivity"
             android:exported="false"
             android:label="@string/title_activity_main_dash_board"
-            android:theme="@style/Theme.PEODemo.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.PEODemo.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".logPages.signInActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".home.introduction.introductionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".welcomeFragments.WelcomeActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

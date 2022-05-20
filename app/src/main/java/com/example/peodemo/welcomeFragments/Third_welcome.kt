@@ -42,23 +42,6 @@ class Third_welcome : Fragment() {
         //those lines to get the view in xml file by them id
         //assigning a nextButton property to control the imageview in the fragment xml file
         val nextButton = view.findViewById<ImageView>(R.id.thirdWelcomeButton)
-        //assigning a text1 property to control the TextView1 in the fragment xml file
-        val text1 = view.findViewById<TextView>(R.id.thirdWelcomeTextView1)
-        //assigning a text2 property to control the TextView2 in the fragment xml file
-        val text2 = view.findViewById<TextView>(R.id.thirdWelcomeTextView2)
-        //assigning a minute property to control the imageview in the fragment xml file
-        val minute = view.findViewById<ImageView>(R.id.minuteThirdFragment)
-
-
-        //here use the animation methods to make our fragment looks good
-        //this line change the next button position about 567 degree at 6 second
-        nextButton.animate().translationX(567f).duration = 6300
-        //this line change the text1 view position about 470 degree at 6 seconds
-        text1.animate().translationX(570f).duration = 6300
-        //this line change the text2 view  position about 489 degree at 6 seconds
-        text2.animate().translationX(589f).duration = 6300
-        //this line change the minute image position about 450 degree at 6 seconds
-        minute.animate().translationX(450f).duration = 6300
 
 
         //this line to make an action when the user click on next button

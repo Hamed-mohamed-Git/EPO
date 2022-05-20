@@ -225,7 +225,21 @@ music, science, engineering, and business."
                         android:layout_height="90dp"
                         android:padding="5sp"
                         android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundVideoFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
 
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/notfound"
+                                app:tint="#343434" />
+                        </FrameLayout>
                         <ImageView
                             android:id="@+id/courseNumber"
                             android:layout_width="30sp"
@@ -251,6 +265,21 @@ music, science, engineering, and business."
                         android:padding="5sp"
                         android:layout_marginStart="17sp"
                         android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundQuizFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/notfound"
+                                app:tint="#343434" />
+                        </FrameLayout>
                         <ImageView
                             android:layout_width="32sp"
                             android:layout_height="32sp"
@@ -270,12 +299,28 @@ music, science, engineering, and business."
                             android:layout_gravity="center_horizontal"/>
                     </FrameLayout>
                     <FrameLayout
+                        android:id="@+id/challengeFrameLayout"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:padding="5sp"
+
                         android:layout_marginStart="17sp"
                         android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundChallengeFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
 
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/notfound"
+                                app:tint="#343434" />
+                        </FrameLayout>
                         <ImageView
                             android:layout_width="30sp"
                             android:layout_height="30sp"
@@ -301,11 +346,26 @@ music, science, engineering, and business."
                     android:layout_height="match_parent"
                     android:layout_marginBottom="22sp">
                     <FrameLayout
+                        android:id="@+id/resourceFrameLayout"
                         android:layout_width="90dp"
                         android:layout_height="90dp"
                         android:padding="5sp"
                         android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundResourceFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
 
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/notfound"
+                                app:tint="#343434" />
+                        </FrameLayout>
                         <ImageView
 
                             android:layout_width="30sp"

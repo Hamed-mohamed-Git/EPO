@@ -1,5 +1,6 @@
 package com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel
 
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseChallengeDetails.courseLessonChellengeDetailsModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseLessonQuizDetials.courseLessonQuizDetailsModel
 import java.io.Serializable
 
@@ -23,10 +24,11 @@ data class CourseLessonsModel(
     var enabled:Boolean?,
     val lessonDetails:courseLessonDetailsModel?,
     val lessonQUIZDetails:courseLessonQuizDetailsModel?,
-    val lessonChallengeDetails:courseLessonChellengeDetailsModel?,
+    val lessonChallengeDetails: courseLessonChellengeDetailsModel?,
+    val lessonResourceDetails:courseLessonResourceDetails?,
     var description:String?
 ): Serializable{
-    constructor():this(null,null,null,null,null,null,null,null,null,null,null,
+    constructor():this(null,null,null,null,null,null,null,null,null,null,null,null,
         null,null,null,null,null,
         null,null,null,null)
 }

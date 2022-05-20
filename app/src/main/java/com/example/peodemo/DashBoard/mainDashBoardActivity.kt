@@ -2,16 +2,14 @@ package com.example.peodemo.DashBoard
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.nfc.Tag
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -22,15 +20,16 @@ import com.example.peodemo.DashBoard.categoriesTabs.tabsModel
 import com.example.peodemo.DashBoard.categoriesTabs.tabsViewModel
 import com.example.peodemo.DashBoard.courseGropie.ModulesPage.courseModulesPageActivity
 import com.example.peodemo.DashBoard.courseGropie.courseItems
-import com.example.peodemo.DashBoard.courseGropie.courseModelMainDashBoard
 import com.example.peodemo.DashBoard.glide.GlideApp
+import com.example.peodemo.DashBoard.profile.profilePageActivity
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.*
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseChallengeDetails.challengeInformation
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseChallengeDetails.courseLessonChellengeDetailsModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseLessonQuizDetials.QuestionsModel
 import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.courseLessonQuizDetials.courseLessonQuizDetailsModel
 import com.example.peodemo.home.introduction.introductionActivity
 import com.example.peodemo.logPages.model.User
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
@@ -75,6 +74,25 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
     private val QuoteDocRef: CollectionReference
         get() = fireStoreInstance.collection("quotes")
+
+    private val designDocRef: CollectionReference
+        get() = fireStoreInstance.collection("design")
+    private var designWebsite = ArrayList<String>()
+    private var designIndex = 0
+    private var designWebsiteInformation = mutableListOf<news>()
+
+
+    private val backendDocRef: CollectionReference
+        get() = fireStoreInstance.collection("backend")
+    private var backendWebsite = ArrayList<String>()
+    private var backendIndex = 0
+    private var backendWebsiteInformation = mutableListOf<news>()
+
+    private val swiftUiDocRef: CollectionReference
+        get() = fireStoreInstance.collection("swiftUi")
+    private var swiftUiWebsite = ArrayList<String>()
+    private var swiftUiIndex = 0
+    private var swiftUiWebsiteInformation = mutableListOf<news>()
 
     private var personHasQuotes = ArrayList<String>()
     private var qouteIndex = 0
@@ -170,11 +188,9 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
         }
         logout_button.setOnClickListener {
-            mAuth.signOut()
-            val intent = Intent(this,introductionActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            val intent = Intent(this,profilePageActivity::class.java)
             startActivity(intent)
-            onBoardingSignOutFinished()
+            this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
         }
         profileButton.setOnClickListener {
 
@@ -199,20 +215,19 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
 
 
-        cardLayout.setOnClickListener {
-            setQuoteDialog()
-        }
 
 
-        profileCircleImageView.setOnClickListener {
-            val getImageFromGallery = Intent().apply {
-                type = "image/*"
-                action = Intent.ACTION_GET_CONTENT
-                putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg","image/png"))
-            }
 
-            startActivityForResult(Intent.createChooser(getImageFromGallery,"select the best image you have"), RC_S_IMAGE)
-        }
+        //profileCircleImageView.setOnClickListener {
+           // val getImageFromGallery = Intent().apply {
+              //  type = "image/*"
+               // action = Intent.ACTION_GET_CONTENT
+               // putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/jpeg","image/png"))
+            //}
+            //startActivityForResult(Intent.createChooser(getImageFromGallery,"select the best image you have"), RC_S_IMAGE)
+        //}
+
+
         GlobalScope.launch {
             getQuotesFromServer()
             if (DataFromOurCourses != ""){
@@ -392,6 +407,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                                 .document(courseName).collection("Modules").document(module.name).collection("Lessons").document("lesson x${listOfLessons + 1}: ${lesson.name}")
                                 .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails!!)
 
+                            fireStoreInstance.collection("Users")
+                                .document(mAuth.currentUser!!.uid)
+                                .collection("My Courses")
+                                .document(courseName).collection("Modules").document(module.name).collection("Lessons").document("lesson x${listOfLessons + 1}: ${lesson.name}")
+                                .collection("lesson Details").document("Resource info").set(lesson.lessonResourceDetails!!)
+
                             /*//add image to lessons into another path
                             val imageHashMap = mutableMapOf<String,String?>()
                             imageHashMap["lessonImageURI"] = null
@@ -421,6 +442,11 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                                 .collection("My Courses")
                                 .document(courseName).collection("Modules").document(module.name).collection("Lessons").document("lesson ${listOfLessons + 1}: ${lesson.name}")
                                 .collection("lesson Details").document("Quiz info").set(lesson.lessonQUIZDetails!!)
+                            fireStoreInstance.collection("Users")
+                                .document(mAuth.currentUser!!.uid)
+                                .collection("My Courses")
+                                .document(courseName).collection("Modules").document(module.name).collection("Lessons").document("lesson ${listOfLessons + 1}: ${lesson.name}")
+                                .collection("lesson Details").document("Resource info").set(lesson.lessonResourceDetails!!)
 
                             /*val imageHashMap = mutableMapOf<String,String?>()
                             imageHashMap["lessonImageURI"] = null
@@ -457,6 +483,85 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             qouteIndex = (0 until personHasQuotes.size).random()
             cardHint.text = personHasQuotes[qouteIndex]
         }
+        cardLayout.setOnClickListener {
+            setQuoteDialog()
+        }
+
+    }
+
+
+    private fun getDesignFromServer(){
+        designWebsite.clear()
+        designWebsiteInformation.clear()
+        designDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                return@addSnapshotListener
+            }
+            var index = 0
+            value!!.documents.forEach {
+                designWebsiteInformation.add(it.toObject(news::class.java)!!)
+                designWebsite.add(it.id)
+                index++
+            }
+            designIndex = (0 until designWebsite.size).random()
+            cardHint.text = designWebsite[designIndex]
+            cardLayout.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data =  Uri.parse(designWebsiteInformation[designIndex].uri)
+                startActivity(intent)
+                this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
+            }
+        }
+
+    }
+
+    private fun getBackEndFromServer(){
+        backendWebsite.clear()
+        backendWebsiteInformation.clear()
+        backendDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                return@addSnapshotListener
+            }
+            var index = 0
+            value!!.documents.forEach {
+                backendWebsiteInformation.add(it.toObject(news::class.java)!!)
+                backendWebsite.add(it.id)
+                index++
+            }
+            backendIndex = (0 until backendWebsite.size).random()
+            cardHint.text = backendWebsite[backendIndex]
+            cardLayout.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data =  Uri.parse(backendWebsiteInformation[backendIndex].uri)
+                startActivity(intent)
+                this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
+            }
+        }
+
+    }
+
+    private fun getSwiftUIFromServer(){
+        swiftUiWebsite.clear()
+        swiftUiWebsiteInformation.clear()
+        swiftUiDocRef.addSnapshotListener { value, error ->
+            if (error != null){
+                return@addSnapshotListener
+            }
+            var index = 0
+            value!!.documents.forEach {
+                swiftUiWebsiteInformation.add(it.toObject(news::class.java)!!)
+                swiftUiWebsite.add(it.id)
+                index++
+            }
+            swiftUiIndex = (0 until swiftUiWebsite.size).random()
+            cardHint.text = swiftUiWebsite[swiftUiIndex]
+            cardLayout.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data =  Uri.parse(swiftUiWebsiteInformation[swiftUiIndex].uri)
+                startActivity(intent)
+                this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
+            }
+        }
 
     }
 
@@ -480,9 +585,16 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         when (position){
             // if the user tap on the first item
             0 ->{
+
+                newsImage.setImageResource(R.drawable.firstadvice)
+                newsTitle.textSize = 25f
+                newsTitle.text = "The quote of the day"
+
                 getQuotesFromServer()
                 //cardHint.text = personHasQuotes[qouteIndex]
                 //call this item and put it in tap property
+
+
                 var taps = tapList[position]
                 taps.pressed = 1
                 //And set 0 to other items
@@ -499,6 +611,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             }
             // if the user tap on the second item
             1 ->{
+
+                newsImage.setImageResource(R.drawable.design)
+                newsTitle.textSize = 20f
+                newsTitle.text = "The design website of the day"
+
+                getDesignFromServer()
                 //call this item and put it in tap property
                 var taps = tapList[position]
                 //and set a last var in this item to 1, if the user tap on this item
@@ -516,7 +634,13 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             }
             // if the user tap on the third item
             2 ->{
+
+                newsImage.setImageResource(R.drawable.backend)
+                newsTitle.textSize = 20f
+                newsTitle.text = "The backend website of the day"
                 //call this item and put it in tap property
+
+                getBackEndFromServer()
                 var taps = tapList[position]
                 //and set a last var in this item to 1, if the user tap on this item
                 taps.pressed = 1
@@ -534,7 +658,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             }
             // if the user tap on the third item
             3 ->{
+                newsImage.setImageResource(R.drawable.swiftui)
+                newsTitle.textSize = 20f
+                newsTitle.text = "The swift UI website of the day"
                 //call this item and put it in tap property
+                getSwiftUIFromServer()
+
                 var taps = tapList[position]
                 //and set a last var in this item to 1, if the user tap on this item
                 taps.pressed = 1
@@ -593,7 +722,8 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         false,LessonDetailsDescription,null)
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 1 Quiz",lessonQuizQuestions,false)
                     val ChallengeDetails = courseLessonChellengeDetailsModel()
-                    setLessonsOFModules("iosFC1M1L1","The Apple Developer Ecosystem",1,5,1,1,0,0,3,0,0,0,0,false,false,true,courseDetails,lessonQuiz,ChallengeDetails,"We’ll begin our app journey by taking a look at the Apple Developer Ecosystem."
+                    val resourceDetails = courseLessonResourceDetails(false,"https://developer.apple.com/programs/")
+                    setLessonsOFModules("iosFC1M1L1","The Apple Developer Ecosystem",1,5,1,1,0,0,3,0,0,0,0,false,false,true,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"We’ll begin our app journey by taking a look at the Apple Developer Ecosystem."
                             )
                 }
                 else if (index == 2){
@@ -631,7 +761,8 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     val courseDetails =  courseLessonDetailsModel("Introduction to Xcode","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%202%2Flesson%2Fintroduction%20to%20xcode.mp4?alt=media&token=4aa6c239-fb69-4d8f-839a-fd54914ac796",
                         false,LessonDetailsDescription,null)
                     val ChallengeDetails = courseLessonChellengeDetailsModel()
-                    setLessonsOFModules("iosFC1M1L2","Introduction to Xcode",2,20,1,3,0,0,3,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this Xcode tutorial, you'll get familiar with the development environment where you’ll build apps in.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://developer.apple.com/xcode/resources/")
+                    setLessonsOFModules("iosFC1M1L2","Introduction to Xcode",2,20,1,3,0,0,3,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this Xcode tutorial, you'll get familiar with the development environment where you’ll build apps in.")
                 }
                 else if (index == 3){
                     var lessonQuizQuestions = ArrayList<QuestionsModel>()
@@ -667,10 +798,16 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 3 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 3 Challenge",ArrayList<String>(),"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%203%2Fchallenge%2FLesson%203%20Challenge.mp4?alt=media&token=dd0f46f4-8471-4c48-9685-5d197b560244",false)
+
+
+                    val chellengeInfo = challengeInformation(null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%203%2Fchallenge%2FLesson%203%20Challenge.mp4?alt=media&token=dd0f46f4-8471-4c48-9685-5d197b560244",null)
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 3 Challenge",chellengeInfo,false)
+
+
                     val courseDetails =  courseLessonDetailsModel("How To Build User Interfaces","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%203%2Flesson%2Flesson%203%20How%20To%20Build%20User%20Interfaces.mp4?alt=media&token=2e45d1aa-86c7-414b-9516-6a605316caf6",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L3","How To Build User Interfaces",3,14,2,1,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, I’ll show you how to use Xcode to build user interfaces with SwiftUI.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AADG3NeQEx5-5zUpK_lzwgqEa/Module%201/Lesson%2003?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L3","How To Build User Interfaces",3,14,2,1,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, I’ll show you how to use Xcode to build user interfaces with SwiftUI.")
                 }
                 else if (index == 4){
                     var lessonQuizQuestions = ArrayList<QuestionsModel>()
@@ -702,10 +839,14 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 4 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 4 Challenge",ArrayList<String>(),"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%204%2Fchallenge%2FLesson%204%20Challenge.mp4?alt=media&token=7c25065c-5a8e-4c9c-a301-d14a210ded52",false)
+
+                    val chellengeInfo = challengeInformation(null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%204%2Fchallenge%2FLesson%204%20Challenge.mp4?alt=media&token=7c25065c-5a8e-4c9c-a301-d14a210ded52",null)
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 4 Challenge",chellengeInfo,false)
+
                     val courseDetails =  courseLessonDetailsModel("SwiftUI Views and Containers","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%204%2Flesson%2FSwiftUI%20Views%20and%20Containers.mp4?alt=media&token=5a26317f-7ff5-43c1-9b89-0c1ceeea499f",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L4","SwiftUI Views and Containers",4,12,2,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, you’ll learn how to use a variety of essential user interface elements and containers."
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AACwBR7z87vybPQG9O8Q77fAa/Module%201/Lesson%2004?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L4","SwiftUI Views and Containers",4,12,2,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, you’ll learn how to use a variety of essential user interface elements and containers."
                             )
                 }
                 else if (index == 5){
@@ -713,7 +854,8 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     val ChallengeDetails = courseLessonChellengeDetailsModel()
                     val courseDetails =  courseLessonDetailsModel("Build The War Card Game UI","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%205%2Flesson%2FLesson%205%20Build%20The%20War%20Card%20Game%20UI.mp4?alt=media&token=7ca6b0d3-c893-45cb-87c4-456b9df34b1c",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L5","Build The War Card Game UI",5,16,1,0,0,0,2,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, we’ll walk through building the War Card Game user interface.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AACREVARHEGXz1e7T4H-Nx1ya/Module%201/Lesson%2005?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L5","Build The War Card Game UI",5,16,1,0,0,0,2,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, we’ll walk through building the War Card Game user interface.")
                 }
                 else if (index == 6){
                     var lessonQuizQuestions = ArrayList<QuestionsModel>()
@@ -745,10 +887,14 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 6 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel()
+
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%206%2Fchallenge%2Fchellenge.pdf?alt=media&token=0745aa14-4db2-4b8f-a847-6ab7bfba67b8")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 6 challenge",challengeInfo,false)
+
                     val courseDetails =  courseLessonDetailsModel("Swift Variables and Constants","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%206%2FLesson%206%20%20Swift%20Variables%20and%20Constants.mp4?alt=media&token=72fbf12c-945a-489d-8c64-c1bdd7dd0210",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L6","Swift Variables and Constants",6,15,1,3,0,0,3,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, you’ll learn about the app lifecycle which includes retrieving and processing data, rendering the UI and handling user interaction.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AABk76KM4R8cP4EY1SsPwr9Ra/Module%201/Lesson%2006?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L6","Swift Variables and Constants",6,15,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, you’ll learn about the app lifecycle which includes retrieving and processing data, rendering the UI and handling user interaction.")
 
                 }
                 else if (index == 7){
@@ -781,10 +927,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 7 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 7 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%207%2Fchallenge%2Fchellenge.pdf?alt=media&token=33f1b03e-e718-48ce-b3ff-9f43dfad7a60")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 7 Challenge",challengeInfo,false)
                     val courseDetails =  courseLessonDetailsModel("Swift Functions","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%207%2FLesson%207%20Swift%20Functions.mp4?alt=media&token=dc9472ef-ef1e-4c9e-8b73-fb84cf530d2c",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L7","Swift Functions",7,22,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"n this lesson, you’ll learn about functions which helps organize and group together your code statements so that:\n" +
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AAB0UPq3NfMM2rpjsCsSAu-ta/Module%201/Lesson%2007?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L7","Swift Functions",7,22,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"n this lesson, you’ll learn about functions which helps organize and group together your code statements so that:\n" +
                             "#1: all the code in a function can work together to serve a speci\u0000c purpose. #2: you can run a group of code statements by calling the function\n")
 
                 }
@@ -818,10 +966,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 8 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 8 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%208%2Fchallenge%2FCHELLENGE.pdf?alt=media&token=baed4469-bd01-4221-9c3e-9ced17908981")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 8 Challenge",challengeInfo,false)
                     val courseDetails =  courseLessonDetailsModel("Swift Structures","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%208%2Flesson%2FLesson%208%20Swift%20Structures.mp4?alt=media&token=c17fc93c-c4f4-4b86-ac57-0ce1320a24c7",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L8","Swift Structures",8,16,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, you’ll learn about the basics of Structures in Swift. You'll also learn about the properties and methods that live inside your structure.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AABpfRs4XO_fKEx12wwGNPbka/Module%201/Lesson%2008?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L8","Swift Structures",8,16,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, you’ll learn about the basics of Structures in Swift. You'll also learn about the properties and methods that live inside your structure.")
 
                 }
                 else if (index == 9){
@@ -853,10 +1003,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 9 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 9 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%209%2Fchallenge%2Fchellenge.pdf?alt=media&token=e6410bcd-53a5-43a2-8a53-49b0e8c6fc15")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 9 Challenge",challengeInfo,false)
                     val courseDetails =  courseLessonDetailsModel("Swift Instances","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%209%2FLesson%209%20Swift%20Instances.mp4?alt=media&token=251fc3f5-dafd-4c08-8f5c-981f31b2c5bd",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L9","Swift Instances",9,27,1,1,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"This lesson is going to be the \u0000nal piece of the puzzle. I’m not saying that you’re the master of Swift but at the end of this lesson, you’ll see how all of your code works together inside of an app.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AADcS3cH2sMGQwM59WecBY5ia/Module%201/Lesson%2009?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L9","Swift Instances",9,27,1,1,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"This lesson is going to be the \u0000nal piece of the puzzle. I’m not saying that you’re the master of Swift but at the end of this lesson, you’ll see how all of your code works together inside of an app.")
                 }
                 else if (index == 10){
                     var lessonQuizQuestions = ArrayList<QuestionsModel>()
@@ -888,10 +1040,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 10 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 10 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2010%2Fchallenge%2FChellange.pdf?alt=media&token=b8c6eaf2-d05c-48ee-8827-725db36ae2ff")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 10 Challenge",challengeInfo,false)
                     val courseDetails =  courseLessonDetailsModel("SwiftUI Buttons","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2010%2FLesson%2010%20SwiftUI%20Buttons.mp4?alt=media&token=ebd045a9-1f7c-4c4b-a5aa-5a4da952f041",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L10","SwiftUI Buttons",10,15,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"Let’s get back to SwiftUI and views. In particular, today I want to dive into the SwiftUI Button view.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AACmsJaYPAO8yMd2ob4K36tta/Module%201/Lesson%2010?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L10","SwiftUI Buttons",10,15,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"Let’s get back to SwiftUI and views. In particular, today I want to dive into the SwiftUI Button view.")
 
                 }
                 else if (index == 11){
@@ -924,10 +1078,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 11 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 11 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2011%2Fchallenge%2Fchellange.pdf?alt=media&token=6601aa04-653f-4097-bca4-c555b30996af")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel(null,challengeInfo,null)
                     val courseDetails =  courseLessonDetailsModel("State Properties","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2011%2FLesson%2011%20State%20Properties.mp4?alt=media&token=7e2ca1a9-4ee9-4ebe-bc88-bb973b415771",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L11","State Properties",11,14,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In the last lesson, you learned about the SwiftUI button and how to handle user interaction.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AADIpx9B2qg7V17Jk3w0BXp1a/Module%201/Lesson%2011?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L11","State Properties",11,14,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In the last lesson, you learned about the SwiftUI button and how to handle user interaction.")
 
                 }
                 else if (index == 12){
@@ -961,10 +1117,12 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                         }
                     }
                     val lessonQuiz = courseLessonQuizDetailsModel("Lesson 12 Quiz",lessonQuizQuestions,false)
-                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 12 Challenge",null,null,false)
+                    val challengeInfo = challengeInformation(null,null,"https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2012%2Fchallenge%2FChellange.pdf?alt=media&token=879603e7-58b7-40d3-bfa8-e3a03ba672d8")
+                    val ChallengeDetails = courseLessonChellengeDetailsModel("Lesson 12 Challenge",challengeInfo,false)
                     val courseDetails =  courseLessonDetailsModel("Swift If Statements","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2012%2FLesson%2012%20Swift%20If%20Statements.mp4?alt=media&token=5d07d8cc-8087-4912-b5e3-03418e3058ae",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L12","Swift If Statements",12,15,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"In this lesson, you’ll learn a new Swift construct that will allow you to write code that says, if this, then that.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AABOOfOviE4HyDEvlhinjed-a/Module%201/Lesson%2012?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L12","Swift If Statements",12,15,1,3,0,0,4,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"In this lesson, you’ll learn a new Swift construct that will allow you to write code that says, if this, then that.")
 
                 }
                 else if (index == 13){
@@ -972,7 +1130,8 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     val ChallengeDetails = courseLessonChellengeDetailsModel()
                     val courseDetails =  courseLessonDetailsModel("Wrap Up Challenge","https://firebasestorage.googleapis.com/v0/b/epo-d0e54.appspot.com/o/courses%2Ffoundation%2Fmodule%201%2Flesson%2013%2FLesson%2013%20Wrap%20Up%20Challenge.mp4?alt=media&token=f56bfcd3-6af9-4e6d-888e-a36d644ae55f",
                         false,LessonDetailsDescription,null)
-                    setLessonsOFModules("iosFC1M1L13","Wrap Up Challenge",13,3,1,0,0,0,2,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,"To solidify what you have learned in this module, try to build the app shown in this video.")
+                    val resourceDetails = courseLessonResourceDetails(false,"https://www.dropbox.com/sh/gc91epvtjdwks19/AADYAlszOCs9_uSdgHnVFyE9a/Module%201/Lesson%2013?dl=0&subfolder_nav_tracking=1")
+                    setLessonsOFModules("iosFC1M1L13","Wrap Up Challenge",13,3,1,0,0,0,2,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"To solidify what you have learned in this module, try to build the app shown in this video.")
                 }
             }
             setModulesOFCourse("iosFC1M1","Module 1: War Card Game","War Card Game",null,13,15,10,Lessons,0,false,false,true,null)
@@ -1028,6 +1187,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         lessonDetails: courseLessonDetailsModel,
         lessonQuizDetails: courseLessonQuizDetailsModel,
         lessonChallengeDetails: courseLessonChellengeDetailsModel,
+        lessonResourceDetails:courseLessonResourceDetails,
         description: String?){
         Lessons.add(
             CourseLessonsModel(
@@ -1050,6 +1210,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                 lessonDetails,
                 lessonQuizDetails,
                 lessonChallengeDetails,
+                lessonResourceDetails,
                 description
             ))
     }

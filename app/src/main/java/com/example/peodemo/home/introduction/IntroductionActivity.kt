@@ -2,9 +2,12 @@ package com.example.peodemo.home.introduction
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.renderscript.ScriptGroup
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.LinearLayout
@@ -44,6 +47,8 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction)
+
+
 
         //make a condition if the phone sdk above 15 or not
         //if matches
@@ -178,6 +183,6 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
             }
         }
     }
-  
+
 
 }

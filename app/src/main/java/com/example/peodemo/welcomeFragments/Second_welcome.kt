@@ -44,24 +44,6 @@ class Second_welcome : Fragment() {
 
         //to assigning the view this view is imageview called first welcome button
         val nextButton = view.findViewById<ImageView>(R.id.secondWelcomeButton)
-        //assigning a text1 property to control the textview 1  in fragment xml file
-        val text1 = view.findViewById<TextView>(R.id.textView5)
-        //assigning a text2 property to control the textview 6  in fragment xml file
-        val text2 = view.findViewById<TextView>(R.id.textView6)
-        //assigning a minute property to control the imageview8  in fragment xml file
-        val minute = view.findViewById<ImageView>(R.id.imageView8)
-
-
-        //here use the animation methods to make our fragment looks good
-        //this line change the next button position about 680 degree at 6 seconds
-        nextButton.animate().translationX(680f).duration = 6300
-        //this line change the text view position about 700 degree at 6 seconds
-        text1.animate().translationX(700f).duration = 6300
-        //this line change the text view position about 600 degree at 6 seconds
-        text2.animate().translationX(600f).duration = 6300
-        //this line change the minute image view position about 510 degree at 6 seconds
-        minute.animate().translationX(510f).duration = 6300
-
 
         //this line to make an action when the user click on next button
         nextButton.setOnClickListener {
