@@ -1,16 +1,20 @@
 package com.example.peodemo.home.introduction
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.renderscript.ScriptGroup
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,14 +22,48 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.peodemo.DashBoard.courseGropie.ModulesPage.URLTypeCourse
 import com.example.peodemo.R
 import com.example.peodemo.home.introduction.fragments.HomeFragment
 import com.example.peodemo.home.introduction.fragments.InformationFragment
 import com.example.peodemo.home.introduction.fragments.ourCourses.ourCoursesFragment
 import com.example.peodemo.home.introduction.fragments.teachOnEPOFragment
 import com.example.peodemo.logPages.signInActivity
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.PlaybackException
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.ui.PlayerView
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.activity_introduction.*
 import java.util.*
+
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController
+
+
+
+import androidx.annotation.NonNull
+
+
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+
+
+
+
+
+
 
 open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickListener {
 
@@ -43,6 +81,14 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
     private val mOurCoursesFragment = ourCoursesFragment()
 
 
+    private lateinit var exoPlayerView: PlayerView
+    private lateinit var simpleExoPlayer: SimpleExoPlayer
+    private lateinit var mediaSource: MediaSource
+    private var statusShown = 0
+    private lateinit var urlType : URLTypeCourse
+    private lateinit var timer: CountDownTimer
+
+
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,22 +101,24 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             this.window.navigationBarColor = getColor(R.color.theSubIOSFoundationCourse)
 
+
             //assigning this property to context the activity on it
             val window = this.window
             //this line to change the state bar by using statusBarColor
-            window?.statusBarColor = this.resources.getColor(R.color.barColor)
+            window?.statusBarColor = this.resources.getColor(R.color.white)
+            window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             //addition the Home item to tapList array to access it in adapter class
-            tapList.add(tapModel("Home",R.drawable.home,R.drawable.homepressed,this.getColor(R.color.white),this.getColor(R.color.recycleViewCardPressedColor),1))
+            tapList.add(tapModel("Epo",R.drawable.epoproject,this.getColor(R.color.epoBackground),this.getColor(R.color.epo),1))
             //addition the Information item to tapList array to access it in adapter class
-            tapList.add(tapModel("Information",R.drawable.info,R.drawable.infopressed,this.getColor(R.color.white),this.getColor(R.color.recycleViewCardPressedColor),0))
+            tapList.add(tapModel("Teacher",R.drawable.teacher,this.getColor(R.color.teacherBackground),this.getColor(R.color.teacher),0))
             //addition the Teach on EPO item to tapList array to access it in adapter class
-            tapList.add(tapModel("Teach on EPO",R.drawable.edit,R.drawable.editpressed,this.getColor(R.color.white),this.getColor(R.color.recycleViewCardPressedColor),0))
+            tapList.add(tapModel("Collaboration",R.drawable.trust,this.getColor(R.color.collaborationBackground),this.getColor(R.color.collaboration),0))
             //addition the Our Courses item to tapList array to access it in adapter class
-            tapList.add(tapModel("Our Courses",R.drawable.cap,R.drawable.cappressed,this.getColor(R.color.white),this.getColor(R.color.recycleViewCardPressedColor),0))
+            tapList.add(tapModel("Courses",R.drawable.cappressed,this.getColor(R.color.courseBackground),this.getColor(R.color.course),0))
         }
 
         //set a home fragment as a init fragment if the activity is created
-        setFragment(mHomeFragment)
+        setFragment(mOurCoursesFragment)
         //control the recycle view to by horizontal
         fragmentMarksButton.layoutManager = LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
         //set an adapter to this recycle view
@@ -81,6 +129,15 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
             val intent = Intent(this,signInActivity::class.java)
             intent.putExtra("CourseID","")
             startActivity(intent)
+            this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
+        }
+
+        startNow.setOnClickListener {
+
+            //introductionScroll.smoothScrollTo(0,videoIntroductionLayout.top)
+            var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",fragmentMarksButton.top)
+            x.duration = 3000
+            x.start()
         }
 
     }
@@ -112,7 +169,10 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[2].pressed = 0
                 tapList[3].pressed = 0
                 //And change the fragment
-                setFragment(mHomeFragment)
+                //setFragment(mHomeFragment)
+                var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",videoIntroductionLayout.top)
+                x.duration = 2000
+                x.start()
                 //And change the item in the tap array
                 adapter.notifyItemChanged(position)
                 adapter.notifyItemChanged(1)
@@ -132,7 +192,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[2].pressed = 0
                 tapList[3].pressed = 0
                 //And change the fragment
-                setFragment(mInformationFragment)
+                //setFragment(mInformationFragment)
                 //And change the item in the tap array
                 adapter.notifyItemChanged(position)
                 adapter.notifyItemChanged(0)
@@ -151,7 +211,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[1].pressed = 0
                 tapList[3].pressed = 0
                 //And change the fragment
-                setFragment(mTeachOnEPOFragment)
+                //setFragment(mTeachOnEPOFragment)
                 //And change the item in the tap array
                 adapter.notifyItemChanged(position)
                 adapter.notifyItemChanged(0)
@@ -170,7 +230,10 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[1].pressed = 0
                 tapList[2].pressed = 0
                 //And change the fragment
-                setFragment(mOurCoursesFragment)
+                //setFragment(mOurCoursesFragment)
+                var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",introductionCoordinatorLayoutNestedScrollView.top)
+                x.duration = 4000
+                x.start()
                 //And change the item in the tap array
                 adapter.notifyItemChanged(position)
                 adapter.notifyItemChanged(0)
@@ -183,6 +246,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
             }
         }
     }
+
 
 
 }

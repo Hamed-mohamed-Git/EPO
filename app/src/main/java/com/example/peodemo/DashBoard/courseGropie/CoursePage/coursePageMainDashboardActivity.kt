@@ -208,7 +208,9 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
     }
 
     private fun changeLessonsInfo(){
-        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").get().addOnSuccessListener{
+        currentUserCourseDocRef.document(courseInfoFromDashBoard)
+            .collection("Modules").document(moduleInfoFromModuleScreen)
+            .collection("Lessons").get().addOnSuccessListener{
             if (it.isEmpty){
                 return@addOnSuccessListener
             }
@@ -379,7 +381,10 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
     }
 
     private fun getUserLessonInformationPlusOne(onComplete:(CourseLessonsModel) -> Unit){
-        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(lessonInfoFromLessonScreenPlusOne).get().addOnSuccessListener {
+        currentUserCourseDocRef.document(courseInfoFromDashBoard)
+            .collection("Modules").document(moduleInfoFromModuleScreen)
+            .collection("Lessons").document(lessonInfoFromLessonScreenPlusOne)
+            .get().addOnSuccessListener {
             onComplete(it.toObject(CourseLessonsModel::class.java)!!)
         }
     }

@@ -3,54 +3,54 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black"
     android:layout_gravity="center"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/transpernt"
     app:cardMaxElevation="0dp">
 
 
     <LinearLayout
         android:layout_gravity="center"
-        android:background="#F8F7F9"
+        android:id="@+id/introductionCourseTabsLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10sp"
+        android:background="@drawable/fragment_markes_bar_viewcard_background"
+        android:orientation="vertical"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp">
+
+
         <FrameLayout
-            android:layout_marginEnd="20sp"
-            android:id="@+id/introductionCourseTabsLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="45sp"
-            android:background="@drawable/background_for_layout_of_categories_card_pressed">
+            android:id="@+id/introductionImageCourseTabsLayout"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:elevation="7sp"
+            android:background="@drawable/signout_button_background">
 
-            <FrameLayout
-                android:id="@+id/introductionImageCourseTabsLayout"
-                android:layout_width="28dp"
-                android:background="@drawable/background_for_layout_of_categories_card"
-                android:layout_height="28dp"
-                android:layout_marginTop="8sp"
-                android:layout_marginStart="5sp"
-                >
-                <ImageView
-                    android:id="@+id/introductionCourseImageView"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ios" />
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/introductionCourseImageView"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ios" />
 
-            <TextView
-                android:id="@+id/introductionCourseTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="12sp"
-                android:text="IOS"
-
-                android:layout_marginEnd="11sp"
-                android:textSize="14sp"
-                android:fontFamily="@font/robotoregular"
-                android:textColor="@color/black"/>
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/introductionCourseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IOS"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="15sp"
+            android:textSize="14sp"
+            android:fontFamily="@font/robotoregular"
+            android:textColor="@color/black"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

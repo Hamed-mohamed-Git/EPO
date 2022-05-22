@@ -1,72 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     tools:context=".welcomeFragments.Third_welcome">
 
-    <ImageView
-        android:id="@+id/thirdWelcomeImage"
-        android:layout_width="569dp"
-        android:layout_height="675dp"
-        android:layout_marginBottom="464dp"
-        android:src="@drawable/fourthimage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/thirdWelcomeTextView1"
-        android:layout_width="450dp"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:fontFamily="@font/geomanistbold"
-        android:text="The great art of learning is to understand but little at a time."
-        android:textColor="#de5a53"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/thirdWelcomeImage"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:background="@drawable/fourthimage"
+                />
 
-    <TextView
-        android:id="@+id/thirdWelcomeTextView2"
-        android:layout_width="440dp"
-        android:layout_height="wrap_content"
-        android:text="we’ll see you how you can deploy full-blown projects production-ready in a typical time . Let’s look into what kind of projects we’ll build and what technologies we’ll use."
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.688" />
+            <TextView
+                android:id="@+id/thirdWelcomeTextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/geomanistbold"
+                android:text="The great art of learning is to understand but little at a time."
+                android:textColor="#de5a53"
+                android:textSize="35sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                />
 
-    <ImageView
-        android:id="@+id/minuteThirdFragment"
-        android:layout_width="100dp"
-        android:layout_height="27dp"
+            <TextView
+                android:id="@+id/thirdWelcomeTextView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="we’ll see you how you can deploy full-blown projects production-ready in a typical time . Let’s look into what kind of projects we’ll build and what technologies we’ll use."
+                android:textSize="18sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                />
 
-        android:src="@drawable/minutethirdfragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799" />
-
+            <ImageView
+                android:id="@+id/minuteThirdFragment"
+                android:layout_width="103dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/minutethirdfragment"
+                />
+        </LinearLayout>
+    </ScrollView>
     <ImageView
         android:id="@+id/thirdWelcomeButton"
-        android:layout_width="100dp"
-        android:layout_height="100sp"
+        android:layout_width="74dp"
+        android:layout_height="80dp"
         android:src="@drawable/thirdwelcomefragmentbackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minuteThirdFragment"
-        app:layout_constraintVertical_bias="0.737"
-        tools:ignore="MissingConstraints" />
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="10sp"
+        android:layout_marginEnd="10sp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

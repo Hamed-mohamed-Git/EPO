@@ -1,75 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white"
+    android:layoutDirection="ltr"
     tools:context=".welcomeFragments.First_welcome">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-        android:fontFamily="@font/mediem"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20sp"
+                android:scaleType="center"
+                android:layout_marginStart="20sp"
+                android:background="@drawable/firstpage"
+                />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/proxima"
+                android:text="Learning Never Exhausts The Mind"
+                android:textColor="#f7b207"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="40sp"
+                android:layout_marginEnd="40sp"
+                />
 
-        android:text="We tell students that the opportunities we had were a result of having a good educational background. Education is what allows you to stand out."
-        android:textColor="#989898"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="438dp"
-        android:layout_height="466dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="380dp"
-        android:src="@drawable/firstfragmentfourthimage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mediem"
+                android:text="We tell students that the opportunities we had were a result of having a good educational background. Education is what allows you to stand out."
+                android:textColor="#989898"
+                android:textSize="15dp"
+                android:layout_marginTop="10sp"
+                android:layout_marginStart="40sp"
+                android:layout_marginEnd="40sp" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="83dp"
-        android:layout_height="27dp"
-        android:src="@drawable/firstminute"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.588" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="359dp"
-        android:layout_height="85dp"
-        android:fontFamily="@font/proxima"
-        android:text="Learning Never Exhausts The Mind"
-        android:textColor="#f7b207"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
-
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_marginTop="30sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/firstminute"
+                />
+        </LinearLayout>
+    </ScrollView>
     <ImageView
         android:id="@+id/firstWelcomeButton"
         android:layout_width="72dp"
         android:layout_height="75dp"
+        android:layout_marginEnd="10sp"
         android:src="@drawable/firstwelcomebuttonbackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginBottom="10sp"
+        android:layout_gravity="right|bottom" />
+</FrameLayout>
+

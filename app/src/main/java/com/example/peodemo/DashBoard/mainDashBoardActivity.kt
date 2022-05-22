@@ -126,7 +126,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
 
-        timer =  object : CountDownTimer(60000, 1000) {
+        timer =  object : CountDownTimer(20000, 1000) {
 
             // Callback function, fired on regular interval
             override fun onTick(millisUntilFinished: Long) {
@@ -586,7 +586,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             // if the user tap on the first item
             0 ->{
 
-                newsImage.setImageResource(R.drawable.firstadvice)
+                newsImage.setImageResource(R.drawable.thinking)
                 newsTitle.textSize = 25f
                 newsTitle.text = "The quote of the day"
 

@@ -175,7 +175,8 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                 notFoundQuizFrameLayout.visibility = View.GONE
                 quizFrameLayout.setOnClickListener {
                     val intent = Intent(this,quizPageActivity::class.java)
-                    intent.putExtra("questionsRoot","$courseInfoFromDashBoard/Modules/$moduleInfoFromModuleScreen/Lessons/$lessonInfoFromLessonScreen")
+                    intent.putExtra("questionsRoot",
+                        "$courseInfoFromDashBoard/Modules/$moduleInfoFromModuleScreen/Lessons/$lessonInfoFromLessonScreen")
                     startActivity(intent)
                     this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
                 }
@@ -191,7 +192,8 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                 notFoundChallengeFrameLayout.visibility = View.GONE
                 challengeFrameLayout.setOnClickListener {
                     val intent = Intent(this,challengePageActivity::class.java)
-                    intent.putExtra("questionsRoot","$courseInfoFromDashBoard/Modules/$moduleInfoFromModuleScreen/Lessons/$lessonInfoFromLessonScreen")
+                    intent.putExtra("questionsRoot",
+                        "$courseInfoFromDashBoard/Modules/$moduleInfoFromModuleScreen/Lessons/$lessonInfoFromLessonScreen")
                     startActivity(intent)
                     this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
                 }
@@ -326,8 +328,10 @@ class lessonDetailsPageActivity : AppCompatActivity() {
         }
     }
     private fun getUserLessonDetailsInformation(onComplete:(courseLessonDetailsModel) -> Unit){
-        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons")
-            .document(lessonInfoFromLessonScreen).collection("lesson Details").document("lesson info")
+        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+            .document(moduleInfoFromModuleScreen).collection("Lessons")
+            .document(lessonInfoFromLessonScreen).collection("lesson Details")
+            .document("lesson info")
             .get().addOnSuccessListener {
             onComplete(it.toObject(courseLessonDetailsModel::class.java)!!)
         }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     tools:context=".DashBoard.courseGropie.lessonDetailsPage.lessonDetailsPageActivity">
 
 
@@ -199,6 +200,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/lessonDescription"
@@ -215,7 +217,7 @@ music, science, engineering, and business."
                     android:fontFamily="@font/futur"
                     />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="25sp"
                     android:orientation="horizontal">
@@ -341,7 +343,7 @@ music, science, engineering, and business."
                     </FrameLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_marginTop="17sp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="22sp">

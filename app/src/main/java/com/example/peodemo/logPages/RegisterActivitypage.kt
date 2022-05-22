@@ -32,6 +32,7 @@ class RegisterActivitypage : AppCompatActivity() {
             intent.putExtra("CourseID",DataFromOurCourses)
             intent.putExtra("DataOfCourse",courseDetails)
             startActivity(intent)
+            this.overridePendingTransition(R.anim.slide_in_right_introduction_activity,R.anim.silde_out_left_introduction_activity)
         }
 
         signIn.setOnClickListener {
@@ -39,6 +40,7 @@ class RegisterActivitypage : AppCompatActivity() {
             intent.putExtra("CourseID",DataFromOurCourses)
             intent.putExtra("DataOfCourse",courseDetails)
             startActivity(intent)
+            this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
         }
     }
 }

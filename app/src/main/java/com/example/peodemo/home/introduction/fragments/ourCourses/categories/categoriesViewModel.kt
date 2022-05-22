@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -41,15 +42,11 @@ class categoriesViewModel(
             //change the background
 
             holder.image.setImageResource(taps.image)
-            holder.layout.setBackgroundResource(R.drawable.background_for_layout_of_categories_card)
-            holder.imageLayout.setBackgroundResource(R.drawable.background_for_layout_of_categories_card_pressed)
             holder.text.text = taps.name
         }
         //if not let the items as they are
         else if (taps.pressed == 0) {
             holder.image.setImageResource(taps.image)
-            holder.layout.setBackgroundResource(R.drawable.background_for_layout_of_categories_card_pressed)
-            holder.imageLayout.setBackgroundResource(R.drawable.background_for_layout_of_categories_card)
             holder.text.text = taps.name
         }
     }
@@ -62,7 +59,7 @@ class categoriesViewModel(
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val image  = itemView.findViewById<ImageView>(R.id.introductionCourseImageView)
         val imageLayout  = itemView.findViewById<FrameLayout>(R.id.introductionImageCourseTabsLayout)
-        val layout  = itemView.findViewById<FrameLayout>(R.id.introductionCourseTabsLayout)
+        val layout  = itemView.findViewById<LinearLayout>(R.id.introductionCourseTabsLayout)
         val text = itemView.findViewById<TextView>(R.id.introductionCourseTextView)
         init {
             //and put context in it

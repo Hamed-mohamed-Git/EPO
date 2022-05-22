@@ -13,10 +13,7 @@ import android.util.Base64
 import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import com.example.peodemo.DashBoard.mainDashBoardActivity
 import com.example.peodemo.R
@@ -53,7 +50,7 @@ class signInActivity : AppCompatActivity(), TextWatcher {
     }
     private lateinit var googleSignInClient:GoogleSignInClient
 
-    private lateinit var loginBtn: ImageView
+    private lateinit var loginBtn: FrameLayout
     private lateinit var githubEdit: EditText
     private val provider = OAuthProvider.newBuilder("github.com")
 
@@ -63,10 +60,7 @@ class signInActivity : AppCompatActivity(), TextWatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        textView14.setOnClickListener {
-            val intent = Intent(this,signUpActivity::class.java)
-            startActivity(intent)
-        }
+
         window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
         DataFromOurCourses = intent.getStringExtra("CourseID") as String
         if (DataFromOurCourses != ""){
@@ -97,27 +91,33 @@ class signInActivity : AppCompatActivity(), TextWatcher {
                 signInWithGithubProvider()
         }
 
+        loginBackButton.setOnClickListener {
+            finish()
+        }
 
 
 
 
-        FacebookSdk.sdkInitialize(applicationContext)
-        callBackManger = CallbackManager.Factory.create()
-        signWithFacebook.setReadPermissions("email", "public_profile")
-        signWithFacebook.registerCallback(callBackManger, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                Log.d("mainDashBoardActivity", "facebook:onSuccess:$result")
-                handleFacebookAccessToken(result!!.accessToken)
-            }
+        signWithFacebookFrameLayout.setOnClickListener {
+            signWithFacebook.performClick()
+            FacebookSdk.sdkInitialize(applicationContext)
+            callBackManger = CallbackManager.Factory.create()
+            signWithFacebook.setReadPermissions("email", "public_profile")
+            signWithFacebook.registerCallback(callBackManger, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult) {
+                    Log.d("mainDashBoardActivity", "facebook:onSuccess:$result")
+                    handleFacebookAccessToken(result!!.accessToken)
+                }
 
-            override fun onCancel() {
-                Log.d("mainDashBoardActivity", "facebook:onCancel")
-            }
+                override fun onCancel() {
+                    Log.d("mainDashBoardActivity", "facebook:onCancel")
+                }
 
-            override fun onError(error: FacebookException) {
-                Log.d("mainDashBoardActivity", "facebook:onError", error)
-            }
-        })
+                override fun onError(error: FacebookException) {
+                    Log.d("mainDashBoardActivity", "facebook:onError", error)
+                }
+            })
+        }
 
 
         // Configure Google Sign In
@@ -156,16 +156,11 @@ class signInActivity : AppCompatActivity(), TextWatcher {
             signIn(email.toString(),password.toString())
         }
 
-        //assigning a sign in property to use the view2 to make animations
-        val signInView =this.findViewById<View>(R.id.view2)
-        val signInProfileImage = this.findViewById<ImageView>(R.id.signInProfile)
-        //move the view from down to top by 900 degrees at 6 minutes
-        signInView.animate().translationY(-900f).duration = 5000
-        signInProfileImage.animate().translationY(262f).duration = 5000
-        //assigning this property to context the activity on it
         val window = this.window
         //this line to change the state bar by using statusBarColor
-        window?.statusBarColor = this.resources.getColor(R.color.signInActivityColor)
+        window?.statusBarColor = this.resources.getColor(R.color.profilePageStatusBar)
+        window?.navigationBarColor = this.resources.getColor(R.color.profilePageStatusBar)
+        window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         //window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
     private fun signIn(email: String, password: String) {

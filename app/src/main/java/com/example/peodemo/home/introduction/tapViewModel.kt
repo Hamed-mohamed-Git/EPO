@@ -3,6 +3,7 @@ package com.example.peodemo.home.introduction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,27 +35,16 @@ class tapViewModel(
         var taps =  items[position]
 
         //if a user tap on the card view change the items on it
-        if (taps.pressed == 1){
             //change the background
-            holder.marksLayout.setBackgroundResource(R.drawable.viewcard_layout_pressed)
+            holder.marksLayout.background.setTint(taps.colorBackground)
             //change the text
             holder.tapNameInstance.text = taps.tapName
             //change the image
-            holder.tapImage.setImageResource(taps.imagePressed)
-            //change the text color
-            holder.tapNameInstance.setTextColor(taps.colorpressed)
-        }
-        //if not let the items as they are
-        else if (taps.pressed == 0) {
-            //set the init background
-            holder.marksLayout.setBackgroundResource(R.drawable.fragment_markes_bar_viewcard_background)
-            //set the init text
-            holder.tapNameInstance.text = taps.tapName
-            //set the init image
             holder.tapImage.setImageResource(taps.image)
-            //set the init text color
-            holder.tapNameInstance.setTextColor(taps.color)
-        }
+            holder.tapImage.setColorFilter(taps.color)
+
+
+
     }
 
     override fun getItemCount(): Int {
@@ -69,7 +59,7 @@ class tapViewModel(
         //assigning a tapImage property to access the image on card view by it's id
         val tapImage = itemView.findViewById<ImageView>(R.id.tapImage)
         //assigning a tapNameInstance property to access the layout of the card view by it's id
-        val marksLayout = itemView.findViewById<LinearLayout>(R.id.marksBarLayout)
+        val marksLayout = itemView.findViewById<FrameLayout>(R.id.marksBarLayout)
 
         //declare a init method to create a set of clickListener method if this is called
         init {

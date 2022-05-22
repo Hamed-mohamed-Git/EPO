@@ -8,10 +8,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.peodemo.R
+import com.example.peodemo.home.introduction.fragments.ourCourses.DataServiceOfCourseModel.CoursesModel
 import kotlinx.android.synthetic.main.activity_terms_and_conditions.*
 
 class TermsAndConditionsActivity : AppCompatActivity() {
     private var mTermsAndConditionsFragment = TermsAndPoliciesFragment()
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_terms_and_conditions)
@@ -22,6 +27,8 @@ class TermsAndConditionsActivity : AppCompatActivity() {
         //addition the Home item to tapList array to access it in adapter class
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         setFragment(mTermsAndConditionsFragment)
+
+
 
         termsAndConditionAgreement.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)

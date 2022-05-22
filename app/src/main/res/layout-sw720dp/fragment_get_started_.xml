@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".welcomeFragments.get_started_Fragment"
     android:background="#f8f7ef"
+    android:layoutDirection="ltr"
     >
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="813dp"
-        android:layout_height="1358dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="170dp"
         android:layout_marginEnd="1dp"
         android:src="@drawable/geomentre"
@@ -21,95 +22,101 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.634" />
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="250dp"
-        android:layout_height="100dp"
-        android:src="@drawable/epologo"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="388dp"
-        android:layout_height="273dp"
-        android:src="@drawable/stand"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.785" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/epologo" />
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:src="@drawable/qurran"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
+            <TextView
+                android:id="@+id/Raad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alfontcomhafsfont"
+                android:text="سورة الرعد"
+                android:textColor="#8e6334"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20sp"
+                android:layout_gravity="center_horizontal"
+                />
+            <TextView
+                android:id="@+id/Ayat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/alfontcomhafsfont"
+                android:text="فَأَمَّا الزَّبَدُ فَيَذْهَبُ جُفَاءً ۖ وَأَمَّا مَا يَنفَعُ النَّاسَ فَيَمْكُثُ فِي الْأَرْضِ ۚ كَذَٰلِكَ يَضْرِبُ اللَّهُ الْأَمْثَالَ"
+                android:textColor="#8e6334"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="5sp"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                />
+            <TextView
+                android:id="@+id/translation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:text="For the scum disappears like froth cast out; while that which is for the good of mankind remains on the earth. Thus doth Allah set forth parables."
+                android:textColor="#a6862c"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                />
 
-    <TextView
-        android:id="@+id/Ayat"
-        android:layout_width="630dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/alfontcomhafsfont"
-        android:text="فَأَمَّا الزَّبَدُ فَيَذْهَبُ جُفَاءً ۖ وَأَمَّا مَا يَنفَعُ النَّاسَ فَيَمْكُثُ فِي الْأَرْضِ ۚ كَذَٰلِكَ يَضْرِبُ اللَّهُ الْأَمْثَالَ"
-        android:textColor="#8e6334"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"
-        app:layout_constraintVertical_bias="0.453" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60sp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="400dp"
+                    android:layout_height="393dp"
+                    android:layout_marginTop="140dp"
+                    android:src="@drawable/stand"
+                    />
+                <ImageView
+                    android:id="@+id/audioCase"
+                    android:layout_width="63dp"
+                    android:layout_height="66dp"
+                    android:layout_marginEnd="7dp"
+                    android:src="@drawable/play"
+                    android:visibility="invisible"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="1sp"
+                    />
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="356dp"
+                    android:layout_height="343dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/qurran"
+                    />
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/translation"
-        android:layout_width="620dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="15dp"
-        android:text="For the scum disappears like froth cast out; while that which is for the good of mankind remains on the earth. Thus doth Allah set forth parables."
-        android:textColor="#a6862c"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.373" />
-
-    <TextView
-        android:id="@+id/Raad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alfontcomhafsfont"
-        android:text="سورة الرعد"
-        android:textColor="#8e6334"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
-
+        </LinearLayout>
+    </ScrollView>
     <Button
         android:id="@+id/getStartedButton"
-        android:layout_width="350dp"
-        android:layout_height="70dp"
-
-        android:layout_marginBottom="10dp"
+        android:layout_width="410dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|center_horizontal"
         android:background="@drawable/get_started_button_background"
         android:drawableEnd="@drawable/getstartedarrow"
         android:fontFamily="@font/geomanistregular"
@@ -117,26 +124,9 @@
         android:text="Get started"
         android:textAllCaps="false"
         android:textColor="@drawable/get_started_text_button_background"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961" />
+        />
+</FrameLayout>
 
-    <ImageView
-        android:id="@+id/audioCase"
-        android:layout_width="43dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="7dp"
-        android:src="@drawable/play"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>

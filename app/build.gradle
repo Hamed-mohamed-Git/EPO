@@ -96,5 +96,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.15.0'
 
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.0.1'
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.26'
+
 
 }

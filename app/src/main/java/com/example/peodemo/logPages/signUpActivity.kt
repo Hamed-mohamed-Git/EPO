@@ -12,6 +12,7 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -38,7 +39,7 @@ import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class signUpActivity : AppCompatActivity(), TextWatcher {
-    private var DataFromOurCourses = ""
+    private lateinit var DataFromOurCourses:String
     private lateinit var courseDetails: CoursesModel
     companion object{
         private const val RC_SIGN_IN = 120
@@ -63,9 +64,11 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
     private val currentUserCourseDetailsDocRef: DocumentReference
         get() = fireStoreInstance.document("Users/${mAuth.currentUser?.uid.toString()}/")
 
-    private lateinit var loginBtn: ImageView
+    private lateinit var loginBtn: FrameLayout
     private lateinit var githubEdit: EditText
     private val provider = OAuthProvider.newBuilder("github.com")
+
+    private var termsPageOpened = false
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -75,14 +78,19 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
         //addition the Home item to tapList array to access it in adapter class
         val window = this.window
         //this line to change the state bar by using statusBarColor
-        window?.statusBarColor = this.resources.getColor(R.color.signInActivityColor)
-        window.navigationBarColor = getColor(R.color.theSubIOSDesignCourse)
+        window?.statusBarColor = this.resources.getColor(R.color.profilePageStatusBar)
+        window?.navigationBarColor = this.resources.getColor(R.color.profilePageStatusBar)
+        window?.decorView!!.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
 
 
         DataFromOurCourses = intent.getStringExtra("CourseID") as String
         courseDetails = intent.getSerializableExtra("DataOfCourse") as CoursesModel
 
 
+        signupBackButton.setOnClickListener {
+            finish()
+        }
 
 
         githubEdit = editTextTextPersonName4
@@ -104,22 +112,28 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
         }
 
 
-        callBackManger = CallbackManager.Factory.create()
-        signWithFacebookSignUpActivity.setReadPermissions("email", "public_profile")
-        signWithFacebookSignUpActivity.registerCallback(callBackManger, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                Log.d("mainDashBoardActivity", "facebook:onSuccess:$result")
-                handleFacebookAccessToken(result.accessToken)
-            }
 
-            override fun onCancel() {
-                Log.d("mainDashBoardActivity", "facebook:onCancel")
-            }
 
-            override fun onError(error: FacebookException) {
-                Log.d("mainDashBoardActivity", "facebook:onError", error)
-            }
-        })
+        signUpWithFacebookFrameLayout.setOnClickListener {
+            termsPageOpened = true
+            signWithFacebookSignUpActivity.performClick()
+            callBackManger = CallbackManager.Factory.create()
+            signWithFacebookSignUpActivity.setReadPermissions("email", "public_profile")
+            signWithFacebookSignUpActivity.registerCallback(callBackManger, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult) {
+                    Log.d("mainDashBoardActivity", "facebook:onSuccess:$result")
+                    handleFacebookAccessToken(result.accessToken)
+                }
+
+                override fun onCancel() {
+                    Log.d("mainDashBoardActivity", "facebook:onCancel")
+                }
+
+                override fun onError(error: FacebookException) {
+                    Log.d("mainDashBoardActivity", "facebook:onError", error)
+                }
+            })
+        }
 
 
 
@@ -152,11 +166,6 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
 
 
-        //assigning a sign in property to use the view2 to make animations
-        val signUpScrollview =this.findViewById<NestedScrollView>(R.id.nestedScrollView)
-        val viewSignUp = this.findViewById<View>(R.id.view7)
-        viewSignUp.animate().translationX(810f).duration = 7000
-        signUpScrollview.animate().translationX(810f).duration = 7000
 
 
 
@@ -167,7 +176,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
         }
         textView22.setOnClickListener {
             val intent  = Intent(this,TermsAndConditionsActivity::class.java)
-            startActivityForResult(intent,2)
+            startActivityForResult(intent,10)
         }
 
 
@@ -241,8 +250,8 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 2 && resultCode == Activity.RESULT_OK){
-            var intent = data!!.extras!!.getInt("accept")
+        if (requestCode == 10 && resultCode == Activity.RESULT_OK){
+            val intent = data?.getIntExtra("accept",1)
             if (intent == 1){
                 checkBoxIsEnabled = 1
                 checkBoxSignUp.isChecked = true
@@ -252,7 +261,9 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
                 checkBoxSignUp.isChecked = false
             }
         }
-        callBackManger?.onActivityResult(requestCode, resultCode, data)
+        if (termsPageOpened){
+            callBackManger.onActivityResult(requestCode, resultCode, data)
+        }
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -419,5 +430,7 @@ class signUpActivity : AppCompatActivity(), TextWatcher {
         editor.apply()
 
     }
+
+
 
 }

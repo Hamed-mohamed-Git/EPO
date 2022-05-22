@@ -82,7 +82,7 @@ class profilePageActivity : AppCompatActivity() {
             this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
         }
         FaceDetailsLayout.setOnClickListener {
-            Toast.makeText(this,"this service not available now",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"this service is not available now",Toast.LENGTH_LONG).show()
         }
 
         profileLogout_button.setOnClickListener {

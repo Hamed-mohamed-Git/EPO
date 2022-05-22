@@ -6,20 +6,26 @@
     android:layout_gravity="center"
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
+    app:cardBackgroundColor="@color/transpernt"
     app:cardMaxElevation="0dp">
     <LinearLayout
-        android:layout_gravity="center"
-        android:background="#F8F7F9"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
         >
         <FrameLayout
             android:layout_width="250dp"
-            android:layout_height="320dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/top_courses_item_card_background">
+            android:layout_height="340dp"
+            android:elevation="7sp"
+            android:background="@drawable/main_dashboard_course_card_item_framelayout_background"
+            android:layout_margin="20sp"
+            >
+
+
             <ImageView
                 android:id="@+id/topCoursesImage"
                 android:layout_width="230dp"

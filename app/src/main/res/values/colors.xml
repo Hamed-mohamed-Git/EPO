@@ -65,4 +65,14 @@
     <color name="questionPageStatusBarColor">#6066CF</color>
     <color name="challengePageStatusBar">#141414</color>
     <color name="profilePageStatusBar">#F7F8FB</color>
+
+    <color name="epo">#ebb51f</color>
+    <color name="epoBackground">#fdf8e9</color>
+    <color name="teacher">#86A6F4</color>
+    <color name="teacherBackground">#DDE6F7</color>
+    <color name="collaboration">#60D6B3</color>
+    <color name="collaborationBackground">#D7FAF1</color>
+    <color name="course">#F7A485</color>
+    <color name="courseBackground">#F7E3DB</color>
+
 </resources>

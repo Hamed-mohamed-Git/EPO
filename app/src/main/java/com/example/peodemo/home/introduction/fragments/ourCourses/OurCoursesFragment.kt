@@ -421,9 +421,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
     @SuppressLint("WrongConstant")
     private fun SetDataInOurCoursesRecycleView(){
         CategoriesType = "IOS"
-        categoryTabList.add(gategoriesModel("Ios Development",R.drawable.ios,1))
-        categoryTabList.add(gategoriesModel("Android Development",R.drawable.androiddevelopment,0))
-        categoryTabList.add(gategoriesModel("Data Structure & Algorithm",R.drawable.datastructure,0))
+        categoryTabList.add(gategoriesModel("Ios Development",R.drawable.apple,1))
+        categoryTabList.add(gategoriesModel("Android Development",R.drawable.goodandroid,0))
+        categoryTabList.add(gategoriesModel("Data Structure & Algorithm",R.drawable.database,0))
 
         categoriesRecycleViewCourseIntroduction.layoutManager = LinearLayoutManager(this.activity, LinearLayout.HORIZONTAL,false)
         categoriesRecycleViewCourseIntroduction.adapter = adapter

@@ -3,6 +3,7 @@
     android:id="@+id/Mainlayout"
     android:layout_width="match_parent"
     android:background="@drawable/fifthquoteimage"
+    android:layoutDirection="ltr"
     android:layout_height="match_parent">
     <View
         android:id="@+id/overlay_image"
@@ -14,7 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="130dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="90dp"
         >
 
         <LinearLayout
@@ -54,15 +56,14 @@
 
     <TextView
         android:id="@+id/Close"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="next"
         android:textColor="@drawable/alert_dialog_close_background"
         android:fontFamily="@font/geomanistbold"
-        android:layout_marginStart="450sp"
         android:layout_marginBottom="10sp"
-
         android:textSize="55dp"/>
 
 </FrameLayout>
