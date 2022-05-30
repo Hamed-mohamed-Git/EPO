@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.peodemo.DashBoard.fragmentPages.courses.viewModel
-import com.example.peodemo.DashBoard.mainDashBoardActivity
+
 import com.example.peodemo.R
 import java.util.ArrayList
 

@@ -143,6 +143,8 @@ class courseModulesPageActivity : AppCompatActivity() {
 
 
 
+
+
         playVideo_button.setOnClickListener {
             intiPlayer()
             playVideo_button.visibility = View.GONE
@@ -182,6 +184,7 @@ class courseModulesPageActivity : AppCompatActivity() {
         }
         //MobileAds.initialize(this) {}
         //loadRewardedAd()
+
 
     }
 
@@ -484,21 +487,26 @@ class courseModulesPageActivity : AppCompatActivity() {
         moduleInfoFromModuleScreen = moduleInfoFromModuleScreenFun
         moduleInfoFromModuleScreenPlusOne = moduleInfoFromModuleScreenPlusOneFun
         getUserModuleInformation {
-            val moduleDataByHashMap = mutableMapOf<String, Any?>()
-            moduleDataByHashMap["description"] = it.description
-            moduleDataByHashMap["finished"] = it.Finished
-            moduleDataByHashMap["finishedLessons"] = it.finishedLessons
-            moduleDataByHashMap["id"] = it.id
-            moduleDataByHashMap["image"] = it.image
-            moduleDataByHashMap["lessonDetails"] = it.lessonDetails
-            moduleDataByHashMap["lessonsCount"] = it.lessonsCount
-            moduleDataByHashMap["name"] = it.name
-            moduleDataByHashMap["process"] = it.Process
-            moduleDataByHashMap["tasksCount"] = it.tasksCount
-            moduleDataByHashMap["title"] = it.title
-            moduleDataByHashMap["videosCount"] = it.videosCount
-            //currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).update(moduleDataByHashMap)
-
+            val moduleNumber = it.moduleNumber
+            if (it.finishedLessons == it.lessonsCount){
+                getUserCourseInformation{
+                    val courseDataByHashMap = mutableMapOf<String, Any?>()
+                    courseDataByHashMap["color"] = it.color
+                    courseDataByHashMap["days"] = it.days
+                    courseDataByHashMap["finished"] = it.finished
+                    courseDataByHashMap["id"] = it.id
+                    courseDataByHashMap["image"] = it.image
+                    courseDataByHashMap["introducitonURL"] = it.introducitonURL
+                    courseDataByHashMap["lessonsCount"] = it.lessonsCount
+                    courseDataByHashMap["modulesCount"] = it.modulesCount
+                    courseDataByHashMap["modulesDetails"] = it.modulesDetails
+                    courseDataByHashMap["name"] = it.name
+                    courseDataByHashMap["percentage"] = moduleNumber
+                    courseDataByHashMap["subscriptionDays"] = it.subscriptionDays
+                    courseDataByHashMap["videosCount"] = it.videosCount
+                    currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).update(courseDataByHashMap)
+                }
+            }
             if (it.Finished!! && it.Process!!){
                 moduleInfoFromModuleScreenPlusOne = moduleName[indexPlusOne]
                 getUserModuleInformationPlusOne {
@@ -511,6 +519,7 @@ class courseModulesPageActivity : AppCompatActivity() {
                     moduleDataByHashMap["image"] = it.image
                     moduleDataByHashMap["lessonDetails"] = it.lessonDetails
                     moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
                     moduleDataByHashMap["name"] = it.name
                     moduleDataByHashMap["process"] = it.Process
                     moduleDataByHashMap["tasksCount"] = it.tasksCount
@@ -523,13 +532,14 @@ class courseModulesPageActivity : AppCompatActivity() {
                 getUserModuleInformationPlusOne{
                     val moduleDataByHashMap = mutableMapOf<String, Any?>()
                     moduleDataByHashMap["description"] = it.description
-                    moduleDataByHashMap["enabled"] = false
+                    moduleDataByHashMap["enabled"] = it.enabled
                     moduleDataByHashMap["finished"] = it.Finished
                     moduleDataByHashMap["finishedLessons"] = it.finishedLessons
                     moduleDataByHashMap["id"] = it.id
                     moduleDataByHashMap["image"] = it.image
                     moduleDataByHashMap["lessonDetails"] = it.lessonDetails
                     moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
                     moduleDataByHashMap["name"] = it.name
                     moduleDataByHashMap["process"] = it.Process
                     moduleDataByHashMap["tasksCount"] = it.tasksCount
@@ -550,6 +560,12 @@ class courseModulesPageActivity : AppCompatActivity() {
     private fun getUserModuleInformationPlusOne(onComplete:(courseModulesModel) -> Unit){
         currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreenPlusOne).get().addOnSuccessListener {
             onComplete(it.toObject(courseModulesModel::class.java)!!)
+        }
+    }
+
+    private fun getUserCourseInformation(onComplete:(CoursesModel) -> Unit){
+        currentUserDocRef.collection("My Courses").document(courseInfoFromDashBoard).get().addOnSuccessListener {
+            onComplete(it.toObject(CoursesModel::class.java)!!)
         }
     }
 

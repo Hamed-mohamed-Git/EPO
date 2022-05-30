@@ -251,6 +251,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
             moduleDataByHashMap["image"] = it.image
             moduleDataByHashMap["lessonDetails"] = it.lessonDetails
             moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+            moduleDataByHashMap["moduleNumber"] = it.moduleNumber
             moduleDataByHashMap["name"] = it.name
             moduleDataByHashMap["process"] = true
             moduleDataByHashMap["tasksCount"] = it.tasksCount
@@ -260,8 +261,6 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
             lessonCount.text = "${moduleDataByHashMap["lessonsCount"]} Lessons"
             videoCount.text = "${moduleDataByHashMap["videosCount"]} Videos"
             taskCount.text = "${moduleDataByHashMap["tasksCount"]} Tasks"
-
-
             currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).update(moduleDataByHashMap)
             if (it.Finished!!){
                 getUserCourseModulePlusOne {
@@ -274,6 +273,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     moduleDataByHashMap["image"] = it.image
                     moduleDataByHashMap["lessonDetails"] = it.lessonDetails
                     moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
                     moduleDataByHashMap["name"] = it.name
                     moduleDataByHashMap["process"] = it.Process
                     moduleDataByHashMap["tasksCount"] = it.tasksCount
@@ -292,6 +292,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     moduleDataByHashMap["image"] = it.image
                     moduleDataByHashMap["lessonDetails"] = it.lessonDetails
                     moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
                     moduleDataByHashMap["name"] = it.name
                     moduleDataByHashMap["process"] = false
                     moduleDataByHashMap["tasksCount"] = it.tasksCount
@@ -371,6 +372,7 @@ class coursePageMainDashboardActivity : AppCompatActivity() {
                     currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons").document(LessonInfoFromModuleScreenPlusOneFun).update(lessonDataByHashMap)
                 }
             }
+
         }
     }
 

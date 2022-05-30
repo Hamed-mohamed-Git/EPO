@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F8"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context=".home.introduction.fragments.ourCourses.checkout.CheckOutActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10sp"
+        android:layout_height="wrap_content">
+
+
+        <FrameLayout
+            android:id="@+id/CheckOutProcessBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/signout_button_background"
+            android:elevation="5sp"
+            >
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="1sp"
+                android:src="@drawable/leftdashboardtabs" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/robotobold"
+            android:text="Checkout Processing"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            />
+
+    </FrameLayout>
+
+
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="#F8F8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotobold"
+                android:gravity="center"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginTop="55sp"
+                android:text="Plans that help you grow"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                tools:layout_editor_absoluteX="56dp"
+                tools:layout_editor_absoluteY="132dp" />
+            <TextView
+                android:id="@+id/anotherText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotoregular"
+                android:gravity="center"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginTop="30sp"
+                android:text="We set out with a single mission, to be the perfect Software engineer. we hope to be master"
+                android:textSize="15sp" />
+            <FrameLayout
+                android:padding="20sp"
+                android:id="@+id/billingTime"
+                android:layout_width="match_parent"
+                android:layout_marginStart="20sp"
+                android:layout_marginEnd="20sp"
+                android:layout_marginTop="30sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top_courses_item_card_background"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center">
+                <TextView
+                    android:id="@+id/billedMonthly"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5sp"
+                    android:layout_width="56dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Billed Monthly"/>
+
+                <Switch
+                    android:id="@+id/billedSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:thumbTint="@color/white"
+                    android:trackTint="@color/barColor"
+                    tools:ignore="UnusedAttribute,UseSwitchCompatOrMaterialXml" />
+                <TextView
+                    android:id="@+id/billedAnnually"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_width="56sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5sp"
+                    android:gravity="left"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/robotobold"
+                    android:text="Billed Annually"/>
+            </FrameLayout>
+            <LinearLayout
+                android:id="@+id/billingInformation"
+                android:layout_width="match_parent"
+                android:layout_marginTop="30sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="60sp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/top_courses_item_card_background"
+                android:backgroundTint="@color/white"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/textView59"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30sp"
+                    android:layout_marginTop="30sp"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/futuraheavyfont"
+                    android:textColor="@color/black"
+                    android:text="Beginner" />
+                <TextView
+                    android:id="@+id/numberOfStudents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30sp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/futuraheavyfont"
+                    android:textColor="@color/black"
+                    android:text="1 Trainer" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30sp"
+                    android:layout_marginTop="15sp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="$"
+                        android:fontFamily="@font/robotobold"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="30sp"
+                        android:text="199.99"
+                        android:fontFamily="@font/robotobold"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/perMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_marginStart="3sp"
+                        android:text="/m"
+                        android:fontFamily="@font/robotobold"
+                        />
+                    <TextView
+                        android:id="@+id/savingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginStart="3sp"
+                        android:visibility="gone"
+                        android:text="(save $"
+                        android:fontFamily="@font/robotobold"
+                        />
+                    <TextView
+                        android:id="@+id/TheSavingAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="50"
+                        android:visibility="gone"
+                        android:fontFamily="@font/robotobold"
+                        />
+                    <TextView
+                        android:id="@+id/bracket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        android:text=")"
+                        android:fontFamily="@font/robotobold"
+                        />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/frameStartMyFreeTrailLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="40sp"
+                    android:layout_marginEnd="40sp"
+                    android:layout_marginTop="35sp"
+                    android:elevation="2sp"
+                    android:background="@drawable/goback_button_check_out_background"
+                    android:backgroundTint="@color/barColor">
+
+                    <TextView
+                        android:id="@+id/textView60"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="15sp"
+                        android:fontFamily="@font/robotobold"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        android:text="Start My Free Trail" />
+                </FrameLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginStart="25sp"
+                    android:text="This plan includes:"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/robotobold"/>
+                <LinearLayout
+                    android:layout_marginBottom="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="30sp"
+                    android:layout_marginTop="20sp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/firstPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+                        <TextView
+                            android:id="@+id/hour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:text="3"
+                            android:fontFamily="@font/robotobold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="hours on-demand video"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/secondPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+                        <TextView
+                            android:id="@+id/module"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:text="1"
+                            android:fontFamily="@font/robotobold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="modules"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/thirdPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+                        <TextView
+                            android:id="@+id/resource"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:text="25"
+                            android:fontFamily="@font/robotobold"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="downloadable resources"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/fourthPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="Full lifetime access"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/fifthPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="Access on mobile"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginTop="20sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/sixthPoint"
+                            android:layout_marginTop="6sp"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:background="@drawable/includespoint"
+                            android:backgroundTint="@color/barColor"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10sp"
+                            android:fontFamily="@font/robotobold"
+                            android:text="Certificate of completion"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

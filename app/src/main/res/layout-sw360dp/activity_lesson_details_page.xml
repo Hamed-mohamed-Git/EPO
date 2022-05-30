@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    tools:context=".DashBoard.courseGropie.lessonDetailsPage.lessonDetailsPageActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_margin="5sp"
+                android:background="@drawable/lesson_details_page_header_background"
+                >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_marginEnd="14sp"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/lessonDetailsBackButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/lesson_details_backbutton_background">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/leftdashboardtabs" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:fontFamily="@font/roboto_medium_numbers"
+                        android:text="Lesson"
+                        android:textColor="#343434"
+                        android:textSize="25sp" />
+
+                    <FrameLayout
+                        android:id="@+id/bookMark_button"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="1sp"
+                        android:layout_gravity="right"
+                        android:background="@drawable/lesson_details_backbutton_background">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/bookmark" />
+                    </FrameLayout>
+
+                </FrameLayout>
+
+
+            </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="80sp">
+                <TextView
+                    android:layout_marginStart="25sp"
+                    android:id="@+id/lessonDetailsName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium_numbers"
+                    android:text="Lesson Name"
+                    android:textColor="#343434"
+                    android:textSize="30sp" />
+
+                <LinearLayout
+                    android:layout_marginStart="25sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10sp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1sp"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="Estimated time:"
+                            android:textColor="#AEAC9C"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/lessonMinutes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:layout_marginTop="1sp"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="10 minutes"
+                            android:textColor="#AEAC9C"
+                            android:textSize="15sp"
+                            />
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="50sp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:layout_marginTop="1sp"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="Lesson"
+                            android:textColor="#AEAC9C"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/lessonNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5sp"
+                            android:layout_marginTop="1sp"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="1.0"
+                            android:textColor="#AEAC9C"
+                            android:textSize="15sp"
+                            />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/lessonDetailsImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginStart="20sp"
+                    android:layout_marginEnd="25sp"
+                    android:layout_marginTop="10sp"
+                    android:src="@color/black"
+                    app:riv_corner_radius="17sp"
+                    />
+
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10sp"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/lessonDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginEnd="10sp"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center"
+                    android:text="Design Thinking is not an exclusive property of
+designers--all great innovators in literature, art,
+music, science, engineering, and business."
+                    android:textSize="18sp"
+                    android:textColor="#4F4F4F"
+                    android:fontFamily="@font/futur"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25sp"
+                    android:orientation="horizontal">
+                    <FrameLayout
+                        android:id="@+id/lessonVideoFrameLayout"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:padding="5sp"
+                        android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundVideoFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
+
+                            <ImageView
+                                android:id="@+id/videoCheck"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                app:tint="#343434" />
+                        </FrameLayout>
+                        <ImageView
+                            android:id="@+id/courseNumber"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:src="@drawable/lessondetailsvideo"
+                            android:layout_marginTop="15sp"
+                            android:layout_gravity="center_horizontal"
+                            app:tint="#EACEFE" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Video"
+                            android:fontFamily="@font/futur"
+                            android:textColor="#343434"
+                            android:textSize="17sp"
+                            android:layout_marginTop="54sp"
+                            android:layout_gravity="center_horizontal"/>
+                    </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/quizFrameLayout"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:padding="5sp"
+                        android:layout_marginStart="17sp"
+                        android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundQuizFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
+
+                            <ImageView
+                                android:id="@+id/quizCheck"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                app:tint="#343434" />
+                        </FrameLayout>
+                        <ImageView
+                            android:layout_width="32sp"
+                            android:layout_height="32sp"
+                            android:src="@drawable/lessondetailsquiz"
+                            android:layout_marginTop="13sp"
+                            android:layout_gravity="center_horizontal"
+                            app:tint="#EACEFE"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quiz"
+                            android:fontFamily="@font/futur"
+                            android:textColor="#343434"
+                            android:textSize="17sp"
+                            android:layout_marginTop="54sp"
+                            android:layout_gravity="center_horizontal"/>
+                    </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/challengeFrameLayout"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:padding="5sp"
+
+                        android:layout_marginStart="17sp"
+                        android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundChallengeFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
+
+                            <ImageView
+                                android:id="@+id/challengeCheck"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                app:tint="#343434" />
+                        </FrameLayout>
+                        <ImageView
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:src="@drawable/challenge"
+                            android:layout_marginTop="15sp"
+                            android:layout_gravity="center_horizontal"
+                            app:tint="#EACEFE"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="challenge"
+                            android:fontFamily="@font/futur"
+                            android:textColor="#343434"
+                            android:textSize="17sp"
+                            android:layout_marginTop="54sp"
+                            android:layout_gravity="center_horizontal"/>
+                    </FrameLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="17sp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="22sp">
+                    <FrameLayout
+                        android:id="@+id/resourceFrameLayout"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:padding="5sp"
+                        android:background="@drawable/lesson_details_buttons_background">
+                        <FrameLayout
+                            android:id="@+id/notFoundResourceFrameLayout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginTop="1sp"
+                            android:layout_marginStart="60sp"
+                            android:background="@drawable/signout_button_background">
+
+                            <ImageView
+                                android:id="@+id/resourceCheck"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_gravity="center"
+                                app:tint="#343434" />
+                        </FrameLayout>
+                        <ImageView
+
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
+                            android:src="@drawable/courseresouces"
+                            android:layout_marginTop="15sp"
+                            android:layout_gravity="center_horizontal"
+                            app:tint="#EACEFE"
+                            />
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resource"
+                            android:fontFamily="@font/futur"
+                            android:textColor="#343434"
+                            android:textSize="17sp"
+                            android:layout_marginTop="54sp"
+                            android:layout_gravity="center_horizontal"/>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,7 @@
                 android:fontFamily="@font/feral"
                 android:text="Nothing is impossible. The word itself says ‘I’m possible!"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/currentLessonChallenge"
@@ -74,11 +74,11 @@
                 android:fontFamily="@font/futur"
                 android:text="Welcome to the challenge of Lesson4. The solution can be found in the Resources lesson."
                 android:textColor="#5A5A5A"
-                android:textSize="15sp" />
+                android:textSize="13sp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:layout_marginStart="10sp"
                 android:layout_marginTop="30sp"
                 android:layout_marginEnd="10sp"
@@ -89,8 +89,8 @@
 
                 <ImageView
                     android:id="@+id/challengeEmoji"
-                    android:layout_width="140dp"
-                    android:layout_height="150sp"
+                    android:layout_width="100dp"
+                    android:layout_height="100sp"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/happyfancy" />
             </FrameLayout>
@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:text="May I tell you something yeah ''I whispered''. You can make it don't worry just downLoad the document to access the challenge"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
 
             <FrameLayout
                 android:id="@+id/downloadButtonChallenge"
@@ -187,7 +187,7 @@
             <FrameLayout
                 android:id="@+id/doneButtonChallenge"
                 android:layout_width="match_parent"
-                android:layout_height="50sp"
+                android:layout_height="40sp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="65dp"
                 android:layout_marginTop="60dp"

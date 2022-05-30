@@ -59,11 +59,66 @@ class lessonDetailsPageActivity : AppCompatActivity() {
         getDataFromServer()
 
 
+        getUserLessonInformation {
+            if (it.finishedCount!! == it.finishCount!!){
+                val lessonDataByHashMap = mutableMapOf<String, Any?>()
+                lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
+                lessonDataByHashMap["description"] = it.description
+                lessonDataByHashMap["enabled"] = it.enabled
+                lessonDataByHashMap["finishCount"] = it.finishCount
+                lessonDataByHashMap["finished"] = true
+                lessonDataByHashMap["finishedCount"] = it.finishedCount
+                lessonDataByHashMap["id"] = it.id
+                lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                lessonDataByHashMap["lessonDetails"] = it.lessonDetails
+                lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
+                lessonDataByHashMap["minutes"] = it.minutes
+                lessonDataByHashMap["name"] = it.name
+                lessonDataByHashMap["number"] = it.number
+                lessonDataByHashMap["process"] = it.Process
+                lessonDataByHashMap["quizCount"] = it.quizCount
+                lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
+                lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
+                lessonDataByHashMap["videosCount"] = it.videosCount
+                currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                    .document(moduleInfoFromModuleScreen).collection("Lessons")
+                    .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
+                val number = it.number
+                getUserModuleInformation {
+                    val moduleDataByHashMap = mutableMapOf<String, Any?>()
+                    moduleDataByHashMap["description"] = it.description
+                    moduleDataByHashMap["enabled"] = it.enabled
+                    moduleDataByHashMap["finished"] = it.Finished
+                    moduleDataByHashMap["finishedLessons"] = number
+                    moduleDataByHashMap["id"] = it.id
+                    moduleDataByHashMap["image"] = it.image
+                    moduleDataByHashMap["lessonDetails"] = it.lessonDetails
+                    moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
+                    moduleDataByHashMap["name"] = it.name
+                    moduleDataByHashMap["process"] = it.Process
+                    moduleDataByHashMap["tasksCount"] = it.tasksCount
+                    moduleDataByHashMap["title"] = it.title
+                    moduleDataByHashMap["videosCount"] = it.videosCount
+                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).update(moduleDataByHashMap)
+                }
+            }
+        }
+
+
         getUserLessonDetailsInformation {
             if (it.finished == null){
-
+                videoCheck.setImageResource(R.drawable.notfound)
             }else{
-                notFoundVideoFrameLayout.visibility = View.GONE
+                val lessonDetailsDataByHashMap = mutableMapOf<String, Any?>()
+                lessonDetailsDataByHashMap["description"] = it.description
+                lessonDetailsDataByHashMap["finished"] = true
+                lessonDetailsDataByHashMap["name"] = it.name
+                lessonDetailsDataByHashMap["resources"] = it.resources
+                lessonDetailsDataByHashMap["uri"] = it.uri
                 val uri = it.uri
                 lessonVideoFrameLayout.setOnClickListener {
                     val intent  = Intent(this,IntroductionVideo::class.java)
@@ -97,69 +152,50 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                         currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
                             .document(moduleInfoFromModuleScreen).collection("Lessons")
                             .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                        if (it.finishedCount!! == it.finishCount!!){
-                            val lessonDataByHashMap = mutableMapOf<String, Any?>()
-                            lessonDataByHashMap["assignmentCount"] = it.assignmentCount
-                            lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
-                            lessonDataByHashMap["description"] = it.description
-                            lessonDataByHashMap["enabled"] = it.enabled
-                            lessonDataByHashMap["finishCount"] = it.finishCount
-                            lessonDataByHashMap["finished"] = true
-                            lessonDataByHashMap["finishedCount"] = it.finishedCount
-                            lessonDataByHashMap["id"] = it.id
-                            lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                            lessonDataByHashMap["lessonDetails"] = it.lessonDetails
-                            lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                            lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
-                            lessonDataByHashMap["minutes"] = it.minutes
-                            lessonDataByHashMap["name"] = it.name
-                            lessonDataByHashMap["number"] = it.number
-                            lessonDataByHashMap["process"] = it.Process
-                            lessonDataByHashMap["quizCount"] = it.quizCount
-                            lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
-                            lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
-                            lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
-                            lessonDataByHashMap["videosCount"] = it.videosCount
-                            currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
-                                .document(moduleInfoFromModuleScreen).collection("Lessons")
-                                .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                        }
                     }
+                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                        .document(moduleInfoFromModuleScreen).collection("Lessons")
+                        .document(lessonInfoFromLessonScreen).collection("lesson Details")
+                        .document("lesson info").update(lessonDetailsDataByHashMap)
                 }
+            }
+            if (it.finished == true){
+                videoCheck.setImageResource(R.drawable.tick)
             }
         }
 
         getUserLessonQuizInformation {
-            if (it.finished == true){
-                getUserLessonInformation {
-                    val lessonDataByHashMap = mutableMapOf<String, Any?>()
-                    val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + it.resourceFinishedCount!!
-                    lessonDataByHashMap["assignmentCount"] = it.assignmentCount
-                    lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
-                    lessonDataByHashMap["description"] = it.description
-                    lessonDataByHashMap["enabled"] = it.enabled
-                    lessonDataByHashMap["finishCount"] = it.finishCount
-                    lessonDataByHashMap["finished"] = it.finished
-                    lessonDataByHashMap["finishedCount"] = finishedCount
-                    lessonDataByHashMap["id"] = it.id
-                    lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                    lessonDataByHashMap["lessonDetails"] = it.lessonDetails
-                    lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                    lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
-                    lessonDataByHashMap["minutes"] = it.minutes
-                    lessonDataByHashMap["name"] = it.name
-                    lessonDataByHashMap["number"] = it.number
-                    lessonDataByHashMap["process"] = it.Process
-                    lessonDataByHashMap["quizCount"] = it.quizCount
-                    lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
-                    lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
-                    lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
-                    lessonDataByHashMap["videosCount"] = it.videosCount
-                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
-                        .document(moduleInfoFromModuleScreen).collection("Lessons")
-                        .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                }
+
+            getUserLessonInformation {
+                val lessonDataByHashMap = mutableMapOf<String, Any?>()
+                val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + it.resourceFinishedCount!!
+                lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
+                lessonDataByHashMap["description"] = it.description
+                lessonDataByHashMap["enabled"] = it.enabled
+                lessonDataByHashMap["finishCount"] = it.finishCount
+                lessonDataByHashMap["finished"] = it.finished
+                lessonDataByHashMap["finishedCount"] = finishedCount
+                lessonDataByHashMap["id"] = it.id
+                lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                lessonDataByHashMap["lessonDetails"] = it.lessonDetails
+                lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
+                lessonDataByHashMap["minutes"] = it.minutes
+                lessonDataByHashMap["name"] = it.name
+                lessonDataByHashMap["number"] = it.number
+                lessonDataByHashMap["process"] = it.Process
+                lessonDataByHashMap["quizCount"] = it.quizCount
+                lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
+                lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
+                lessonDataByHashMap["videosCount"] = it.videosCount
+                currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                    .document(moduleInfoFromModuleScreen).collection("Lessons")
+                    .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
+
             }
+
         }
 
         lessonDetailsBackButton.setOnClickListener {
@@ -170,9 +206,8 @@ class lessonDetailsPageActivity : AppCompatActivity() {
 
         getUserLessonQuizInformation {
             if (it.finished == null){
-
+                quizCheck.setImageResource(R.drawable.notfound)
             }else{
-                notFoundQuizFrameLayout.visibility = View.GONE
                 quizFrameLayout.setOnClickListener {
                     val intent = Intent(this,quizPageActivity::class.java)
                     intent.putExtra("questionsRoot",
@@ -181,15 +216,17 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                     this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
                 }
             }
+            if (it.finished == true){
+                quizCheck.setImageResource(R.drawable.tick)
+            }
         }
 
 
 
         getUserChallengeInformation {
             if (it.finished == null){
-
+                challengeCheck.setImageResource(R.drawable.notfound)
             }else{
-                notFoundChallengeFrameLayout.visibility = View.GONE
                 challengeFrameLayout.setOnClickListener {
                     val intent = Intent(this,challengePageActivity::class.java)
                     intent.putExtra("questionsRoot",
@@ -199,6 +236,7 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                 }
             }
             if (it.finished == true){
+                challengeCheck.setImageResource(R.drawable.tick)
                 getUserLessonInformation {
                     val lessonDataByHashMap = mutableMapOf<String, Any?>()
                     val finishedCount = 1 + it.videoFinishedCount!! + it.quizFinishedCount!! + it.resourceFinishedCount!!
@@ -232,9 +270,8 @@ class lessonDetailsPageActivity : AppCompatActivity() {
 
         getUserResourceInformation {
             if (it.finished == null){
-
+                resourceCheck.setImageResource(R.drawable.notfound)
             }else{
-                notFoundResourceFrameLayout.visibility = View.GONE
                 val uri = it.uri!!.toString()
                 resourceFrameLayout.setOnClickListener {
                     val intent = Intent(Intent.ACTION_VIEW)
@@ -248,39 +285,40 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                         currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons")
                             .document(lessonInfoFromLessonScreen).collection("lesson Details")
                             .document("Resource info").update(resourceHasMap)
+                        getUserLessonInformation {
+                            val lessonDataByHashMap = mutableMapOf<String, Any?>()
+                            val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + 1
+                            lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                            lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
+                            lessonDataByHashMap["description"] = it.description
+                            lessonDataByHashMap["enabled"] = it.enabled
+                            lessonDataByHashMap["finishCount"] = it.finishCount
+                            lessonDataByHashMap["finished"] = it.finished
+                            lessonDataByHashMap["finishedCount"] = finishedCount
+                            lessonDataByHashMap["id"] = it.id
+                            lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                            lessonDataByHashMap["lessonDetails"] = it.lessonDetails
+                            lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                            lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
+                            lessonDataByHashMap["minutes"] = it.minutes
+                            lessonDataByHashMap["name"] = it.name
+                            lessonDataByHashMap["number"] = it.number
+                            lessonDataByHashMap["process"] = it.Process
+                            lessonDataByHashMap["quizCount"] = it.quizCount
+                            lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                            lessonDataByHashMap["resourceFinishedCount"] = 1
+                            lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
+                            lessonDataByHashMap["videosCount"] = it.videosCount
+                            currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                                .document(moduleInfoFromModuleScreen).collection("Lessons")
+                                .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
+                        }
                     }
                 }
-                if (it.finished == true){
-                    getUserLessonInformation {
-                        val lessonDataByHashMap = mutableMapOf<String, Any?>()
-                        val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + 1
-                        lessonDataByHashMap["assignmentCount"] = it.assignmentCount
-                        lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
-                        lessonDataByHashMap["description"] = it.description
-                        lessonDataByHashMap["enabled"] = it.enabled
-                        lessonDataByHashMap["finishCount"] = it.finishCount
-                        lessonDataByHashMap["finished"] = it.finished
-                        lessonDataByHashMap["finishedCount"] = finishedCount
-                        lessonDataByHashMap["id"] = it.id
-                        lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                        lessonDataByHashMap["lessonDetails"] = it.lessonDetails
-                        lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                        lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
-                        lessonDataByHashMap["minutes"] = it.minutes
-                        lessonDataByHashMap["name"] = it.name
-                        lessonDataByHashMap["number"] = it.number
-                        lessonDataByHashMap["process"] = it.Process
-                        lessonDataByHashMap["quizCount"] = it.quizCount
-                        lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
-                        lessonDataByHashMap["resourceFinishedCount"] = 1
-                        lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
-                        lessonDataByHashMap["videosCount"] = it.videosCount
-                        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
-                            .document(moduleInfoFromModuleScreen).collection("Lessons")
-                            .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                    }
 
-                }
+            }
+            if (it.finished == true){
+                resourceCheck.setImageResource(R.drawable.tick)
             }
         }
 
@@ -353,6 +391,12 @@ class lessonDetailsPageActivity : AppCompatActivity() {
             }
     }
 
+    private fun getUserModuleInformation(onComplete:(courseModulesModel) -> Unit){
+        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).get().addOnSuccessListener {
+            onComplete(it.toObject(courseModulesModel::class.java)!!)
+        }
+    }
+
 
 
     private fun getLessonImage(onComplete:(lessonImageModel) -> Unit){
@@ -373,6 +417,63 @@ class lessonDetailsPageActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+        getUserLessonDetailsInformation {
+            if (it.finished == true){
+                videoCheck.setImageResource(R.drawable.tick)
+            }
+        }
+
+        getUserLessonInformation {
+            if (it.finishedCount!! == it.finishCount!!){
+                val lessonDataByHashMap = mutableMapOf<String, Any?>()
+                lessonDataByHashMap["assignmentCount"] = it.assignmentCount
+                lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
+                lessonDataByHashMap["description"] = it.description
+                lessonDataByHashMap["enabled"] = it.enabled
+                lessonDataByHashMap["finishCount"] = it.finishCount
+                lessonDataByHashMap["finished"] = true
+                lessonDataByHashMap["finishedCount"] = it.finishedCount
+                lessonDataByHashMap["id"] = it.id
+                lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
+                lessonDataByHashMap["lessonDetails"] = it.lessonDetails
+                lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
+                lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
+                lessonDataByHashMap["minutes"] = it.minutes
+                lessonDataByHashMap["name"] = it.name
+                lessonDataByHashMap["number"] = it.number
+                lessonDataByHashMap["process"] = it.Process
+                lessonDataByHashMap["quizCount"] = it.quizCount
+                lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
+                lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
+                lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
+                lessonDataByHashMap["videosCount"] = it.videosCount
+                currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                    .document(moduleInfoFromModuleScreen).collection("Lessons")
+                    .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
+                val number = it.number
+                getUserModuleInformation {
+                    val moduleDataByHashMap = mutableMapOf<String, Any?>()
+                    moduleDataByHashMap["description"] = it.description
+                    moduleDataByHashMap["enabled"] = it.enabled
+                    moduleDataByHashMap["finished"] = it.Finished
+                    moduleDataByHashMap["finishedLessons"] = number
+                    moduleDataByHashMap["id"] = it.id
+                    moduleDataByHashMap["image"] = it.image
+                    moduleDataByHashMap["lessonDetails"] = it.lessonDetails
+                    moduleDataByHashMap["lessonsCount"] = it.lessonsCount
+                    moduleDataByHashMap["moduleNumber"] = it.moduleNumber
+                    moduleDataByHashMap["name"] = it.name
+                    moduleDataByHashMap["process"] = it.Process
+                    moduleDataByHashMap["tasksCount"] = it.tasksCount
+                    moduleDataByHashMap["title"] = it.title
+                    moduleDataByHashMap["videosCount"] = it.videosCount
+                    currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).update(moduleDataByHashMap)
+                }
+            }
+        }
+
+
         lessonVideoFrameLayout.setOnClickListener {
             getUserLessonDetailsInformation {
                 val intent  = Intent(this,IntroductionVideo::class.java)
@@ -407,11 +508,26 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                         .document(moduleInfoFromModuleScreen).collection("Lessons")
                         .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
                 }
+                val lessonDetailsDataByHashMap = mutableMapOf<String, Any?>()
+                lessonDetailsDataByHashMap["description"] = it.description
+                lessonDetailsDataByHashMap["finished"] = true
+                lessonDetailsDataByHashMap["name"] = it.name
+                lessonDetailsDataByHashMap["resources"] = it.resources
+                lessonDetailsDataByHashMap["uri"] = it.uri
+                currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
+                    .document(moduleInfoFromModuleScreen).collection("Lessons")
+                    .document(lessonInfoFromLessonScreen).collection("lesson Details")
+                    .document("lesson info").update(lessonDetailsDataByHashMap)
             }
+
         }
 
+
+
         getUserLessonQuizInformation {
+
             if (it.finished == true){
+                quizCheck.setImageResource(R.drawable.tick)
                 getUserLessonInformation {
                     val lessonDataByHashMap = mutableMapOf<String, Any?>()
                     val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + it.resourceFinishedCount!!
@@ -439,86 +555,13 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                     currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
                         .document(moduleInfoFromModuleScreen).collection("Lessons")
                         .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                    if (it.finishedCount!! == it.finishCount!!){
-                        val lessonDataByHashMap = mutableMapOf<String, Any?>()
-                        lessonDataByHashMap["assignmentCount"] = it.assignmentCount
-                        lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
-                        lessonDataByHashMap["description"] = it.description
-                        lessonDataByHashMap["enabled"] = it.enabled
-                        lessonDataByHashMap["finishCount"] = it.finishCount
-                        lessonDataByHashMap["finished"] = true
-                        lessonDataByHashMap["finishedCount"] = it.finishedCount
-                        lessonDataByHashMap["id"] = it.id
-                        lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                        lessonDataByHashMap["lessonDetails"] = it.lessonDetails
-                        lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                        lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
-                        lessonDataByHashMap["minutes"] = it.minutes
-                        lessonDataByHashMap["name"] = it.name
-                        lessonDataByHashMap["number"] = it.number
-                        lessonDataByHashMap["process"] = it.Process
-                        lessonDataByHashMap["quizCount"] = it.quizCount
-                        lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
-                        lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
-                        lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
-                        lessonDataByHashMap["videosCount"] = it.videosCount
-                        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
-                            .document(moduleInfoFromModuleScreen).collection("Lessons")
-                            .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                    }
-                }
-                getUserLessonInformation {
-                    if (it.finishedCount!! == it.finishCount!!){
-                        val lessonDataByHashMap = mutableMapOf<String, Any?>()
-                        lessonDataByHashMap["assignmentCount"] = it.assignmentCount
-                        lessonDataByHashMap["challengeFinishedCount"] = it.challengeFinishedCount
-                        lessonDataByHashMap["description"] = it.description
-                        lessonDataByHashMap["enabled"] = it.enabled
-                        lessonDataByHashMap["finishCount"] = it.finishCount
-                        lessonDataByHashMap["finished"] = true
-                        lessonDataByHashMap["finishedCount"] = it.finishedCount
-                        lessonDataByHashMap["id"] = it.id
-                        lessonDataByHashMap["lessonChallengeDetails"] = it.lessonChallengeDetails
-                        lessonDataByHashMap["lessonDetails"] = it.lessonDetails
-                        lessonDataByHashMap["lessonQUIZDetails"] = it.lessonQUIZDetails
-                        lessonDataByHashMap["lessonResourceDetails"] = it.lessonResourceDetails
-                        lessonDataByHashMap["minutes"] = it.minutes
-                        lessonDataByHashMap["name"] = it.name
-                        lessonDataByHashMap["number"] = it.number
-                        lessonDataByHashMap["process"] = it.Process
-                        lessonDataByHashMap["quizCount"] = it.quizCount
-                        lessonDataByHashMap["quizFinishedCount"] = it.quizFinishedCount
-                        lessonDataByHashMap["resourceFinishedCount"] = it.resourceFinishedCount
-                        lessonDataByHashMap["videoFinishedCount"] = it.videoFinishedCount
-                        lessonDataByHashMap["videosCount"] = it.videosCount
-                        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
-                            .document(moduleInfoFromModuleScreen).collection("Lessons")
-                            .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                    }
                 }
             }
         }
 
         getUserResourceInformation {
-            if (it.finished == null){
-
-            }else{
-                notFoundResourceFrameLayout.visibility = View.GONE
-                val uri = it.uri!!.toString()
-                resourceFrameLayout.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data =  Uri.parse(uri)
-                    startActivity(intent)
-                    getUserResourceInformation {
-                        val resourceHasMap = mutableMapOf<String,Any?>()
-                        resourceHasMap["finished"] = true
-                        resourceHasMap["uri"] = it.uri
-                        currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules").document(moduleInfoFromModuleScreen).collection("Lessons")
-                            .document(lessonInfoFromLessonScreen).collection("lesson Details")
-                            .document("Resource info").update(resourceHasMap)
-                    }
-                }
                 if (it.finished == true){
+                    resourceCheck.setImageResource(R.drawable.tick)
                     getUserLessonInformation {
                         val lessonDataByHashMap = mutableMapOf<String, Any?>()
                         val finishedCount = it.challengeFinishedCount!! + it.videoFinishedCount!! + it.quizFinishedCount!! + 1
@@ -546,12 +589,13 @@ class lessonDetailsPageActivity : AppCompatActivity() {
                         currentUserCourseDocRef.document(courseInfoFromDashBoard).collection("Modules")
                             .document(moduleInfoFromModuleScreen).collection("Lessons")
                             .document(lessonInfoFromLessonScreen).update(lessonDataByHashMap)
-                    }
+
                 }
             }
         }
         getUserChallengeInformation {
             if (it.finished == true){
+                challengeCheck.setImageResource(R.drawable.tick)
                 getUserLessonInformation {
                     val lessonDataByHashMap = mutableMapOf<String, Any?>()
                     val finishedCount = 1 + it.videoFinishedCount!! + it.quizFinishedCount!! + it.resourceFinishedCount!!

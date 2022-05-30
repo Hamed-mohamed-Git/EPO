@@ -6,26 +6,23 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.peodemo.DashBoard.categoriesTabs.models.Photo
+import com.example.peodemo.DashBoard.glide.GlideApp
 import com.example.peodemo.R
+import kotlinx.android.synthetic.main.activity_profile_page.*
 import kotlinx.android.synthetic.main.quotes_alert_dialog.*
 
-class quoteAlertDialog(var quoteInformation:quoteModel?):DialogFragment() {
-    private var images = listOf<Int>(R.drawable.fquoteimage,R.drawable.squoteimagee,R.drawable.thquoteimage,R.drawable.fourthquoteimage,R.drawable.fifthquoteimage
-    ,R.drawable.sixieethquoteimage,R.drawable.seventhquoteimage,R.drawable.eighteethquoteimage,R.drawable.nineteethquoteimage
-    ,R.drawable.tenthquoteimage,R.drawable.ellthquoteimage,R.drawable.twethquoteimage,R.drawable.thirtthquoteimage,R.drawable.fourteenthquoteimage
-    ,R.drawable.fifteenthquoteimage,R.drawable.sixieethquoteimage,R.drawable.seventeenthquoteimage,R.drawable.eiighteenquoteimage
-    ,R.drawable.ninteenquoteimage,R.drawable.twentyquoteimage,R.drawable.twentyonequoteimage,R.drawable.twentytwoquoteimage,R.drawable.twentythreequoteimage
-    ,R.drawable.twentyfourquoteimage,R.drawable.twentyfourquoteimage,R.drawable.twentyfivequoteimage,R.drawable.twentysixquoteimage,R.drawable.twentysevenquoteimage
-    ,R.drawable.twentyeigntquoteimage,R.drawable.twentyninequoteimage,R.drawable.thirteenquoteimage
-    )
+class quoteAlertDialog(var quoteInformation:quoteModel?,var quotephoto:List<String>):DialogFragment() {
+
     private lateinit var timer:CountDownTimer
     @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {return activity?.let {
-        val randomImagesIndex = (images.indices).random()
+        val randomImagesIndex = (quotephoto.indices).random()
         val builder = AlertDialog.Builder(it)
         // Get the layout inflater
         val inflater = requireActivity().layoutInflater
@@ -34,8 +31,12 @@ class quoteAlertDialog(var quoteInformation:quoteModel?):DialogFragment() {
         val cancel = inflation.findViewById<TextView>(R.id.Close)
         val person = inflation.findViewById<TextView>(R.id.personWhoQuoted)
         val quote = inflation.findViewById<TextView>(R.id.quote)
-        val mainLayout = inflation.findViewById<FrameLayout>(R.id.Mainlayout)
-        mainLayout.setBackgroundResource(images[randomImagesIndex])
+        val quotePhoto = inflation.findViewById<ImageView>(R.id.quoteImage)
+        GlideApp.with(requireContext())
+            .load(quotephoto[randomImagesIndex])
+            .placeholder(R.drawable.fourteenthquoteimage).into(quotePhoto)
+        //Toast.makeText(requireContext(),quotephoto[randomImagesIndex],Toast.LENGTH_LONG).show()
+
         val randomIndex = (0 until quoteInformation!!.Quotes!!.size).random()
         val quoteValue = quoteInformation!!.Quotes!![randomIndex]
         person.text = "— ${quoteInformation!!.name} "

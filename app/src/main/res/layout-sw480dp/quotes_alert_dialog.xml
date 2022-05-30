@@ -5,6 +5,11 @@
     android:background="@drawable/fifthquoteimage"
     android:layoutDirection="ltr"
     android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/quoteImage"
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"/>
     <View
         android:id="@+id/overlay_image"
         android:layout_width="match_parent"

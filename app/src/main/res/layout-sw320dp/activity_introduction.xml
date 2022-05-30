@@ -1,53 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.introduction.introductionActivity"
+    android:layoutDirection="ltr"
     android:id="@+id/introductionLayout"
-    android:background="@color/barColor">
+    android:background="@color/white">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fragmentMarksButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="80dp"
-        android:background="@color/barColor"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/nested_scroll_view_background"
-        android:fillViewport="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentMarksButton">
-
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/introductionCoordinatorLayoutNestedScrollView"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/nested_scroll_view_background">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="20sp"
+            >
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/feral"
+                android:text="Hi! Student"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/barColor"
+                android:textSize="30dp"
+                />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <FrameLayout
+                android:id="@+id/signInIntroductionButton"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="end|center_vertical"
+
+                android:background="@drawable/log_in_button_background">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/login"
+                    app:tint="@color/barColor" />
+            </FrameLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+        <ScrollView
+            android:id="@+id/introductionScroll"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20sp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/cardLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="195dp"
+                    android:layout_marginStart="35sp"
+                    android:layout_marginEnd="35sp"
+                    android:layout_marginTop="20sp"
+                    android:backgroundTint="@color/barColor"
+                    android:background="@drawable/categories_card_background"
+                    android:elevation="10sp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/newsTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30sp"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginEnd="50dp"
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/robotoregular"
+                            android:text="Start Your Own programming dream"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/cardHint"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20sp"
+                            android:layout_marginEnd="20sp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/futur"
+                            android:text="create Your Own programming path"
+                            android:textColor="@color/white"
+                            android:gravity="center_horizontal"
+                            android:textSize="15sp"
+                            />
+                        <FrameLayout
+                            android:id="@+id/startNow"
+                            android:layout_width="match_parent"
+                            android:layout_height="45sp"
+                            android:layout_marginTop="18sp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginStart="85dp"
+                            android:layout_marginEnd="85dp"
+                            android:layout_marginBottom="20sp"
+                            android:background="@drawable/start_now_background"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/feral"
+                                android:text="Start Now"
+                                android:layout_gravity="center"
+                                android:textColor="@color/barColor"
+                                android:textSize="18sp" />
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragmentMarksButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35sp"
+                    android:layout_marginBottom="35sp"
+                    android:orientation="horizontal"
+                    android:background="@null"
+                    />
+                <LinearLayout
+                    android:id="@+id/videoIntroductionLayout"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/black"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50sp"
+                        android:gravity="center"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginStart="20sp"
+                        android:fontFamily="@font/proxima"
+                        android:text="Start Your Own programming dream"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.exoplayer2.ui.PlayerView
+                        android:id="@+id/epoIntroductionVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintDimensionRatio="16:9"
+
+                        />
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                        android:id="@+id/youtube_player_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50sp"
+                        android:layout_marginBottom="70sp"
+                        app:videoId="HMys6oWaUio"
+                        app:autoPlay="true" />
+
+                </LinearLayout>
+
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                    android:id="@+id/introductionCoordinatorLayoutNestedScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+
+                    />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <Button
-        android:id="@+id/signInIntroductionButton"
         android:layout_width="100dp"
         android:layout_height="38dp"
         android:layout_marginTop="25dp"
@@ -55,6 +211,7 @@
         android:background="@drawable/signin_itroduction_button_background"
         android:fontFamily="@font/feral"
         android:paddingBottom="5dp"
+        android:visibility="gone"
         android:text="Sign In"
         android:textAllCaps="false"
         android:textColor="@drawable/sign_in_button_introduction_text_color"
@@ -66,18 +223,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:fontFamily="@font/feral"
-        android:text="Hi! Student"
-        android:textColor="@color/white"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

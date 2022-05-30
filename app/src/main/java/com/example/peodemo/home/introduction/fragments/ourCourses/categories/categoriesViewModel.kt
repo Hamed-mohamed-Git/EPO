@@ -9,8 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.peodemo.DashBoard.fragmentPages.courses.model
-import com.example.peodemo.DashBoard.fragmentPages.courses.viewModel
+
 import com.example.peodemo.R
 import java.util.ArrayList
 

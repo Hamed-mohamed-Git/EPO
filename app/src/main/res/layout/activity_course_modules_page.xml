@@ -31,7 +31,7 @@
                 android:layout_margin="5sp"
                 android:background="@drawable/course_modules_header_view_background">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14sp"
@@ -43,7 +43,6 @@
                         android:id="@+id/back_button"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="center"
                         android:background="@drawable/course_modules_back_button_background">
 
                         <ImageView
@@ -56,9 +55,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="80sp"
-                        android:layout_marginBottom="1sp"
+                        android:layout_gravity="center"
+
                         android:fontFamily="@font/roboto_medium_numbers"
                         android:text="Details"
                         android:textColor="#343434"
@@ -68,7 +66,7 @@
                         android:id="@+id/bookMark_button"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="80sp"
+                        android:layout_gravity="right"
                         android:background="@drawable/course_modules_back_button_background">
 
                         <ImageView
@@ -78,7 +76,7 @@
                             android:src="@drawable/bookmark" />
                     </FrameLayout>
 
-                </LinearLayout>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/courseName"
@@ -92,7 +90,7 @@
                     android:textSize="30sp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="25sp"
                     android:layout_marginTop="140sp"
@@ -195,11 +193,10 @@
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginEnd="25sp">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -234,11 +231,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/modules_RecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15sp"
-            android:layout_marginTop="5sp"
-            android:layout_marginEnd="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="5sp"
+
             />
 
     </LinearLayout>
@@ -278,4 +276,3 @@
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

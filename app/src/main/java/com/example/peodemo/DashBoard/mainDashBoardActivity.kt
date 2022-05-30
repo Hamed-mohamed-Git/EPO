@@ -10,12 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.peodemo.BuildConfig
+import com.example.peodemo.DashBoard.categoriesTabs.models.Photo
 import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteAlertDialog
 import com.example.peodemo.DashBoard.categoriesTabs.qoutes.quoteModel
+import com.example.peodemo.DashBoard.categoriesTabs.services.RetrofitInstance
 import com.example.peodemo.DashBoard.categoriesTabs.tabsModel
 import com.example.peodemo.DashBoard.categoriesTabs.tabsViewModel
 import com.example.peodemo.DashBoard.courseGropie.ModulesPage.courseModulesPageActivity
@@ -43,15 +50,86 @@ import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.activity_main_dash_board2.*
+import kotlinx.android.synthetic.main.activity_profile_page.*
+import kotlinx.android.synthetic.main.quiz_alert_dialog.view.*
 import kotlinx.android.synthetic.main.quotes_alert_dialog.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
 class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListener {
+
+    private var page : Int = 1
+    private var photos : MutableList<Photo> = ArrayList()
+    private var islamicPhotos = mutableListOf<String>("https://images.unsplash.com/photo-1637720421492-c8477b7b0324?ixlib=rb-1.2.1&dl=mataq-darul-ulum-t-j5XywiAlA-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1590227728255-1d1b1910e2bb?ixlib=rb-1.2.1&dl=omid-armin-5Rt3prYKzQ4-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1629140795752-8f123952b3c9?ixlib=rb-1.2.1&dl=linus-mimietz-OAo1gczfwuQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1626079651751-2f2c31f38223?ixlib=rb-1.2.1&dl=imad-alassiry-rK9twevBzu0-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1626079313403-7399d1aa95cf?ixlib=rb-1.2.1&dl=imad-alassiry-AOdx2ZTsnf8-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1523981729822-80f25e681301?ixlib=rb-1.2.1&dl=annie-spratt-FddqGrvwoyE-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1642332419434-3400b8ebcac6?ixlib=rb-1.2.1&dl=muhammad-shoaib-e85wj45prAk-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1582618941813-affa4f219d9f?ixlib=rb-1.2.1&dl=arisa-s-9vWrC8357fY-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1582618941318-aaecc139f54b?ixlib=rb-1.2.1&dl=arisa-s-FlMMjEi4SRU-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1627383602264-f8296cac79a0?ixlib=rb-1.2.1&dl=imad-alassiry-Bp8Yw-2f2ZQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1627384209800-d5d2e7692c47?ixlib=rb-1.2.1&dl=imad-alassiry-Z-5fV9m03A8-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1638813893006-20622c05b4f4?ixlib=rb-1.2.1&dl=levi-meir-clancy-GMjFiQFx9l4-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1624140930678-01e73ae34e4a?ixlib=rb-1.2.1&dl=levi-meir-clancy-11pYd78qMwY-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1590075865003-e48277faa558?ixlib=rb-1.2.1&dl=nick-fewings-ZcBY_mxVBCE-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1623241087673-632acaa0e995?ixlib=rb-1.2.1&dl=ahmet-kagan-hancer-FFhJCVaFuO0-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1591004272853-1462c050dca8?ixlib=rb-1.2.1&dl=omer-f-arslan-GX_qAm0U18M-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1558261537-8fcffa3479c7?ixlib=rb-1.2.1&dl=afdhallul-ziqri-if33Kw08PIw-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1551041777-ed277b8dd348?ixlib=rb-1.2.1&dl=yasmine-arfaoui-R6rh5ttDO-4-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1554976757-606d486f5d92?ixlib=rb-1.2.1&dl=boim-H_6zuSsHMNo-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1513072064285-240f87fa81e8?ixlib=rb-1.2.1&dl=izuddin-helmi-adnan-JFirQekVo3U-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1551041777-ed277b8dd348?ixlib=rb-1.2.1&dl=yasmine-arfaoui-R6rh5ttDO-4-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1519817650390-64a93db51149?ixlib=rb-1.2.1&dl=fahrul-azmi-5K549TS6F08-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1508688551218-d1a72cfef9c8?ixlib=rb-1.2.1&dl=izuddin-helmi-adnan-pphEJz1JzjU-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1574246604907-db69e30ddb97?ixlib=rb-1.2.1&dl=rumman-amin-i1bfxi1cFBY-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1603663694798-e43bd6c3b150?ixlib=rb-1.2.1&dl=sheraz-nazar-KfpTd2B5vV4-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1601191362988-ac6ebec629c8?ixlib=rb-1.2.1&dl=hasan-almasi-6M3_19hsDaw-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+    )
+
+    private var Photos = mutableListOf(
+        "https://images.unsplash.com/photo-1601191362988-ac6ebec629c8?ixlib=rb-1.2.1&dl=hasan-almasi-6M3_19hsDaw-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1519818187420-8e49de7adeef?ixlib=rb-1.2.1&dl=fahrul-azmi-gyKmF0vnfBs-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1618856377016-3aba91c3eb4e?ixlib=rb-1.2.1&dl=aryan-nikhil-b7lM8NbykS4-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1602557062264-069aaab3c4db?ixlib=rb-1.2.1&dl=intricate-explorer-pIAEpUZfmjQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1619271121705-61b5c3faaae9?ixlib=rb-1.2.1&dl=khashayar-kouchpeydeh-Nx2djwRZxWU-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1626462888446-890438706d85?ixlib=rb-1.2.1&dl=angshu-purkait--c0wGxBtFpU-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1623690547314-d05581628287?ixlib=rb-1.2.1&dl=shivansh-singh-eKynGpsH24A-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1561365028-65810a3d4c2a?ixlib=rb-1.2.1&dl=nandkumar-patel-hcXbGlAhUsM-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1631587801056-dc8951bb0a8e?ixlib=rb-1.2.1&dl=aedrian-O8Zw9y2M-Kk-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1612713566476-385f5af81095?ixlib=rb-1.2.1&dl=john-rodenn-castillo-iehg_BlPWbQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1595278255669-a875c1a75956?ixlib=rb-1.2.1&dl=inga-shcheglova-iiFpGS2HBKo-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1505521377774-103a8cc2f735?ixlib=rb-1.2.1&dl=madhu-shesharam-EVZxXuOEk3w-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1570420118092-5b96e28ff4cb?ixlib=rb-1.2.1&dl=clay-banks-1zTg4KT4EtE-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1606029246036-7b352c188652?ixlib=rb-1.2.1&dl=omid-armin-AbLK0g0K_ZM-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1568729679038-06e52f6eb820?ixlib=rb-1.2.1&dl=ganesh-ravikumar-P92MH8f-eNE-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1568512307854-e58afca3ad20?ixlib=rb-1.2.1&dl=xiaolong-wong-hKfqMioaDUU-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1591287083773-9a52ba8184a4?ixlib=rb-1.2.1&dl=fahd-khan-mrFdBdTlElk-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-1.2.1&dl=kimon-maritz-zMV7sqlJNow-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?ixlib=rb-1.2.1&dl=ian-dooley-hpTH5b6mo2s-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1567647753830-de3fe7ce9f28?ixlib=rb-1.2.1&dl=ampersand-creative-co-pp_oXEb2H48-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1529419412599-7bb870e11810?ixlib=rb-1.2.1&dl=damiano-baschiera-d4feocYfzAM-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1621849400072-f554417f7051?ixlib=rb-1.2.1&dl=krystal-ng-jRp60R7ogNQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1507041957456-9c397ce39c97?ixlib=rb-1.2.1&dl=deglee-ganzorig-wQImoykAwGs-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1508669232496-137b159c1cdb?ixlib=rb-1.2.1&dl=eberhard-grossgasteiger-BXasVMRGsuo-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1533387520709-752d83de3630?ixlib=rb-1.2.1&dl=jakub-kriz-4r_tHA3gsUY-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1508459855340-fb63ac591728?ixlib=rb-1.2.1&dl=nathan-anderson-5-jtsfuaLBw-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1547036967-23d11aacaee0?ixlib=rb-1.2.1&dl=carles-rabada-DD1fSz2HF1s-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?ixlib=rb-1.2.1&dl=casey-horner-4rDCa5hBlCs-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1455218873509-8097305ee378?ixlib=rb-1.2.1&dl=thomas-kelley-JoH60FhTp50-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?ixlib=rb-1.2.1&dl=goutham-krishna-h5wvMCdOV3w-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1433086966358-54859d0ed716?ixlib=rb-1.2.1&dl=blake-verdoorn-cssvEZacHvQ-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1505144808419-1957a94ca61e?ixlib=rb-1.2.1&dl=shifaaz-shamoon-9K9ipjhDdks-unsplash.jpg&w=1920&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+        "https://images.unsplash.com/photo-1600356381284-f331cdd4a9c9?ixlib=rb-1.2.1&dl=burak-saygi-N0imepa1nFE-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb"
+    )
 
 
     private lateinit var courseItemSection: Section
@@ -61,9 +139,11 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
     companion object{
         val RC_S_IMAGE = 2
     }
+
     private val mAuth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
     }
+
     private val fireStoreInstance: FirebaseFirestore by lazy {
         FirebaseFirestore.getInstance()
     }
@@ -125,6 +205,10 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_dash_board2)
+        getImages()
+
+
+
 
         timer =  object : CountDownTimer(20000, 1000) {
 
@@ -218,6 +302,9 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
 
 
+
+
+
         //profileCircleImageView.setOnClickListener {
            // val getImageFromGallery = Intent().apply {
               //  type = "image/*"
@@ -251,6 +338,8 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
             getCourseInformation(:: initRecycleView)
         }
+
+
 
 
     }
@@ -361,7 +450,7 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
         val newCourse = CoursesModel("New",null,R.drawable.newcoursegif,null,null,null,null,null,0,null,null,null,null)
         if (courseProcessChecked){
             setDataIntoCourseModel("iosFC1")
-            courseDetails.ModulesDetails = modules
+            courseDetails.modulesDetails = modules
             fireStoreInstance.collection("Users")
                 .document(mAuth.currentUser!!.uid)
                 .collection("My Courses")
@@ -482,10 +571,17 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             }
             qouteIndex = (0 until personHasQuotes.size).random()
             cardHint.text = personHasQuotes[qouteIndex]
+            if (personHasQuotes[qouteIndex] == "Prophet Muhammad"){
+                cardLayout.setOnClickListener {
+                    setQuoteDialog(islamicPhotos)
+                }
+            }else{
+                cardLayout.setOnClickListener {
+                    setQuoteDialog(Photos)
+                }
+            }
         }
-        cardLayout.setOnClickListener {
-            setQuoteDialog()
-        }
+
 
     }
 
@@ -565,8 +661,10 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
 
     }
 
-    fun setQuoteDialog(){
-        quoteAlertDialog(quotesInformation[qouteIndex]).show(supportFragmentManager,"mydialog")
+    fun setQuoteDialog(Images:List<String>){
+        //quoteAlertDialog(quotesInformation[qouteIndex],Images).show(supportFragmentManager,"mydialog")
+
+        quoteAlertDialog(quotesInformation[qouteIndex],Images)
 
     }
 
@@ -587,7 +685,6 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             0 ->{
 
                 newsImage.setImageResource(R.drawable.thinking)
-                newsTitle.textSize = 25f
                 newsTitle.text = "The quote of the day"
 
                 getQuotesFromServer()
@@ -613,7 +710,6 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             1 ->{
 
                 newsImage.setImageResource(R.drawable.design)
-                newsTitle.textSize = 20f
                 newsTitle.text = "The design website of the day"
 
                 getDesignFromServer()
@@ -636,7 +732,6 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             2 ->{
 
                 newsImage.setImageResource(R.drawable.backend)
-                newsTitle.textSize = 20f
                 newsTitle.text = "The backend website of the day"
                 //call this item and put it in tap property
 
@@ -659,7 +754,6 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
             // if the user tap on the third item
             3 ->{
                 newsImage.setImageResource(R.drawable.swiftui)
-                newsTitle.textSize = 20f
                 newsTitle.text = "The swift UI website of the day"
                 //call this item and put it in tap property
                 getSwiftUIFromServer()
@@ -1134,22 +1228,23 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                     setLessonsOFModules("iosFC1M1L13","Wrap Up Challenge",13,3,1,0,0,0,2,0,0,0,0,false,false,false,courseDetails,lessonQuiz,ChallengeDetails,resourceDetails,"To solidify what you have learned in this module, try to build the app shown in this video.")
                 }
             }
-            setModulesOFCourse("iosFC1M1","Module 1: War Card Game","War Card Game",null,13,15,10,Lessons,0,false,false,true,null)
-            setModulesOFCourse("iosFC1M2","Module 2: Recipe List App","Recipe List App",null,12,17,9,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
-            setModulesOFCourse("iosFC1M3","Module 3: GitHub","GitHub",null,7,10,6,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
-            setModulesOFCourse("iosFC1M4","Module 4: Recipe App","Recipe App",null,20,25,18,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
-            setModulesOFCourse("iosFC1M5","Module 5: Learning App","Learning App",null,28,28,25,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
-            setModulesOFCourse("iosFC1M6","Module 6: City Sights App","City Sights App",null,20,23,16,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
+            setModulesOFCourse(1,"iosFC1M1","Module 1: War Card Game","War Card Game",null,13,15,10,Lessons,0,false,false,true,null)
+            setModulesOFCourse(2,"iosFC1M2","Module 2: Recipe List App","Recipe List App",null,12,17,9,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
+            setModulesOFCourse(3,"iosFC1M3","Module 3: GitHub","GitHub",null,7,10,6,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
+            setModulesOFCourse(4,"iosFC1M4","Module 4: Recipe App","Recipe App",null,20,25,18,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
+            setModulesOFCourse(5,"iosFC1M5","Module 5: Learning App","Learning App",null,28,28,25,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
+            setModulesOFCourse(6,"iosFC1M6","Module 6: City Sights App","City Sights App",null,20,23,16,ArrayList<CourseLessonsModel>(),0,false,false,false,null)
         }
     }
 
-    private fun setModulesOFCourse(
+    private fun setModulesOFCourse(moduleNumber:Int?,
         id:String,name:String,title:String,Image:Int?,lessons: Int,videos:Int?,task:Int?,lessonDetails:ArrayList<CourseLessonsModel>,
         HowManyLessonsFinished:Int,finished:Boolean,process:Boolean?,enabled:Boolean?,
         description:ArrayList<String>?)
     {
         modules.add(
             courseModulesModel(
+                moduleNumber,
                 id,
                 name,
                 title,
@@ -1213,6 +1308,91 @@ class mainDashBoardActivity : AppCompatActivity(),tabsViewModel.OnItemClickListe
                 lessonResourceDetails,
                 description
             ))
+    }
+
+    private fun getImages() {
+        page = 1
+        var index = 0
+        val getPost = RetrofitInstance.api.getRecentPhotos("islam","islam","portrait",30)
+        getPost.enqueue(object : Callback<MutableList<Photo>> {
+            override fun onResponse(
+                call: Call<MutableList<Photo>>,
+                response: Response<MutableList<Photo>>
+            ) {
+                if(response.isSuccessful)
+                {
+                    photos.clear()
+                    Log.d("response",response.body().toString())
+                    photos = response.body()!!
+                }
+                else
+                    Log.d("response",response.body().toString())
+            }
+
+            override fun onFailure(call: Call<MutableList<Photo>>, t: Throwable) {
+                Log.d("Response","Failed")
+            }
+
+        })
+
+    }
+
+
+    private fun quoteAlertDialog(quoteInformation:quoteModel?,quotephoto:List<String>){
+        val timer:CountDownTimer
+        val randomImagesIndex = (quotephoto.indices).random()
+        val builder = AlertDialog.Builder(this)
+        // Get the layout inflater
+        val inflater = this.layoutInflater
+        val inflation = inflater.inflate(R.layout.quotes_alert_dialog, null)
+
+
+
+        val cancel = inflation.findViewById<TextView>(R.id.Close)
+        val person = inflation.findViewById<TextView>(R.id.personWhoQuoted)
+        val quote = inflation.findViewById<TextView>(R.id.quote)
+        val quotePhoto = inflation.findViewById<ImageView>(R.id.quoteImage)
+        GlideApp.with(this)
+            .load(quotephoto[randomImagesIndex])
+            .placeholder(R.drawable.course_lesson_seeall_background).into(quotePhoto)
+        //Toast.makeText(requireContext(),quotephoto[randomImagesIndex],Toast.LENGTH_LONG).show()
+
+        val randomIndex = (0 until quoteInformation!!.Quotes!!.size).random()
+        val quoteValue = quoteInformation!!.Quotes!![randomIndex]
+        person.text = "— ${quoteInformation!!.name} "
+        quote.text = "'' ${quoteValue} ''"
+
+
+
+        builder.setView(inflation)
+        // Add action buttons
+        val dialog = builder.create()
+
+        timer =  object : CountDownTimer(60000, 1000) {
+
+            // Callback function, fired on regular interval
+            override fun onTick(millisUntilFinished: Long) {
+
+            }
+            // Callback function, fired
+            // when the time is up
+            override fun onFinish() {
+                dialog.dismiss()
+            }
+
+        }.start()
+
+        cancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+
+    private fun getUserCourseInformation(onComplete:(CoursesModel) -> Unit){
+        currentUserDocRef.collection("My Courses").document("Foundation").get().addOnSuccessListener {
+            onComplete(it.toObject(CoursesModel::class.java)!!)
+        }
     }
 
 }

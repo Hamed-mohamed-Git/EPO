@@ -1,6 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#141414"
+    android:orientation="vertical"
+    tools:context=".DashBoard.courseGropie.lessonDetailsPage.challengePage.challengePageActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="40sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="20sp"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/challenge_progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="400dp"
+            android:layout_height="7dp"
+            android:layout_marginTop="2sp"
+            android:layout_gravity="center_vertical"
+            android:max="2"
+            android:progressDrawable="@drawable/challenge_progress_background"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/taskDoneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:text="3/10 Done!"
+            android:textColor="#5A5A5A"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="30sp"
+        android:layout_marginEnd="20sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginEnd="10sp"
+                android:fontFamily="@font/feral"
+                android:text="Nothing is impossible. The word itself says ‘I’m possible!"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/currentLessonChallenge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginEnd="10sp"
+                android:fontFamily="@font/futur"
+                android:text="Welcome to the challenge of Lesson4. The solution can be found in the Resources lesson."
+                android:textColor="#5A5A5A"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginEnd="10sp"
+                android:elevation="5sp"
+                android:outlineSpotShadowColor="#F6BBCD"
+                android:background="@drawable/question_coordinate_background"
+                android:backgroundTint="#F6BBCD">
+
+                <ImageView
+                    android:id="@+id/challengeEmoji"
+                    android:layout_width="240dp"
+                    android:layout_height="250sp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/happyfancy" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textUnderShape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="50sp"
+                android:layout_marginEnd="10sp"
+                android:fontFamily="@font/futur"
+                android:gravity="center"
+                android:text="May I tell you something yeah ''I whispered''. You can make it don't worry just downLoad the document to access the challenge"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <FrameLayout
+                android:id="@+id/downloadButtonChallenge"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="65dp"
+                android:layout_marginBottom="20sp"
+                android:visibility="gone"
+                android:background="@drawable/challenge_download_background"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/downloadpdf"
+                        app:tint="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15sp"
+                        android:fontFamily="@font/proxima"
+                        android:text="DownLoad"
+                        android:layout_marginTop="1sp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/watchButtonChallenge"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="60dp"
+                android:visibility="gone"
+                android:layout_marginBottom="20sp"
+                android:layout_marginEnd="65dp"
+                android:background="@drawable/challenge_download_background"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/playcourse"
+                        app:tint="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15sp"
+                        android:fontFamily="@font/proxima"
+                        android:text="Watch"
+                        android:layout_marginTop="1sp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/doneButtonChallenge"
+                android:layout_width="match_parent"
+                android:layout_height="70sp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="65dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="65dp"
+                android:layout_marginBottom="20sp"
+                android:background="@drawable/challenge_download_background"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/done"
+                        android:layout_gravity="center_vertical"
+                        app:tint="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15sp"
+                        android:fontFamily="@font/proxima"
+                        android:text="Done!"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

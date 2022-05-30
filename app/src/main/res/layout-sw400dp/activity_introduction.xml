@@ -51,6 +51,7 @@
 
         </FrameLayout>
         <ScrollView
+            android:id="@+id/introductionScroll"
             android:layout_width="match_parent"
             android:layout_marginTop="20sp"
             android:layout_height="match_parent">
@@ -105,7 +106,7 @@
                             android:textSize="15sp"
                             />
                         <FrameLayout
-                            android:id="@+id/doneButtonChallenge"
+                            android:id="@+id/startNow"
                             android:layout_width="match_parent"
                             android:layout_height="45sp"
                             android:layout_marginTop="18sp"
@@ -139,24 +140,47 @@
                     android:orientation="horizontal"
                     android:background="@null"
                     />
-                <TextView
-
+                <LinearLayout
+                    android:id="@+id/videoIntroductionLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10sp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="50dp"
-                    android:gravity="left"
-                    android:fontFamily="@font/proxima"
-                    android:text="Start Your Own programming dream"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:background="@color/black"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50sp"
+                        android:gravity="center"
+                        android:layout_marginEnd="20sp"
+                        android:layout_marginStart="20sp"
+                        android:fontFamily="@font/proxima"
+                        android:text="Start Your Own programming dream"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.exoplayer2.ui.PlayerView
+                        android:id="@+id/epoIntroductionVideo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintDimensionRatio="16:9"
+
+                        />
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                        android:id="@+id/youtube_player_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50sp"
+                        android:layout_marginBottom="70sp"
+                        app:videoId="HMys6oWaUio"
+                        app:autoPlay="true" />
+
+                </LinearLayout>
 
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:id="@+id/introductionCoordinatorLayoutNestedScrollView"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="20sp"
                     android:layout_height="wrap_content"
                     android:background="@null"
 

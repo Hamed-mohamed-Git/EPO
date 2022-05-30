@@ -43,7 +43,6 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".DashBoard.courseGropie.CoursePage.coursePageMainDashboardActivity"
-            android:configChanges="orientation|keyboard|layoutDirection|screenSize"
             android:exported="true"
             android:launchMode="singleTask"
              />

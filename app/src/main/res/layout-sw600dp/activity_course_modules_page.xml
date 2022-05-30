@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="ltr"
     tools:context=".DashBoard.courseGropie.ModulesPage.courseModulesPageActivity">
 
     <LinearLayout
@@ -27,11 +28,11 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
-                android:layout_margin="10sp"
+                android:layout_height="350dp"
+                android:layout_margin="5sp"
                 android:background="@drawable/course_modules_header_view_background">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14sp"
@@ -43,7 +44,6 @@
                         android:id="@+id/back_button"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="center"
                         android:background="@drawable/course_modules_back_button_background">
 
                         <ImageView
@@ -56,9 +56,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="200sp"
-                        android:layout_marginBottom="1sp"
+                        android:layout_gravity="center"
+
                         android:fontFamily="@font/roboto_medium_numbers"
                         android:text="Details"
                         android:textColor="#343434"
@@ -68,7 +67,7 @@
                         android:id="@+id/bookMark_button"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="190sp"
+                        android:layout_gravity="right"
                         android:background="@drawable/course_modules_back_button_background">
 
                         <ImageView
@@ -78,25 +77,23 @@
                             android:src="@drawable/bookmark" />
                     </FrameLayout>
 
-                </LinearLayout>
+                </FrameLayout>
 
                 <TextView
                     android:id="@+id/courseName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_marginStart="25dp"
                     android:layout_marginTop="90sp"
                     android:fontFamily="@font/roboto_medium_numbers"
                     android:text="Foundation Course"
-                    android:layout_gravity="center_horizontal"
                     android:textColor="#343434"
                     android:textSize="30sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-
+                    android:layout_marginStart="25sp"
                     android:layout_marginTop="140sp"
                     android:orientation="horizontal">
 
@@ -185,7 +182,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="380dp"
+                android:layout_height="350sp"
                 android:layout_marginStart="25sp"
                 android:layout_marginTop="190sp"
                 android:layout_marginEnd="25sp"
@@ -200,9 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="25sp"
-            android:layout_marginTop="40sp"
-            android:layout_marginEnd="20sp">
+            android:layout_marginTop="40sp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -217,7 +212,7 @@
                 android:id="@+id/seeAll_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="270sp"
+                android:layout_marginStart="335sp"
                 android:background="@drawable/course_modules_seeall_button_background">
 
                 <TextView
@@ -238,9 +233,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/modules_RecyclerView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="80sp"
-            android:layout_marginTop="5sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="5sp"
+
             />
 
     </LinearLayout>
@@ -248,9 +245,9 @@
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/courseModulesVideoIntroduction"
         android:layout_width="0dp"
-        android:layout_height="360dp"
+        android:layout_height="320dp"
         android:layout_marginStart="32sp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="205dp"
         android:layout_marginEnd="32sp"
         android:clipToOutline="true"
         android:visibility="visible"
@@ -264,7 +261,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="335dp"
         android:background="@drawable/course_modules_back_button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -280,4 +277,3 @@
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

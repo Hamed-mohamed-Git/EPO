@@ -67,6 +67,9 @@ class ourCoursesFragment : Fragment(), categoriesViewModel.OnItemClickListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         SetDataInOurCoursesRecycleView()
+        justScroll.setOnClickListener {
+
+        }
     }
 
     private fun addCourses(name: String,price:String, count: String, image: Int) {
