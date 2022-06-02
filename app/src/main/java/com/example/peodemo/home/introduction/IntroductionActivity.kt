@@ -3,23 +3,14 @@ package com.example.peodemo.home.introduction
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.renderscript.ScriptGroup
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.peodemo.DashBoard.courseGropie.ModulesPage.URLTypeCourse
@@ -29,43 +20,39 @@ import com.example.peodemo.home.introduction.fragments.InformationFragment
 import com.example.peodemo.home.introduction.fragments.ourCourses.ourCoursesFragment
 import com.example.peodemo.home.introduction.fragments.teachOnEPOFragment
 import com.example.peodemo.logPages.signInActivity
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.PlaybackException
-import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.activity_introduction.*
-import java.util.*
 
 
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.DefaultPlayerUiController
-
-
-
-import androidx.annotation.NonNull
-
-
-
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.example.peodemo.home.introduction.teacher.teacherModel
+import com.example.peodemo.home.introduction.teacher.teacherModelView
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 
+import kotlin.collections.ArrayList
 
 
+open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickListener,
+    teacherModelView.OnItemClickListener {
 
+    private var youTubePlayerView:YouTubePlayerView? = null
+    private val videoId = "HMys6oWaUio"
 
+    private val fireStoreInstance: FirebaseFirestore by lazy {
+        FirebaseFirestore.getInstance()
+    }
+    private val epoStatisticsDocRef: CollectionReference
+        get() = fireStoreInstance.collection("epoStatistics")
 
-open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickListener {
+    private var codeCountS = 0
+    private var currentCount = 0
 
     //assigning a tapList array property to store the recycle view in it
     private val  tapList = ArrayList<tapModel>()
@@ -81,6 +68,12 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
     private val mOurCoursesFragment = ourCoursesFragment()
 
 
+    private val  teachers = ArrayList<teacherModel>()
+    //assigning a adapter property to store the tapView instance in ti
+    private val teacherAdapter = teacherModelView(teachers,this)
+    private var listenr:AbstractYouTubePlayerListener? = null
+
+
     private lateinit var exoPlayerView: PlayerView
     private lateinit var simpleExoPlayer: SimpleExoPlayer
     private lateinit var mediaSource: MediaSource
@@ -94,6 +87,59 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_introduction)
 
+
+
+
+        getStatisticOfCodeFromServer {
+            codeCountS = it.count!!
+        }
+
+        cwcImage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://codewithchris.com/?_ga=2.43673443.752191784.1654040368-433373843.1649806717")
+            startActivity(intent)
+        }
+        moshImage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://codewithmosh.com")
+            startActivity(intent)
+        }
+        jomaImage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://www.jomaclass.com")
+            startActivity(intent)
+        }
+
+
+        timer =  object : CountDownTimer(8000, 1000) {
+
+            // Callback function, fired on regular interval
+            override fun onTick(millisUntilFinished: Long) {
+                if (currentCount <= codeCountS ){
+                    codeCount.setText("${currentCount}k")
+                    currentCount++
+                }
+            }
+
+            // Callback function, fired
+            // when the time is up
+            override fun onFinish() {
+
+            }
+
+
+        }.start()
+
+
+
+
+
+        getStatisticOfUsersFromServer {
+            usesCount.setText("${currentCount}k")
+        }
+        getStatisticOfVideosFromServer {
+            videoCount.setText("${currentCount}k")
+        }
 
 
         //make a condition if the phone sdk above 15 or not
@@ -115,6 +161,14 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
             tapList.add(tapModel("Collaboration",R.drawable.trust,this.getColor(R.color.collaborationBackground),this.getColor(R.color.collaboration),0))
             //addition the Our Courses item to tapList array to access it in adapter class
             tapList.add(tapModel("Courses",R.drawable.cappressed,this.getColor(R.color.courseBackground),this.getColor(R.color.course),0))
+
+            teachers.add(teacherModel("Chris","After building apps for enterprise clients for years, I found a passion for helping non-coders discover a love for programming, become professional developers and change their careers. I would love to help you reach your goals!"
+                ,"iOS Developer",this.getColor(R.color.chrisImageBackground),R.drawable.chrisimage))
+            teachers.add(teacherModel("Jonathan Ma","I'm a Canadian YouTuber with a channel of the same name. MY real name is Jonathan Ma. Mostly known for making videos related to Software engineering, data science, Silicon Valley, and tech companies, etc"
+            ,"Engineer of Computer Science",this.getColor(R.color.JomaImageBackground),R.drawable.jomaimage))
+            teachers.add(
+                teacherModel("Mosh Hamedani","I'm a passionate and pragmatic software engineer specializing in web application development with ASP.NET MVC, Web API, Entity Framework, Angular, Backbone, HTML5, and CSS.",
+            "software engineer",this.getColor(R.color.moshImageBackground),R.drawable.moshimage))
         }
 
         //set a home fragment as a init fragment if the activity is created
@@ -123,6 +177,10 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         fragmentMarksButton.layoutManager = LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
         //set an adapter to this recycle view
         fragmentMarksButton.adapter = adapter
+
+        teachersRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayout.HORIZONTAL,false)
+        teachersRecyclerView.adapter = teacherAdapter
+
 
         //make an action if the user tap on signIn button take they to SignIn Activity
         signInIntroductionButton.setOnClickListener {
@@ -160,6 +218,20 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
         when (position){
             // if the user tap on the first item
             0 ->{
+                youTubePlayerView!!.addYouTubePlayerListener(object :
+                    AbstractYouTubePlayerListener() {
+                    override fun onError(
+                        youTubePlayer: YouTubePlayer,
+                        error: PlayerConstants.PlayerError
+                    ) {
+                        super.onError(youTubePlayer, error)
+                        youTubePlayer.loadVideo(videoId,0f)
+                    }
+
+                })
+
+
+
                 //call this item and put it in tap property
                 var taps = tapList[position]
                 //and set a last var in this item to 1 if the user tap on this item
@@ -191,6 +263,10 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[0].pressed = 0
                 tapList[2].pressed = 0
                 tapList[3].pressed = 0
+
+                var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",teacherLinearLayout.top)
+                x.duration = 3000
+                x.start()
                 //And change the fragment
                 //setFragment(mInformationFragment)
                 //And change the item in the tap array
@@ -210,6 +286,9 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 tapList[0].pressed = 0
                 tapList[1].pressed = 0
                 tapList[3].pressed = 0
+                var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",collaborationLayout.top)
+                x.duration = 4000
+                x.start()
                 //And change the fragment
                 //setFragment(mTeachOnEPOFragment)
                 //And change the item in the tap array
@@ -232,7 +311,7 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
                 //And change the fragment
                 //setFragment(mOurCoursesFragment)
                 var x = ObjectAnimator.ofInt(introductionScroll,"scrollY",introductionCoordinatorLayoutNestedScrollView.top)
-                x.duration = 4000
+                x.duration = 5000
                 x.start()
                 //And change the item in the tap array
                 adapter.notifyItemChanged(position)
@@ -245,8 +324,55 @@ open class introductionActivity : AppCompatActivity(), tapViewModel.OnItemClickL
 
             }
         }
+
+
+
     }
 
+
+
+    private fun getStatisticOfCodeFromServer(onComplete:(statisticsModel) -> Unit){
+        epoStatisticsDocRef.document("code").get().addOnSuccessListener {
+            onComplete(it.toObject(statisticsModel::class.java)!!)
+        }
+    }
+
+    private fun getStatisticOfUsersFromServer(onComplete:(statisticsModel) -> Unit){
+        epoStatisticsDocRef.document("users").get().addOnSuccessListener {
+            onComplete(it.toObject(statisticsModel::class.java)!!)
+        }
+    }
+
+    private fun getStatisticOfVideosFromServer(onComplete:(statisticsModel) -> Unit){
+        epoStatisticsDocRef.document("videos").get().addOnSuccessListener {
+            onComplete(it.toObject(statisticsModel::class.java)!!)
+        }
+    }
+
+    override fun onTeacherItemClick(position: Int) {
+        when (position){
+            0 ->{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://www.youtube.com/codewithchris")
+                startActivity(intent)
+            }
+            1 ->{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://www.youtube.com/c/JomaOppa")
+                startActivity(intent)
+            }
+            2 ->{
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse("https://www.youtube.com/c/programmingwithmosh")
+                startActivity(intent)
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        youTubePlayerView!!.release()
+    }
 
 
 }

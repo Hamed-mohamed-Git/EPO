@@ -75,4 +75,9 @@
     <color name="course">#F7A485</color>
     <color name="courseBackground">#F7E3DB</color>
 
+
+    <color name="chrisImageBackground">#1C2451</color>
+    <color name="JomaImageBackground">#272727</color>
+    <color name="moshImageBackground">#2C2730</color>
+
 </resources>

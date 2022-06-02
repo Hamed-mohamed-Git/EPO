@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../layout/custom_preview.xml" value="0.36974358974358973" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/action_bar_background.xml" value="0.2861111111111111" />
         <entry key="app/src/main/res/drawable/add_image_button_background.xml" value="0.37384615384615383" />
@@ -32,6 +33,7 @@
         <entry key="app/src/main/res/drawable/course_modules_video_background.xml" value="0.24444444444444444" />
         <entry key="app/src/main/res/drawable/couse_course_card_view_progressbar_background.xml" value="0.362962962962963" />
         <entry key="app/src/main/res/drawable/couse_modules_card_view_progressbar_background.xml" value="0.24444444444444444" />
+        <entry key="app/src/main/res/drawable/cwc_image_background.xml" value="0.3188034188034188" />
         <entry key="app/src/main/res/drawable/dashboard_header_background_linearlayout.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/find_course_card_dashboard_background.xml" value="0.3390625" />
         <entry key="app/src/main/res/drawable/firstwelcomebuttonbackground.xml" value="0.33645833333333336" />
@@ -91,6 +93,9 @@
         <entry key="app/src/main/res/drawable/signout_button_background.xml" value="0.2763888888888889" />
         <entry key="app/src/main/res/drawable/start_now_background.xml" value="0.36923076923076925" />
         <entry key="app/src/main/res/drawable/start_quiz_button_background.xml" value="0.3707692307692308" />
+        <entry key="app/src/main/res/drawable/teacher_info_card_background.xml" value="0.38256410256410256" />
+        <entry key="app/src/main/res/drawable/teacher_layout_background.xml" value="0.38256410256410256" />
+        <entry key="app/src/main/res/drawable/teacher_section_background.xml" value="0.3707692307692308" />
         <entry key="app/src/main/res/drawable/terms_and_conditions_decline_button_text_background.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/termsandconditions.xml" value="0.3328125" />
         <entry key="app/src/main/res/drawable/termsandconditions_button_accept_background.xml" value="0.3328125" />
@@ -188,7 +193,7 @@
         <entry key="app/src/main/res/layout-sw400dp/activity_quiz_page.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout-sw400dp/activity_sign_in.xml" value="0.23505434782608695" />
         <entry key="app/src/main/res/layout-sw400dp/activity_sign_up.xml" value="0.17725409836065573" />
-        <entry key="app/src/main/res/layout-sw400dp/course_modules_card_view.xml" value="0.13810252486610558" />
+        <entry key="app/src/main/res/layout-sw400dp/course_modules_card_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout-sw400dp/fragment_first_welcome.xml" value="0.22871376811594202" />
         <entry key="app/src/main/res/layout-sw400dp/fragment_get_started_.xml" value="0.15368852459016394" />
         <entry key="app/src/main/res/layout-sw400dp/fragment_our_courses.xml" value="0.17641625615763548" />
@@ -305,7 +310,7 @@
         <entry key="app/src/main/res/layout/fragment_get_started_.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2898550724637681" />
         <entry key="app/src/main/res/layout/fragment_information.xml" value="0.2509057971014493" />
-        <entry key="app/src/main/res/layout/fragment_markes_bar.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_markes_bar.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_our_courses.xml" value="0.2509057971014493" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.23369565217391305" />
@@ -324,6 +329,7 @@
         <entry key="app/src/main/res/layout/quotes_alert_dialog.xml" value="0.20525956284153005" />
         <entry key="app/src/main/res/layout/recycler_view_item.xml" value="0.2644927536231884" />
         <entry key="app/src/main/res/layout/register_image_background.xml" value="0.18795289855072464" />
+        <entry key="app/src/main/res/layout/teacher_card_view.xml" value="0.33" />
         <entry key="app/src/main/res/layout/top_courses_card_item.xml" value="0.33" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/icon.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/peoIcon_round.xml" value="0.190625" />

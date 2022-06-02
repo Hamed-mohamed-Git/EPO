@@ -80,7 +80,6 @@ class challengePageActivity : AppCompatActivity() {
                     startActivity(intent)
                     this.overridePendingTransition(R.anim.slide_in_left_introduction_activity,R.anim.silde_out_right_introduction_activity)
                 }
-
             }
             val challengeInfo = it.challengeInfo
             val name = it.name

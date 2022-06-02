@@ -9,21 +9,6 @@
     android:id="@+id/introductionLayout"
     android:background="@color/white">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -188,13 +173,231 @@
                         android:layout_marginTop="50sp"
                         android:layout_marginBottom="70sp"
                         app:videoId="HMys6oWaUio"
-                        app:autoPlay="true" />
+                        app:autoPlay="false"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/teacherLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/barColor"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="35sp"
+                        android:fontFamily="@font/proxima"
+                        android:layout_marginStart="20sp"
+                        android:layout_marginEnd="20sp"
+                        android:gravity="center"
+                        android:text="Together we’ve empowered millions of people to realize their dreams!"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/teachersRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15sp"
+                        android:layout_marginBottom="35sp"
+                        android:orientation="horizontal"
+                        android:background="@null"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/collaborationLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#F8F7F9"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="40sp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="1dp"
+                            android:layout_marginTop="28dp"
+                            android:text="We Collaborate With"
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/proxima"
+                             />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="1dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/proxima"
+                            android:text="+2 Programming Companies"
+                            android:textColor="#ebb51f"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="50sp"
+                        android:layout_marginBottom="50sp"
+                        android:layout_marginStart="30sp"
+                        android:layout_marginEnd="30sp"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/cwcImage"
+                            android:layout_width="95dp"
+                            android:layout_height="40sp"
+                            android:background="@drawable/cwc_image_background"
+                            />
+
+                        <ImageView
+                            android:id="@+id/jomaImage"
+                            android:layout_width="85sp"
+                            android:layout_height="40sp"
+
+                            android:layout_gravity="center_horizontal"
+                            android:background="@drawable/joma_image_background"
+                            />
+
+                        <ImageView
+                            android:id="@+id/moshImage"
+                            android:layout_width="80sp"
+                            android:layout_height="40sp"
+                            android:layout_marginStart="20sp"
+                            android:layout_gravity="right"
+
+                            android:background="@drawable/mosh_image_background"/>
+                    </FrameLayout>
+
+
+
+
 
                 </LinearLayout>
 
 
                 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@color/barColor">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join in on something big"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/proxima"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30sp"
+                        android:layout_marginStart="5sp"
+                        android:layout_marginEnd="5sp"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_marginBottom="40sp"
+                        android:layout_marginStart="40sp"
+                        android:layout_marginEnd="40sp"
+                        >
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/usesCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50M"
+                                android:textSize="20sp"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/robotobold"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/robotobold"
+                                android:text="Learners"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/videoCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50M"
+                                android:textSize="20sp"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/robotobold"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/robotobold"
+                                android:textSize="18sp"
+                                android:text="Videos"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_gravity="right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/codeCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50M"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/robotobold"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:fontFamily="@font/robotobold"
+                                android:text="Projects"/>
+                        </LinearLayout>
+                    </FrameLayout>
+
+                </FrameLayout>
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:id="@+id/introductionCoordinatorLayoutNestedScrollView"
                     android:layout_width="match_parent"
