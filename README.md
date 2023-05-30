@@ -88,6 +88,8 @@ with perfect develper teachers, you can learn with experts and build the most jo
      style="width: 200px">
 <img src="/Epo screens/course3.jpg" alt="Screenshot 1"
      style="width: 200px">
+ <img src="/Epo screens/challenge.jpg" alt="Screenshot 1"
+     style="width: 200px">    
      
 ## Quiz:
 <img src="/Epo screens/quiz-1.jpg" alt="Screenshot 1"
@@ -99,7 +101,4 @@ with perfect develper teachers, you can learn with experts and build the most jo
 <img src="/Epo screens/quiz3.jpg" alt="Screenshot 1"
      style="width: 200px">
      
-## Challenge:
-<img src="/Epo screens/challenge.jpg" alt="Screenshot 1"
-     style="width: 200px">
 
