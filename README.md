@@ -31,7 +31,7 @@ with perfect develper teachers, you can learn with experts and build the most jo
 
 <img src="/Epo screens/onboarding1.jpg" alt="Screenshot 1"
      style="width: 200px">
-<img src="/Epo screens/onboarding2.jpg" alt="Screenshot 1"
+<img src="/Epo screens/onboarding22.jpg" alt="Screenshot 1"
      style="width: 200px">
 <img src="/Epo screens/onboarding3.jpg" alt="Screenshot 1"
      style="width: 200px">
@@ -54,6 +54,8 @@ with perfect develper teachers, you can learn with experts and build the most jo
      style="width: 200px">
 <img src="/Epo screens/courseInfo.jpg" alt="Screenshot 1"
      style="width: 200px">
+<img src="/Epo screens/checkoutedit.jpg" alt="Screenshot 1"
+     style="width: 200px">
 
 ## Check out:
 <img src="/Epo screens/checkoutMain.jpg" alt="Screenshot 1"
@@ -61,6 +63,8 @@ with perfect develper teachers, you can learn with experts and build the most jo
 <img src="/Epo screens/checoutMain1.jpg" alt="Screenshot 1"
      style="width: 200px">
 <img src="/Epo screens/checkout.jpg" alt="Screenshot 1"
+     style="width: 200px">
+<img src="/Epo screens/checkoutlast.jpg" alt="Screenshot 1"
      style="width: 200px">
 
 ## Registeration:
@@ -79,6 +83,8 @@ with perfect develper teachers, you can learn with experts and build the most jo
 <img src="/Epo screens/dashA.jpg" alt="Screenshot 1"
      style="width: 200px">
 <img src="/Epo screens/settings.jpg" alt="Screenshot 1"
+     style="width: 200px">
+<img src="/Epo screens/settinglast.jpg" alt="Screenshot 1"
      style="width: 200px">
 
 ## Course Details:
